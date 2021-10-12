@@ -3,20 +3,19 @@ layout: post
 title: second post
 description: index page
 tags: blog test-tag
-sidebar: toc
 ---
 
-# This is a test post
+## This is a test post
 
 Here is a test post
 
-# This is a header 1
+## This is a header 1
 
-## A subheader
+### A subheader
 
 content
 
-## Another subheader
+### Another subheader
 
 more content
 

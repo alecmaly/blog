@@ -22,10 +22,10 @@
             <h2>{{ site.description | default: site.github.project_tagline }}</h2>
 
             <section id="downloads">
-                <a href='/'>Home</a>
-                <a href='/tagpage'>Tags</a>
-                <a href='/aboutme'>About</a>
-                <a href='mailto:{{ site.email }}''>Contact</a>
+                <a href="{{ '/' | relative_url }}">Home</a>
+                <a href="{{ '/tagpage' | relative_url }}">Tags</a>
+                <a href="{{ '/aaboutme' | relative_url }}">About</a>
+                <a href="mailto:{{ site.email }}">Contact</a>
 
 
 

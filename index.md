@@ -15,3 +15,5 @@ Find me on other platforms
 
 
 [first_post](/posts/first_post.md)
+
+[second_post](/posts/second_post.md)

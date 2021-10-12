@@ -3,7 +3,10 @@ layout: post
 title: first post
 description: this is my first post
 sidebar: toc
+tags: new-tag embedded
 ---
+
+{{ page.tags }}
 
 # This is a test post
 

@@ -1,8 +1,7 @@
 ---
 layout: post
-title: Jekyll Tags on Github Pages
-description: index page
-tags: blog test-tag
+title: first post
+description: this is my first post
 sidebar: toc
 ---
 
@@ -14,7 +13,7 @@ Here is a test post
 
 ## A subheader
 
-content
+content more content
 
 ## Another subheader
 

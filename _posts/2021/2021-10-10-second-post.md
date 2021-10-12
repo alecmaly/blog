@@ -1,5 +1,8 @@
 ---
 layout: post
+title: second post
+description: index page
+tags: blog test-tag
 sidebar: toc
 ---
 

@@ -38,12 +38,6 @@ $linkPink: rgb(216, 29, 216);
 $linkPurple: rgb(98, 16, 250);
 $bannerColor: #1d1d1d;
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: $bannerColor;
-}
 
 nav {
   ul {
@@ -97,6 +91,8 @@ nav {
   }
 }
 
+
+
 // hover on all links
 a:hover {
   color: $linkPink;
@@ -104,4 +100,36 @@ a:hover {
   &::before {
       background: linear-gradient(to right, $linkPink 40%, $linkPurple 75%);
   }
+}
+
+
+
+
+// .sticky {
+//   position: fixed;
+//   top: 0;
+//   width: 100%;
+// }
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: $bannerColor;
+}
+
+main {
+  flex: 1;
 }

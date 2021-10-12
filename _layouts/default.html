@@ -17,7 +17,7 @@
     <header class='sticky'>
         <div class="container">
             <a id="a-title" href="{{ '/' | relative_url }}">
-                <h1>{{ site.title }}</h1>
+                <h1 style='font-size:25px'>{{ site.title }}</h1>
             </a>
             <!-- <h2>{{ site.description }}</h2> -->
 
@@ -29,9 +29,9 @@
                         <a href="{{ '/alltags' | relative_url }}">Tags</a>
                     </li>
                     <li style='float:right'>
-                        <a class='icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
+                        <!-- <a class='icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
                             <i class="fa fa-fw fa-envelope"></i>
-                        </a>
+                        </a> -->
                         {% if site.linkedin_username %}
                             <a class='icon' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" style="text-decoration:none">
                                 <i class="fa fa-fw fa-linkedin"></i>

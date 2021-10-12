@@ -47,7 +47,7 @@ $bannerColor: #1d1d1d;
 
 nav {
   ul {
-    font-size: 1.15em;
+    // font-size: 1.15em;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -64,6 +64,10 @@ nav {
     border-right: none;
   }
   
+  // tighen logos on top right
+  li a {
+    margin: -2px -2px;
+  }
 
   li a:not(.icon) {
     color: #f0f0f0;
@@ -84,11 +88,20 @@ nav {
     }
 
     &:hover {
-        color: $linkPink;
-  
-        &::before {
-            background: linear-gradient(to right, $linkPink 40%, $linkPurple 75%);               
-        }
-    }
+      color: $linkPink;
+
+      &::before {
+          background: linear-gradient(to right, $linkPink 40%, $linkPurple 75%);               
+      }
+  }
+  }
+}
+
+// hover on all links
+a:hover {
+  color: $linkPink;
+
+  &::before {
+      background: linear-gradient(to right, $linkPink 40%, $linkPurple 75%);
   }
 }

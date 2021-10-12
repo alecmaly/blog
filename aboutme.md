@@ -2,7 +2,7 @@
 
 <h1 align="center">👨‍💻 About me: Alec Maly</h1>
 
-<h3 align="left">I'm passionate about software development and application security. I very much enjoy enabling people with technology, improving processes with automation, and making our modern technological landscape safer for the average person.</h3>
+<p align="left">I'm passionate about software development and application security. I very much enjoy enabling people with technology, improving processes with automation, and making our modern technological landscape safer for the average person.</p>
 
 - 🌱 I’m currently learning **Reverse Engineering and shellcoding**
 

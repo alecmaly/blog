@@ -2,8 +2,8 @@
 layout: post
 title: first post
 description: this is my first post
-sidebar: toc
 tags: new-tag
+toc: true
 ---
 
 # This is a test post

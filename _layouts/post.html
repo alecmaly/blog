@@ -37,8 +37,11 @@ layout: default
   {%  endif %}
   <br>
   <br>
-  <br>
-  {% include toc.html html=content ordered=true %}
+  
+  {% if page.toc == true %}
+    {% include toc.html html=content ordered=true %}
+    <br>
+  {% endif %}
   {{ content }}
 </div>
 

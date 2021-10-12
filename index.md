@@ -5,3 +5,6 @@ This is my personal blog to post things I find interesting or worth sharing. I h
 ## Support or Contact
 
 Find me on other platforms
+
+
+[first_post](/posts/first_post.md)

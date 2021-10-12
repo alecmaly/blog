@@ -22,15 +22,16 @@
             <!-- <h2>{{ site.description }}</h2> -->
 
             <!-- Top/Global Navigation -->
-            <nav>
+            <nav class='top-nav'>
                 <ul>
-                    <li class="fullwidth">
-                        <a href="{{ '/' | relative_url }}">Home</a>
+                    <li>
                         <a href="{{ '/aboutme' | relative_url }}">About</a>
                         <a href="{{ '/alltags' | relative_url }}">Tags</a>
-                        <a href="mailto:{{ site.email }}">Contact</a>
                     </li>
                     <li style='float:right'>
+                        <a class='icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
+                            <i class="fa fa-fw fa-envelope"></i>
+                        </a>
                         {% if site.linkedin_username %}
                             <a class='icon' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" style="text-decoration:none">
                                 <i class="fa fa-fw fa-linkedin"></i>

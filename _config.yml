@@ -23,9 +23,7 @@
 title: Alec Maly's Blog
 email: alecjmaly@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Just lookin for a lil tenderoni
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://alecmaly.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  alecmaly
@@ -39,10 +37,15 @@ theme: jekyll-theme-hacker
 
 plugins:
   - jekyll-feed
+  - jekyll-toc
 
 # pagination
 paginate: 10
 
+
+## 3d Party 
+# Google analytics
+# google_analytics: [Your Google Analytics tracking ID]
 
 
 
@@ -67,3 +70,6 @@ exclude:
   - vendor/ruby/
   - readme.md     # start custom files
   - tag_generator.py
+
+
+

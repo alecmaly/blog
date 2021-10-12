@@ -3,10 +3,8 @@ layout: post
 title: first post
 description: this is my first post
 sidebar: toc
-tags: new-tag embedded
+tags: new-tag
 ---
-
-{{ page.tags }}
 
 # This is a test post
 
@@ -25,3 +23,28 @@ more content
 ```html
 meow
 ```
+
+# Another header
+
+This is going to represent a really long post
+
+## subheading
+
+Let's see what it looks like
+
+```html
+<html>
+    <body>
+        this is a block of code
+    </body>
+</html>
+```
+
+I sure hope the syntax highlighting works properly
+
+### Bash example
+```bash
+python3 script.py some args
+```
+
+Interesting

@@ -8,7 +8,7 @@ tags: blog test-tag
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
   <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time>
-  <h1><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h1>
+  <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
   <p class="author">
     <div class="content">{{ post.description }}</span>
   </p>

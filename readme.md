@@ -16,6 +16,9 @@ sudo apt-get install ubuntu-dev-tools
 > python3 tag_generator.py
 > ```
 
+# useful tools
+- https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image
+
 # TODO
 
 Custom domain (DNS)
@@ -37,3 +40,11 @@ Custom domain (DNS)
 - ~~SEO tags~~
 - Related Posts
     - Put on left navigation?
+- Table of Contents [jekyll-toc](https://github.com/allejo/jekyll-toc)
+    - Put in left navigation?
+
+## Content
+- https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/
+- SharePoint/OneDrive permissions
+- inoreader
+- hacking joplin

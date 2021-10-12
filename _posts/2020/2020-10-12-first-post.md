@@ -43,8 +43,12 @@ Let's see what it looks like
 I sure hope the syntax highlighting works properly
 
 ### Bash example
+**What happens now?**
+
 ```bash
 python3 script.py some args
 ```
+
+# Another example
 
 Interesting

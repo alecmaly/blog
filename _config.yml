@@ -36,11 +36,12 @@ linkedin_username: alecmaly
 theme: jekyll-theme-hacker
 
 plugins:
-  - jekyll-feed
   - jekyll-toc
+  - jekyll-feed
 
 # pagination
 paginate: 10
+
 
 
 ## 3d Party 

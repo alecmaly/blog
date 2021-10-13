@@ -1,6 +1,6 @@
 ---
 layout: tagpage
-title: "Tag: new-tag"
-tag: new-tag
+title: "Tag: BurpSuite"
+tag: BurpSuite
 robots: noindex
 ---

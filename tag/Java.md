@@ -1,6 +1,6 @@
 ---
 layout: tagpage
-title: "Tag: embedded"
-tag: embedded
+title: "Tag: Java"
+tag: Java
 robots: noindex
 ---

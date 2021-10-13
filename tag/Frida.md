@@ -1,6 +1,6 @@
 ---
 layout: tagpage
-title: "Tag: test-tag"
-tag: test-tag
+title: "Tag: Frida"
+tag: Frida
 robots: noindex
 ---

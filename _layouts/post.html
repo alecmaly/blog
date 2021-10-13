@@ -25,7 +25,7 @@ layout: default
 {% endif %}
   <span class="post-date">{{ page.date | date_to_string }}</span>
   <h1 class="post-title">{{ page.title }}</h1>
-  <p class="post-description">{{ page.description }}</p>
+  
   <!-- tags -->
   {%  if page.tags.size > 0 %}
     <span class="post-tags">
@@ -37,9 +37,11 @@ layout: default
       ]
     </span>
   {%  endif %}
-  <br>
-  <br>
-  
+
+  <!-- description -->
+  <p class="post-description">{{ page.description }}</p>
+
+  <!-- table of contents -->
   {% if page.toc == true %}
     {% include toc.html html=content class="table-of-contents" %}
     <br>

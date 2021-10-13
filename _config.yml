@@ -47,8 +47,8 @@ paginate: 10
 
 ## 3d Party 
 # Google analytics
-# google_analytics: [Your Google Analytics tracking ID]
-
+# google_analytics: UA-...
+google_analytics_gtag: G-JF1EELZBK6
 
 
 # Exclude from processing.

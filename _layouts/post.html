@@ -39,7 +39,7 @@ layout: default
   <br>
   
   {% if page.toc == true %}
-    {% include toc.html html=content ordered=true %}
+    {% include toc.html html=content class="table-of-contents" %}
     <br>
   {% endif %}
   {{ content }}
@@ -48,8 +48,8 @@ layout: default
 <br>
 <br>
 <br>
-<hr>
 <!-- Related Posts -->
+<!-- 
 <div class="relatedPosts">
   <h2>Related Posts</h2>
 
@@ -85,6 +85,18 @@ layout: default
       {% endif %}
       </ul>
 
-    {% endfor %}
+    {% endfor %} -->
 
+    
+    <!-- Comments -->
+    <hr>
+    <h1>Comments</h1>
+    <script src="https://utteranc.es/client.js"
+      repo="alecmaly/blog"
+      issue-term="pathname"
+      label="test label"
+      theme="photon-dark"
+      crossorigin="anonymous"
+      async>
+    </script>
 </div>

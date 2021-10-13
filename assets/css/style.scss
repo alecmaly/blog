@@ -1,28 +1,44 @@
 ---
 ---
-
 @import "{{ site.theme }}";
+
+
+// mobile variables
+$mobile_maxWidth: 500px;
+$navLinkSize: 1.5em;
+$navLinkSize_mobile: 1.2em;
+
 
 // MISC
 .tag {
   text-decoration: none;
 }
 
+.container {
+  max-width: 1500px;
+}
+
 
 // PREVIOUS | NEXT POST
 .PageNavigation {
-  font-size: 1.1em;
+  font-size: $navLinkSize;
   display: block;
   width: auto;
   overflow: hidden;
   white-space: nowrap;
 }
 
+@media only screen and (max-width: $mobile_maxWidth) {
+  .PageNavigation {
+    font-size: $navLinkSize_mobile;
+  }
+}
+
 .PageNavigation a {
   display: block;
   width: 50%;
   float: left;
-  margin: 1em 0;
+  margin: .01em 0;
 }
 
 .PageNavigation .next {
@@ -41,11 +57,17 @@ $bannerColor: #1d1d1d;
 
 .top-nav {
   ul {
-    font-size: 1.125em;
+    font-size: $navLinkSize;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
+  }
+
+  @media only screen and (max-width: $mobile_maxWidth) {
+    ul {
+      font-size: $navLinkSize_mobile;
+    }
   }
   
   li {  
@@ -105,6 +127,14 @@ a:hover {
 
 
 
+// Table of contents
+.table-of-contents li {
+  list-style-image: none;
+}
+
+
+
+
 
 body {
   margin: 0;
@@ -130,3 +160,27 @@ main {
   flex: 1;
 }
 
+
+
+
+// Jump to top button
+
+#jump-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+#jump-to-top-btn:hover {
+  background-color: #555;
+}

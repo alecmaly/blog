@@ -1,10 +1,14 @@
 
 
-<h1 align="center">👨‍💻 About me: Alec Maly</h1>
+<h1 align="center">👨‍💻 About me</h1>
 
 <p align="left">I'm passionate about software development and application security. I very much enjoy enabling people with technology, improving processes with automation, and making our modern technological landscape safer for the average person.</p>
 
-- 🌱 I’m currently learning **Reverse Engineering and shellcoding**
+<div style='text-align: center'>
+    🌱 I’m currently learning **Reverse Engineering and shellcoding**
+    <br>
+    <br>
+</div>
 
 
 <h3 align="left">My other public profiles:&nbsp;

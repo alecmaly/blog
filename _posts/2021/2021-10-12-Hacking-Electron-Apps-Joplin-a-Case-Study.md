@@ -2,7 +2,7 @@
 layout: post
 title: Hacking Electron Apps&#x3a; Joplin
 description: Adding custom functionality to the Joplin note-taking app.
-tags: Electronjs Joplin PowerShell JavaScript
+tags: Electronjs Joplin JavaScript TypeScript
 toc: true
 ---
 

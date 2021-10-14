@@ -6,10 +6,10 @@
 // mobile variables
 $mobile_maxWidth: 900px;
 $navLinkSize: 1.5em;
-$navLinkSize_mobile: 1.2em;
+$navLinkSize_mobile: 1.1em;
 
 $titleSize: 2em; 
-$titleSize_mobile: 1.5em; 
+$titleSize_mobile: 1.4em; 
 
 // colors
 $linkPink: rgb(216, 29, 216);
@@ -62,6 +62,13 @@ $bannerColor: #1d1d1d;
 // TOP NAV
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+
+.mail-icon {
+  font-size: $navLinkSize;
+  float: right;
+  margin: 0;
+  padding: 0;
+}
 
 .top-nav {
   ul {
@@ -213,10 +220,12 @@ main {
     font-size: $navLinkSize_mobile;
   }
 
-  @media only screen and (max-width: $mobile_maxWidth) {
-    .top-nav ul {
-      font-size: $navLinkSize_mobile;
-    }
+  .top-nav ul {
+    font-size: $navLinkSize_mobile;
+  }
+
+  .mail-icon {
+    font-size: $navLinkSize_mobile;
   }
 }
 

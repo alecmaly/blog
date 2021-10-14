@@ -45,6 +45,10 @@ Custom domain (DNS)
 - Set thumbnail for Facebook / links
     - https://stackoverflow.com/questions/39214375/how-can-you-get-thumbnails-for-jekyll-posts-when-the-post-has-no-images
 
+- Dynamic font size
+    - https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
+    - nav - responsive w/ CSS Grid OR Flexbox
+
 ## Content
 - https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/
 - SharePoint/OneDrive permissions

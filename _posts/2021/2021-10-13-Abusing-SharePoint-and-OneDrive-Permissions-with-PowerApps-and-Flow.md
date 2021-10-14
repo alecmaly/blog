@@ -6,6 +6,7 @@ description: >-
     Subtly gain access to a target user's OneDrive / SharePoint sites they own.
 tags: PowerApps Power-Automate SharePoint OneDrive Phishing O365 POC
 toc: true
+published: false
 ---
 
 # Introduction

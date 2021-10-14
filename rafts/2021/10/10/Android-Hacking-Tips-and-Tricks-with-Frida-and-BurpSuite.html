@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=b885a6cfe9e7e824252a5d7b97ff73e7083bd41f">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup theme-color -->
+<!-- start theme color meta headers -->
+<meta name="theme-color" content="#151515">
+<meta name="msapplication-navbutton-color" content="#151515">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- end theme color meta headers -->
+
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+
+    <!-- Thumbnail -->
+    
+        <meta property="og:image" content="/assets/images/tech-thumbnail.jpg">
+    
+
+    <!-- import font-awesome -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- google analytics -->
+    
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF1EELZBK6"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-JF1EELZBK6');
+        </script>
+    
+
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Android Hacking Tips and Tricks with Frida &amp; BurpSuite | Alec’s Tech Blog</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Android Hacking Tips and Tricks with Frida &amp; BurpSuite" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learning by modifying an android .apk, intercepting + decrypting network traffic, and poking at game memory (changing function arguments + return values / calling functions by virtual address)." />
+<meta property="og:description" content="Learning by modifying an android .apk, intercepting + decrypting network traffic, and poking at game memory (changing function arguments + return values / calling functions by virtual address)." />
+<link rel="canonical" href="http://192.168.1.36:4000/2021/10/10/Android-Hacking-Tips-and-Tricks-with-Frida-and-BurpSuite.html" />
+<meta property="og:url" content="http://192.168.1.36:4000/2021/10/10/Android-Hacking-Tips-and-Tricks-with-Frida-and-BurpSuite.html" />
+<meta property="og:site_name" content="Alec’s Tech Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-10-10T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Android Hacking Tips and Tricks with Frida &amp; BurpSuite" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Android Hacking Tips and Tricks with Frida &amp; BurpSuite","dateModified":"2021-10-10T00:00:00-04:00","datePublished":"2021-10-10T00:00:00-04:00","url":"http://192.168.1.36:4000/2021/10/10/Android-Hacking-Tips-and-Tricks-with-Frida-and-BurpSuite.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://192.168.1.36:4000/2021/10/10/Android-Hacking-Tips-and-Tricks-with-Frida-and-BurpSuite.html"},"description":"Learning by modifying an android .apk, intercepting + decrypting network traffic, and poking at game memory (changing function arguments + return values / calling functions by virtual address).","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+
+<body>
+    <!-- App Container -->
+    <div class="App">
+        <!-- header -->
+        <header class='sticky'>
+            
+            <!-- ASPECT RATIO SETTINGS: TESTING -->
+            
+
+            <div class="container">
+                <a id="a-title" href="/">
+                    <h1>Alec's Tech Blog</h1>
+                </a>
+                <!-- <h2 id='site-description' style='margin-bottom: 2px'>I'm just a guy that does things sometimes.</h2> -->
+    
+                <!-- Top / Global Navigation -->
+                <nav class='top-nav'>
+                    <ul>
+                        <li>
+                            <a href="/aboutme">About</a>
+                            <a href="/alltags">Tags</a>
+                        </li>
+                        <li style='float:right'>
+                            <!-- <a class='icon' href="mailto:alecjmaly@gmail.com" target="_blank" style="text-decoration:none">
+                                <i class="fa fa-fw fa-envelope"></i>
+                            </a> -->
+                            
+                                <a class='icon' href="https://linkedin.com/in/alecmaly" target="_blank" style="text-decoration:none">
+                                    <i class="fab fa-fw fa-linkedin"></i>
+                                </a>
+                            
+                            
+                                <a class='icon' href="https://github.com/alecmaly" target="_blank" style="text-decoration:none">
+                                    <i class="fab fa-fw fa-github"></i>
+                                </a>
+                            
+                            
+                                <a class='icon' href="https://youtube.com/c/AlecM" target="_blank" style="text-decoration:none">
+                                    <i class="fab fa-fw fa-youtube"></i>
+                                </a>
+                              
+                            | 
+                            <a class='icon' href="/feed.xml" target="_blank" style="text-decoration:none">
+                                <i class="fa fa-fw fa-rss"></i>
+                            </a>
+                            <a></a> <!-- Empty element fixes safari? -->
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <!-- Body / Content -->
+        <div class="container content">
+            <section id="main_content">
+                <!-- Previous | Next page navigation -->
+<div class="PageNavigation">
+  
+    <a></a>   <!-- empty element to push next button to the right -->
+  
+  
+    <!-- <a class="next" href="/2021/10/11/Adventures-in-open-source-contributing-Joplin.html">Adventures in Open Source Contributing&#x3a; Joplin &raquo;</a>   -->
+    <a class="next" href="/2021/10/11/Adventures-in-open-source-contributing-Joplin.html">Next Post &raquo;</a>
+  
+</div>
+
+<br>
+
+<!-- Body of post -->
+
+  <div class="post">
+
+  <span class="post-date">10 Oct 2021</span>
+  <h1 class="post-title">Android Hacking Tips and Tricks with Frida & BurpSuite</h1>
+  
+  <!-- tags -->
+  
+    <span class="post-tags">
+      Tags: [&nbsp;
+      
+        
+        <a class="tag" href="/tag/Android"><code class="highligher-rouge"><nobr>Android</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/Frida"><code class="highligher-rouge"><nobr>Frida</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/BurpSuite"><code class="highligher-rouge"><nobr>BurpSuite</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/.apk"><code class="highligher-rouge"><nobr>.apk</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/JavaScript"><code class="highligher-rouge"><nobr>JavaScript</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/Java"><code class="highligher-rouge"><nobr>Java</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/linux"><code class="highligher-rouge"><nobr>linux</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/il2cpp"><code class="highligher-rouge"><nobr>il2cpp</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/adb"><code class="highligher-rouge"><nobr>adb</nobr></code>&nbsp;</a>    
+      
+        
+        <a class="tag" href="/tag/reverse-engineering"><code class="highligher-rouge"><nobr>reverse-engineering</nobr></code>&nbsp;</a>    
+      
+      ]
+    </span>
+  
+
+  <!-- description -->
+  <p class="post-description">Learning by modifying an android .apk, intercepting + decrypting network traffic, and poking at game memory (changing function arguments + return values / calling functions by virtual address).</p>
+
+  <!-- table of contents -->
+  
+    <hr>
+<h1>Table of Contents</h1>
+<ul class="table-of-contents"><li><a href="#introduction">Introduction</a></li><li><a href="#1-prepwork">1) Prepwork​</a></li><li><a href="#2-getting-the-apk">2) Getting the APK​</a></li><li><a href="#3-unzipping--unpacking-the-apk">3) Unzipping / Unpacking the .apk​</a></li><li><a href="#4-decompilation-and-static-analysis">4) Decompilation and Static Analysis​</a></li><li><a href="#5-using-the-static-analysis-data-and-decoding-some-intercepted-network-traffic">5) Using the static analysis data and decoding some intercepted network traffic​</a></li><li><a href="#6-dynamic-analysis-with-wait-lets-talk-about-logs">6) Dynamic Analysis with… wait… let’s talk about logs.​</a></li><li><a href="#7-injecting-frida-and-building-our-modified-apk">7) Injecting Frida and building our modified .apk​</a></li><li><a href="#8-dynamic-analysis-with-frida">8) Dynamic Analysis with Frida​</a></li></ul><hr>
+    <br>
+  
+
+  <!-- post body -->
+  <blockquote>
+  <p>I originally posted this on <a href="https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/">GuidedHacking</a> (excellent website) and figured it would be worthwhile to port it to my new blog!</p>
+</blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Hello,</p>
+
+<p>So, this post has become much more massive than I was expecting it to be. I didn’t want to make a full blown tutorial describing every little detail. My goal is to provide a branching off point to give some insight into a few methodologies I have used over the past couple weeks with some recent Android experimentation. I am using pre-built tooling here, so if you are trying to not get caught you should look elsewhere. That said, I believe these tools can be powerfully leveraged in the learning process as GUIs and frameworks sometimes make concepts clearer and easily understood.</p>
+
+<p>I wanted to share a few leanings, tools, tips and tricks that I think others may find useful – especially since a search on the forums for key terms such as Procyon and Frida yielded no results.</p>
+
+<p>The key to this methodology is that I was able to achieve all of this WITHOUT ROOT. I think this is an important note as it’s surprising how far you can take this on an unrooted device. Please note that this will not be possible with all games as some validate signatures and do other sanity checks, but it’s still worth investigating and fun.</p>
+
+<p>I’m using kali linux where a few of these tools come pre-installed, but instillation on your machine may require a quick google search. A few of these tools will be linux based, I’m not sure if they have Windows versions. Windows does have the linux emulators or the Windows Subsystem for Linux (WSL) which you can enable, but be aware that I have definitely had issues in the past with feature parody to a true linux box, so be aware that if something doesn’t work you should just mount a VM and try it there. Not to mention you won’t get the GUI based tools like jd-gui with the WSL environment.</p>
+
+<p><strong>Tools used:</strong></p>
+<ul>
+  <li><a href="https://developer.android.com/studio/command-line/adb">adb (Android Device Bridge)</a> – used to pull and push applications to and from your android device. Also can dump android logs. ** note: I was using virtualbox and the USB connection would cut in and out. I’m not sure if it was due to a bad cable, but I would constantly have to unplug and re-plug in the cable. You may experience this as well.</li>
+  <li><a href="https://ibotpeaches.github.io/Apktool/documentation/">apktool</a> – decode/build .apk</li>
+  <li>d2j-dex2jar</li>
+  <li>jd-gui/jad/<a href="https://bitbucket.org/mstrobel/procyon/wiki/Java%20Decompiler">procyon</a> – java decompilers</li>
+  <li>frida – a dynamic analysis framework using the v8 JavaScript engine. Allows you to hook game logic and inject with JavaScript.</li>
+  <li>javac + java w/ Java Runtime Environment (JRE): command line tools to compile and run Java programs</li>
+  <li><a href="https://portswigger.net/burp">BurpSuite</a> – network proxy tool</li>
+  <li>grep/find/cut/uniq/cat/vim – general linux command line tools to help sift through file content and find files by name/extension</li>
+  <li>jarsigner/zipalign/keytool – command line tools to package and resign a new, modified .apk</li>
+  <li>Android Studio</li>
+  <li>il2cpp Dumper</li>
+  <li>EF Explorer/FX Explorer (android app) – file managers</li>
+</ul>
+
+<p>Alright, lets get started. The example app I am going to use is called Hustle Castle: Medieval RPG. Fantasy Kingdom. At this point the game has been out for a couple years. Pretty much everything I poked at was validated server side, which is probably why the developers didn’t put any obfuscation on the code base itself. The game loads and runs as a self-signed .apk without any preventative measures, thus we can tamper with it no problemo. It’s a nice game to play with as I wouldn’t feel comfortable giving out actual working hacks against someone else’s source of income.</p>
+
+<h1 id="1-prepwork">1) Prepwork​</h1>
+
+<p>Although we do not need root, there are some features we need to enable on the device. First, you’ll have to enable Developer options – consult the oracle (Google) and do that. Next, in Developer options we will need to toggle a couple settings: (enable) “USB Debugging” and (disable) “Verify apps over USB”, this will be important when we resign the app and push it to our device, we don’t want our modified .apk to be rejected due to a self-signed certificate.</p>
+
+<h1 id="2-getting-the-apk">2) Getting the APK​</h1>
+
+<p>There are a couple ways to do this. One would be to download from a website that provides .apk files such as apkpure.com. If you’re like me, you feel weird downloading random stuff from websites, especially when you don’t have to. So, an alternative that seems to work, at least for this game, is to download it on the Android device like any other app - from the Google Play Store. Great, now you have the app installed, lets pull the .apk files to our computer. Adb (Android Device Bridge) is a tool used to interact with a connected Android device. This is easily installed on a linux based machine using the built-in package manager (e.g. apt-get install adb). Now, I don’t want to drive too deep into a full-blown tutorial, but the jist of this process looks something like this:</p>
+
+<p>Connect your android device to your computer vis USB and run the following commands:</p>
+
+<p class="codeblock-label">List packages on device using adb:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1) list packages on device</span>
+adb shell pm list packages
+
+<span class="c">## Note: piping output to grep can help you find the package name in this case,</span>
+<span class="c">## 'adb shell pm list packages' | grep hc # helps locate the package name: com.my.hc.rpg.kingdom.simulator</span>
+
+<span class="c"># 2) Get filepath of installed package</span>
+adb shell pm path com.my.hc.rpg.kingdom.simulator
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Ok, I want to stop here for a moment and take note of something. This application actually has TWO .apks installed. This will be important later. With my limited research, I believe this started occurring when Android introduced project bundling, but I just wanted to point this out as it will affect a few of our later steps.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-12-43-20.png" alt="" /></p>
+
+<p>Back to it:</p>
+
+<p class="codeblock-label">Pull .apk files from device:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 3) Use adb to pull all game .apks from the device. Since there are two in this app, I will download both to my local machine.</span>
+adb pull /data/app/com.my.hc.rpg.kingdom.simulator.../base.apk
+adb pull /data/app/com.my.hc.rpg.kingdom.simulator.../split_config.arm64_v8a.apk
+</code></pre></div></div>
+
+<p>That’s it, you should now have your .apk files on your computer.</p>
+
+<hr />
+
+<blockquote>
+  <p>Note: For all future code examples, I will refer to base.apk as the apk name.</p>
+</blockquote>
+<hr />
+
+<p><br /></p>
+
+<h1 id="3-unzipping--unpacking-the-apk">3) Unzipping / Unpacking the .apk​</h1>
+
+<p>It’s important to know that .apk files are basically just .zip files. If you are on a linux based device, you can literally just unzip the .apk itself</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># unzip the .apk files into a folder named 'unzipped'</span>
+unzip base.apk <span class="nt">-d</span> unzipped
+</code></pre></div></div>
+
+<p>^ we will use this later, particularly the .dex files in the output ^</p>
+
+<p>Next we will use a tool called <a href="https://ibotpeaches.github.io/Apktool/documentation/">apktool</a> to both unzip and decode the files in the .apk. This is useful for several reasons. I won’t dive too deep into this as the information is available elsewhere, but as a quick recap: it gives us access to a decoded version of AndroidManifest.xml, [if you’ve decoded resources] you can access interesting files such as /res/values/strings.xml, it gives you access to smali code (basically android assembly), and it gives us a foothold into our codebase so we can make changes to the smali assembly and re-build it with our changes.</p>
+
+<p>It’s important to know that .apk files are basically just .zip files. If you are on a linux based device, you can literally just unzip the .apk itself</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># unzip the .apk files into a folder named 'unzipped'</span>
+unzip base.apk <span class="nt">-d</span> unzipped
+</code></pre></div></div>
+
+<p>^ we will use this later, particularly the .dex files in the output ^</p>
+
+<p>Next we will use a tool called apktool to both unzip and decode the files in the .apk. This is useful for several reasons. I won’t dive too deep into this as the information is available elsewhere, but as a quick recap: it gives us access to a decoded version of AndroidManifest.xml, [if you’ve decoded resources] you can access interesting files such as /res/values/strings.xml, it gives you access to smali code (basically android assembly), and it gives us a foothold into our codebase so we can make changes to the smali assembly and re-build it with our changes.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># decoding with apktool</span>
+<span class="c"># this will create a folder with the name of the package. Change the output folder name with the -o switch</span>
+
+apktool d base.apk
+<span class="c"># results in a folder /base/ with the content</span>
+</code></pre></div></div>
+
+<p>I again want to stop here and point out something important. In future steps when you try to rebuild your .apk, it may not work and you’ll be all like “wtf, this is nutty”. Well, there is a very important switch you can use ‘-r’ that will prevent the decoding of resource files. Decoded resources don’t re-build well sometimes, so be aware of that. Depending on if you want to inspect those resource files for recon, you can choose to skip this and run another decode later when you are ready to make changes and rebuild the app, or you can just do it now and forget about it.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apktool d base.apk <span class="nt">-r</span>
+</code></pre></div></div>
+
+<p>You’ll immediately note a difference in the output of apktool.</p>
+
+<p>Without -r</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-32-38.png" alt="apktool output without -r" /></p>
+
+<p>With -r</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-33-04.png" alt="apktool output with -r" /></p>
+
+<h1 id="4-decompilation-and-static-analysis">4) Decompilation and Static Analysis​</h1>
+
+<p>Ok, this is where it starts getting a bit interesting. Let’s go into the ‘unzipped’ folder to inspect files we extracted in section 3, above. You’ll notice a few .dex files.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-33-48.png" alt="" /></p>
+
+<p>You’ll notice that there is a classes.dex and a classes2.dex. Similar to how the .apk was split into two .apk packages, as Android apps got larger they started to split java classes resources into multiple .dex packages. I’m not sure why, the rhyme or reason, but just be aware to check out both as interesting code can be found in each.</p>
+
+<p>To prepare for the decompilation, we need to convert each .dex into a .jar. To do this, there is another handy command line tool called dex2jar. I will run it on both my classes.dex files.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># convert .dex to .jar</span>
+
+d2j-dex2jar classes.dex
+<span class="c"># outputs to the file: classes-dex2jar.jar</span>
+
+d2j-dex2jar classes2.dex
+<span class="c"># outputs to the file: classes2-dex2jar.jar</span>
+</code></pre></div></div>
+
+<p>I will now split the next section into different decompilation tools. You’ll notice next to each tool I reference a Java version number. Decompilation gets mildly annoying because a few of the tools are older and support different versions, while newer tools may support newer versions but are not necessarily feature complete or have other bugs/complications. Some output is cleaner than others. You’ll probably end up spending time bouncing between them for some .java files (especially ones involving decryption) to cross reference output. There are actually several decompilers out there, a bit of research will go a long way and I encourage you to explore options I have not listed here.</p>
+
+<p>jad (java 6?):</p>
+
+<p>It was a pretty popular command line tool/decompiler. No longer supported but still can be useful when jd-gui output is a cluster. Used to decompile .smali (android assembly) into readable Java code – outputs to a .jad file extension. Simply run it on a .smali file (generated in the apktool output directory in step 3) and ‘cat’ the resulting .jad file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If you want an idea of where smali files can be found you can run find to get a list of all smali files in subfolders from the current directory:</span>
+<span class="c"># find . -name '*.smali'</span>
+
+jad target_file.smali
+<span class="nb">cat </span>target_file.jad
+</code></pre></div></div>
+
+<p>Note that the previous tool (jad) was run directly on .smali files generated from apktool. The following two tools can be run on the .jar files that were unzipped into the /unzipped/ directory in step 3.</p>
+
+<ul>
+  <li>jd-gui (supports up to java 7):</li>
+</ul>
+
+<p>Pretty much the simplest to get started with, it’s very fast and effective. Just run ‘jd-gui’ at the command line, point it at your .jar file, and start browsing the decompiled .java files. While the tool is closed source and no longer maintained, it is so fast and easy that it’s worth knowing.</p>
+
+<p>Here is what the tool looks like. My text may be small or look wonky because apps don’t typically scale well 4k 13” laptop monitors:</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-38-09.png" alt="jd-gui output" /></p>
+
+<ul>
+  <li><a href="https://bitbucket.org/mstrobel/procyon/wiki/Java%20Decompiler">Procyon</a> (java 8):
+This is a nice .jar to decompile into java 8, which introduced several features such as lambda functions, the :: operator, etc. What worked really well for me is to decompile the entire .jar (both of them in this case) to an output directory and open that directory in an editor such as VS Code to inspect the .java files – this results in an experience similar to jd-gui with just the added overhead of downloading procyon and running a few commands for setup.</li>
+</ul>
+
+<p>Downloading Procyon results in a .jar file which I will call decompiler.jar. You may have to build it from source, I don’t remember. It’s easy, just follow the docs.</p>
+
+<p>I’m too lazy to test specific commands again, but they should look something like this based on the documentation.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># use the Procyon decompiler.jar to decompile classes-dex2jar.jar to the procyon_out directory</span>
+java <span class="nt">-jar</span> decompiler.jar <span class="nt">-jar</span> classes-dex2jar.jar <span class="nt">-o</span> procyon_out
+</code></pre></div></div>
+
+<p>Ok, now that you have access to Java code, feel free to analyze it and understand how the game works. Keep in mind this is only the written code, and not code found in any game engines such as unity3d. This decompiled code will only take you so far in some cases. You can use tools such as grep and find to search through the code quickly and find target files.</p>
+
+<p>For instance, running on my procryon output directory:</p>
+
+<p class="codeblock-label">Useful command line tools:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># returns all lines in all files (recursively) with the target text, case-insensative</span>
+<span class="nb">grep</span> <span class="nt">-RIi</span> <span class="s2">"decode("</span>
+
+<span class="c"># grep accepts regex but can be escaped with \. Regex is useful for many things such as finding imports</span>
+<span class="c"># finding any .java file that uses json packages</span>
+<span class="nb">grep</span> <span class="nt">-RIi</span> <span class="s2">"import.*json"</span>
+
+<span class="c"># Use the -v in subsequent greps to do a reverse grep and omit the lines that match that criteria. If you wanted to omit files in the /ironsource/ directory because you don't care about those package files right now</span>
+<span class="nb">grep</span> <span class="nt">-RIi</span> <span class="s2">"decode("</span> | <span class="nb">grep</span> <span class="nt">-vi</span> <span class="s2">"/ironsource/"</span>
+
+<span class="c"># Get unique filenames with a few other commands by splitting on the semicolon and piping the output to uniq</span>
+<span class="nb">grep</span> <span class="nt">-RIi</span> <span class="s2">"decode("</span> | <span class="nb">cut</span> <span class="nt">-d</span><span class="s1">';'</span> <span class="nt">-f1</span>| <span class="nb">uniq</span>
+
+<span class="c"># Find's all files with .smali extension</span>
+find <span class="nb">.</span> <span class="nt">-name</span> <span class="s2">"*.smali"</span>
+
+<span class="c"># finding an interesting file, you can cat it to the console</span>
+<span class="nb">cat </span>interesting_file.java
+<span class="c"># OR you can open it in an editor such as vim</span>
+vim interesting_file.java
+
+
+<span class="c"># Vim can be very useful because you can use commands such as</span>
+:/searchtext/g
+
+
+<span class="c"># to search for content. Press 'ENTER' then keep pressing 'n' to find the next match. </span>
+<span class="c"># This can be an easy way to open a file and jump to the interesting section much like ctrl+F </span>
+<span class="c"># would do in a GUI based application. </span>
+<span class="c"># There's a pretty awesome game to learn the basics of VIM that I have found fun and useful. </span>
+<span class="c"># &gt;&gt; https://vim-adventures.com &lt;&lt;</span>
+<span class="c"># Issa good one.</span>
+</code></pre></div></div>
+
+<p>Ok. I just wanted to give another way to search through the files, please look up the documentation on these commands if you need to, they are very useful to easily and quickly to find interesting files and lines of code. I don’t want to dive deep into the specifics, only give guidance on a few options.</p>
+
+<p>It’s important to note that this code may only go so far. This game, for instance, is running unity3d, meaning it includes some unity .so binary files (a .so is basically a linux .dll), with the raw, compiled game logic. Thus, there isn’t much you can do with this code output. I will go more into analyzing and hooking the .so binaries in the Dynamic Analysis section of this post, but I also want to touch on a bit more here.</p>
+
+<p>While I hesitate to dive too deep, I want to give some more detail on using this code we decompiled in a practical way.</p>
+
+<h1 id="5-using-the-static-analysis-data-and-decoding-some-intercepted-network-traffic">5) Using the static analysis data and decoding some intercepted network traffic​</h1>
+
+<p>Here is a practical example of using this data gathered from static analysis. It’s a bit game specific but can be abstracted to other situations you may encounter. I will try to avoid going too deep into a tutorial because again, you can just google the specifics and this post would be even longer if I got into that.</p>
+
+<p>For this section, I am going to use a tool called Burp Suite (installed on my computer) to intercept WiFi traffic from my phone. Note that this method may fail due to various reasons, one of which is if the app does certificate pinning which you will have to bypass by modifying the .apk or by other means – do some google fu if you need to for your use case.</p>
+
+<p>Setup:</p>
+
+<p>I don’t want to get too deep here, but I will briefly explain the general process. Feel free to google Android + Burp Suite and you’ll figure it out. These steps are <a href="https://support.portswigger.net/customer/portal/articles/1841102-installing-burp-s-ca-certificate-in-an-android-device">documented elsewhere</a>, but I wanted to provide a few steps outlining the process to provide clarity if you get stuck.</p>
+
+<p>Note that you will need to re-download the Burp Suite certificate as you change networks or restart Burp Suite. Just be aware if things aren’t working, you may want to try re-downloading the certificate and install it.</p>
+
+<ol>
+  <li>
+    <p>First, download Burp Suite (obviously).</p>
+  </li>
+  <li>
+    <p>Second, You’ll want to disable the Interceptor for now so setting up the proxy doesn’t stop traffic. From the (a) proxy tab, (b) disable the ‘Intercept’ button</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-40-07.png" alt="burp1" /></p>
+
+    <p>Create a new proxy listener. This can be done by (a) going to the proxy tab, (b) options, (c) add, (d) bind to an unused port and select ‘All Interfaces’, then click Ok.</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-40-41.png" alt="burp2" /></p>
+  </li>
+  <li>
+    <p>Third, get the ip address of your computer running Burp Suite (e.g. using ‘ip addr/ifconfig’ on Linux or ‘ipconfig’ on windows terminal looking for inet/IPv4 parameters, respectively).</p>
+  </li>
+  <li>
+    <p>Fourth, you’re gonna want to open that port on your router because it’s probably not going to be open by default. Look up your router information on how to do this from the Admin web interface of your router. I suppose you may need to open ports on your device firewall such as with the command ‘ufw’ on ubuntu or through the windows defender firewall on windows. Make sure your inbound/outbound rules are configured appropriately on each device. (you only need to do this once per router/device)</p>
+  </li>
+  <li>
+    <p>Fifth, configure the target WiFi network settings on the android device to ‘Manual’ proxy mode and set the ip address of your host machine and port you specified using Burp Suite – it’s in the advanced settings of your current network settings (settings for the current target SSID)… I hope that makes sense because there is another network settings page we will use shortly to install a certificate. Google will help you configure a proxy on your android device if needed. I’ve provided a screenshot below of the proper settings button to provide clarity.</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-41-23.png" alt="android wifi settings" /></p>
+  </li>
+  <li>
+    <p>Sixth, from the android device, go to <a href="http://burp">http://burp</a> and download the CA Certificate on the top right.</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-42-13.png" alt="download burp certificate" /></p>
+  </li>
+  <li>
+    <p>Seventh, open an android app such as ‘EX File Manager’ or ‘FX File Manager’ because we are going to have to rename the certificate that was just downloaded. It is downloaded as a .der, but you need to rename it as a .crt or a .cer for Android to recognize it.</p>
+  </li>
+  <li>
+    <p>Eighth, from the Android device, you should now go into the Advanced WiFi settings (not the settings of the current SSID) and ‘Install network certificates’, select the downloaded certificate and name it whatever you want.</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-42-43.png" alt="android settings 2" /></p>
+
+    <p>Great, you can now test going to a page like test.com on the Android device and check the HTTP History tab in Burp Suite to ensure you are capturing traffic.</p>
+
+    <p>Check the <code class="language-plaintext highlighter-rouge">Proxy &gt; HTTP History</code> tabs. In this example I went to blah.com on my android device. Note that some sites that require HTTPS may not work because Chrome, Firefox, and potentially other browsers validate certificates with built in good/bad certificate lists due to past exploitation. You’ll get a warning message to proceed and at best it’s just extra clicks. Here, blah.com was a quick way to test.</p>
+
+    <p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-43-35.png" alt="test interception" /></p>
+  </li>
+</ol>
+
+<p>Now that we have a proxy on our network traffic, you can play the game and notice a few calls being made to different servers. One is much more strongly obfuscated than the other. For this instance, we are going to look at the network traffic with base64 encoded payloads.</p>
+
+<p>Using methods described earlier, I found an interesting file
+You’ll notice a file called MRGS Define which contains a few keys in the form of byte[] and a function to convert them to a String. Encript is spelt with an ‘i’ here.. tricky tricky.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-44-06.png" alt="code" /></p>
+
+<p>Using previous techniques, we can now grep through the code base to quickly find interesting files with this function call.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-44-25.png" alt="" /></p>
+
+<p>Where we land into another file with a decode function.
+It gets a bit deeper, only in the sense that there are some decode functions to call other decode functions. I’m not going to post another bunch of screenshots, but I would like to illustrate a few more points.</p>
+
+<p>Mainly that we can take these decode functions and pull them out into our own java project. Creating out own program.java with a typical java structure</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+    <span class="err">…</span> <span class="no">EXTRACTED</span> <span class="no">DECODE</span> <span class="no">FUNCTIONS</span> <span class="no">AND</span> <span class="no">KEYS</span> <span class="err">…</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>With the Java Runtime Environment installed, you can compile and run this code from the command line:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Important note: my file is called program.java</span>
+
+<span class="c"># compile the program</span>
+javac program.java
+
+<span class="c"># run the program</span>
+java program
+</code></pre></div></div>
+
+<p>We can now run some code locally and try to understand what is going on. Take note that this code comes from not only a decompiled source, but it is also an Android device with access to Android SDKs. One key and common example is the base64 library. Android seems to use android.util.Base64 which has different syntax from the typical java.util.Base64 package.</p>
+
+<p>To get around this, you can either try to convert your code or maybe even download Android Studio, install a virtual android image, create from the template with one button, and hook that button to a function where you run your code and Log.d code to the debug console. I won’t get into that process, but that’s what worked for me for trying to run the Android SDK code when things started getting a bit more complex and I was attempting to understand how it all worked. For instance, there are more encrypted payloads being sent to severs and I spent some time trying to serialize that crazy Unicode into Android Java objects such as Parcelable objects.</p>
+
+<p>The end result of all this is we can intercept traffic from this source and decode the base64 given the proper encryption key.</p>
+
+<ul>
+  <li>An example:</li>
+</ul>
+
+<p>Base64 from a server response, captured in Burp Suite:</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OOSiN+qRISyRbVuBavlaWIz5R1/NmHVYskxkRgql+D4eMEhpBRmN5bhrACFnUrpuyR/9uXjFv+QvfT5yIUd5uhhwdKP3I8iiQ/4MdpDOoSI=
+</code></pre></div></div>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-48-28.png" alt="burp captured traffic" /></p>
+
+<p>You’ll notice standard base64 decoding results in gibberish:</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-48-54.png" alt="base64 decoded data" /></p>
+
+<p>But our local java program with the proper keys and decryption algorithm:
+<img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-49-20.png" alt="" /></p>
+
+<p>Hurray for symmetric keys!!</p>
+
+<p>In this game, this doesn’t do much for us, but perhaps it will be more useful in another game. The rest of the traffic is not decoded with this algorithm, it looks more like this and is encoded somewhere in the game logic, deeper than the .smali code. It looks something like this (screenshot below), and after much effort trying to deserialize or find some other encryption method (even going down to a Huffman encoding schema I found in the okio library because all responses started with a 1 in their binary representation), it is clear this encoding was probably done in the .so binary layer.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-49-41.png" alt="" /></p>
+
+<h1 id="6-dynamic-analysis-with-wait-lets-talk-about-logs">6) Dynamic Analysis with… wait… let’s talk about logs.​</h1>
+
+<p>Before I get into a brief overview of Frida, I’d like to point out something that is useful for both the Dynamic Analysis section and the Static Analysis mentioned above. While programming, many developers leave interesting console output statements in code that are not always removed when the application is pushed to production. While running the game, you can attach your Android through USB and use ‘adb’ to inspect device logs.</p>
+
+<p class="codeblock-label">Dumping logs with adb:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb logcat
+</code></pre></div></div>
+
+<p>This will dump the logs on the device and eventually you will see more of a scrolling action as logs come in. You can dump this to a file to <code class="language-plaintext highlighter-rouge">cat log_output |grep _searchTerm_</code> or you can <code class="language-plaintext highlighter-rouge">adb logcat |grep _searchTerm_</code> to filter in real time. This can be useful because you may see functions that relate to network traffic or see logs of the game that could provide greppable code in the codebase if the strings are not encrypted. This technique may aid in pinpointing .java files of interest.</p>
+
+<p>Another interesting note is that the game may be saving some logs from the game. Not all of these files are available in the /data/ directory on an unrooted device. That said, I noticed while using EX Explorer that there is another path that is accessible and may contain valuable app log data. This path is /storage/emulated/0/Android/data/com.my.hc.rpg.kingdom.simulator. Clearly your package name may be different, but in this case the directory has a /files/logs folder with app generated logs that are pretty interesting to cross reference with app code.</p>
+
+<p>I figure I would mention these two log sources as they can be additional data sets that could prove invaluable depending on your application.</p>
+
+<p>In summary, the two locations I found logs for this game are those dumped by <code class="language-plaintext highlighter-rouge">adb logcat</code> while the game is running and /storage/emulated/0/Android/data/com.my.hc.rpg.kingdom.simulator. Adb can be used to pull those files to your machine for local analysis, if needed: <code class="language-plaintext highlighter-rouge">adb pull /storage/emulated/0/Android/data/com.my.hc.rpg.kingdom.simulator</code></p>
+
+<p>A quick example of log usage:</p>
+
+<p>This game has network traffic with encoded payloads, but oddly enough, there are a few variables in plain text.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-51-21.png" alt="" /></p>
+
+<p>I can run <code class="language-plaintext highlighter-rouge">adb logcat &gt; log</code> to pipe log data into a log file which I can grep through. Running <code class="language-plaintext highlighter-rouge">cat log | grep d_7V</code> I get the following output</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-52-02.png" alt="" /></p>
+
+<p>I now know this is a firebase token and that MRSGPushNotificationHandler.java may be interesting to look at. Even if that .java file contains nothing, the fact this is a firebase token arms me with more data. I can grep through the .java or other useful files looking for calls to functions like getFirebaseToken() or looking for what may be building a POST request with a firebase token in the payload. I hope I’ve illustrated the point and utility of logs when you are stuck, they could be that golden ticket that keeps you going. You can then also hook these functions using Frida (below) and possibly find the code that is being used to send/receive data to/from the server.</p>
+
+<p>This leads me to the next phase of this progression, dynamic analysis.</p>
+
+<h1 id="7-injecting-frida-and-building-our-modified-apk">7) Injecting Frida and building our modified .apk​</h1>
+
+<p>Let’s talk about Frida. It’s a dynamic analysis framework that works by injecting a binary into the application. In this case since the phone is not rooted, we will be modifying the application code to call the Frida binary upon startup, which then spins up a server listening on a port that you can connect to and run JavaScript code to interact with your app – effectively hooking into the running application. Much like any other game, I would imagine using open source tooling is a quick way to get caught, but it can also be useful to very quickly iterate on a game, poke at some game logic, and learn exactly where to write your custom cheats, mods, or whatever you crazy kids do these days.</p>
+
+<p>Again, there are plenty of tutorials on this but I want to briefly explain the process at a high level and note a few examples that may be useful.</p>
+
+<p>I’d like to point out there are tools such as <a href="https://github.com/sensepost/objection">objection</a> to automatically patch your apk with frida-gadget. It did not work in my case, I believe because of the multiple .apk files. There may be a way to pass in an argument, but I wanted to do it a bit more manual for learning purposes anyway. This may be a tool worth checking out if you are interested.
+The process:</p>
+
+<p>First we need to download and extract the frida-gadet binary. You can download from here: <a href="https://github.com/frida/frida/releases">frida/frida</a>.</p>
+
+<p>In my case, my device is arm64-v8a (you can validate using adb: <code class="language-plaintext highlighter-rouge">adb shell getprop ro.product.cpu.abi</code>), so I will download the arm64 version of frida gadget</p>
+
+<p class="codeblock-label">Download frida-gadget:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># download the gadet</span>
+
+wget frida-gadget-12.8.9-android-arm64.so.xz
+<span class="c"># extract</span>
+
+unxz frida-gadget-12.8.9-android-arm64.so.xz
+<span class="c"># results in: frida-gadget-12.8.9-android-arm64.so</span>
+</code></pre></div></div>
+
+<p>You will now need to move this binary into the proper directory of the decompiled apk. But which one? I’d like to point out that the game I am using as an example had 2 .apk files. One was base.apk and the other was split_config.apk. At this point, I need to run ‘apktool d split_config.apk’ on the second apk file to decode it into the /split_config/ directory.</p>
+
+<p>You will place this frida-gadget.so where the other binaries are being loaded in the app. A useful tool is find if you’d like to quickly find the target directory: ‘find . -name ‘*.so’</p>
+
+<p>Even if all the .so binaries were loaded from the base.apk, this step would still be required as we need to re-push the app with all .apk files in the bundle; all .apks will need to have the same certificate chain to successfully install. So, for instance, if we only modified the base.apk and tried to combine it with the original split_config.apk, our device would detect that the signature chains do not line up and reject the install.</p>
+
+<p>Moving on. Now we can move the frida-gadget-12.8.9-android-arm64.so into the libraries for import, and rename it to ‘libfrida-gadget.so’ – as all android binaries need to start with ‘lib’ and end with ‘.so’</p>
+
+<p class="codeblock-label">rename and move frida-gadget to the proper directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mv </span>frida-gadget-12.8.9-android-arm64.so /split_config/lib/arm64-v8a/libfrida-gadget.so
+</code></pre></div></div>
+
+<p><strong>Config file:</strong>
+This part is not required, I believe, as defaults are embedded into the program. That said, the defaults can be confusing if you do not know they exist. When starting the modified game, you may end up with a black screen and think something is broken. Actually, the default is set so that the game pauses for you to attach to the frida-gadget server before it proceeds. This is so you can hook before any other code is loaded, allowing you to nop anti-cheat code, attach a debugger, or do whatever you need to do. To change this behavior, you can create a ‘libfrida-gadget.config.so’ file, written in JSON (don’t be confused with the .so extension, it works). Mine looked like this (below). the important part is the “on_load” where I declare that the app may resume like normal immediately upon loading the frida-gadget binary.</p>
+
+<p>This is created in the same directory as the libfrida-gadget.so binary.</p>
+
+<p class="codeblock-label">libfrida-gadget.config.so:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"interaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"listen"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">27042</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"on_load"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resume"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We then inject some smali code to load libfrida-gadget.so when the game loads.</p>
+
+<p>I won’t get too deep about how I chose this for this specific game as methodology is described in other online resources, but here I chose the static constructor in /hustlecastle/AndroidCoreActivity.smali to inject the required smali code to call the frida-gadget binary. I didn’t see it in every doc, so I will point out that you should increment the ‘.locals ‘ at the beginning of the function call by 1, and inject your smali code, as we will need to set a string variable. Also, if there are other variables in use, you may want to consider using v1, v2, or otherwise to prevent polluting registers and crashing the game.</p>
+
+<p>This code just sets a string variable to the name of the frida-gadget.so and loads the library.</p>
+
+<p><img src="/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida &amp; BurpSuite/2021-10-13-13-56-02.png" alt="" /></p>
+
+<p>At this point we are ready to rebuild the .apk and push it to our device. This step must be repeated for all .apk files. I will post some code as a reference, but I encourage you to google for a better understanding of what is happening. Some of functions you may need to do multiple times if you are repeatedly messing with smali code and seeing how it affects the game, it may be useful to make a few shell scripts such as build.sh and sign.sh to aid in this process. Note that there are other tools that may do this automatically for you.</p>
+
+<p class="codeblock-label">Building a new self-signed .apk from our modified package:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># generate a key to sign the app. This only needs to be done once and the .keystore file will be created in the local directory.</span>
+keytool <span class="nt">-genkey</span> <span class="nt">-v</span> <span class="nt">-keystore</span> my-release-key.keystore <span class="nt">-alias</span> alias_name <span class="nt">-keyalg</span> RSA <span class="nt">-keysize</span> 2048 <span class="nt">-validity</span> 10000
+
+<span class="c"># build the /base/ directory files back into an .apk</span>
+apktool b base <span class="nt">-o</span> new_base.apk
+
+<span class="c"># sign the new .apk</span>
+jarsigner <span class="nt">-verbose</span> <span class="nt">-sigalg</span> SHA1withRSA <span class="nt">-digestalg</span> SHA1 <span class="nt">-keystore</span> my-release-key.keystore new_base.apk alias_name
+
+<span class="c"># zipalign the .apk – this is to optimize the .apk which android requires for instillation</span>
+zipalign <span class="nt">-v</span> 4 new_base.apk signed_base.apk
+<span class="c"># The output file is called signed_base.apk – this is the modified, signed .apk you will be pushing to the device with adb</span>
+</code></pre></div></div>
+
+<p>Push modified .apk to the device.</p>
+
+<p>Remember to uninstall the current version of the app from the phone. You can now use adb to install the modified .apk. Note that this step requires the developer settings mentioned above to be enabled/disabled respectively.</p>
+
+<p class="codeblock-label">Install bundled apk files:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb install-multiple signed_base.apk signed_split_config.apk
+</code></pre></div></div>
+
+<p>If the app did not have multiple .apk files, you could simply use ‘adb install signed_base.apk’ and be good to go.</p>
+
+<h1 id="8-dynamic-analysis-with-frida">8) Dynamic Analysis with Frida​</h1>
+
+<p>Alright, so we have Frida injected into the game, it’s time to load the game and connect.</p>
+
+<p>First, ensure you can connect to your device using <code class="language-plaintext highlighter-rouge">adb shell</code> – this will start the adb daemon, which is required, if it isn’t started already. Feel free to <code class="language-plaintext highlighter-rouge">exit</code> out of that shell once you’ve confirmed you can connect.</p>
+
+<p>To test if Frida is connecting you can run</p>
+
+<p class="codeblock-label">Attach to frida-gadget:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># attach frida over USB to the gadget</span>
+frida <span class="nt">-U</span> gadget
+</code></pre></div></div>
+
+<p>You should now have a shell like with access to frida commands.</p>
+
+<p>You can also create .js files with Frida code and run pre-defined commands directly into the hooked game.</p>
+
+<p class="codeblock-label">Run frida_payload.js using frida-gadget:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># attach frida over USB to the gadget</span>
+frida <span class="nt">-U</span> <span class="nt">-l</span> frida_paylod.js gadget
+</code></pre></div></div>
+
+<p>For instance, a .js file to dump classes (e.g. pipe this to a file and grep through it):</p>
+
+<p class="codeblock-label">enumerate_classes.js:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Java</span><span class="p">.</span><span class="nx">perform</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">Java</span><span class="p">.</span><span class="nx">enumerateLoadedClasses</span><span class="p">({</span>
+        <span class="na">onMatch</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">className</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">className</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="na">onComplete</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>You can hook the methods in those java classes and change their implementation to do additional things, change parameters or return variables. For instance, hooking the toString() function of the org.json.JSONObject class – this prints that the function was called and the returned string’s value to the console. You’ll notice that the return_value = this.toString(); here, we are calling the original toString() method and getting the return value.</p>
+
+<p class="codeblock-label">Hook org.json.JSONObject Java class:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Java</span><span class="p">.</span><span class="nx">perform</span><span class="p">(</span><span class="kd">function</span> <span class="nx">x</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">activity</span> <span class="o">=</span> <span class="nx">Java</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">"</span><span class="s2">org.json.JSONObject</span><span class="dl">"</span><span class="p">)</span>
+  
+    <span class="nx">activity</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">overload</span><span class="p">(</span><span class="dl">'</span><span class="s1">).implementation = function() {
+        console.log("called toString of JSONObject")
+        var return_value = this.toString()
+        console.log(return_value)
+    }
+}
+</span></code></pre></div></div>
+
+<p>We can also Intercept game logic. This game was built with unity and has lib2cpp.so, which has the bulk of the game logic. Much like (<a href="https://guidedhacking.com/threads/android-mod-menu-tutorial-very-hard-works-on-il2cpp-and-native-games-too.13795/#post-82451">Tutorial - Android Mod Menu Tutorial (Very?) Hard (Works on il2cpp and native games too</a>), you can dump the offsets of lib2cpp.so by using il2cppDumper. With those offsets, you can use the Interceptor tool in Frida to hook functions in the binary itself. This is useful because many of the java classes are just high level code that makes api calls to the lower level .so functions, comprising the bulk of the game engine.</p>
+
+<p>We can hook the function calls given the offsets
+An example: hook_function_by_offset.js</p>
+
+<p class="codeblock-label">Hook .so binary function using Frida Interceptor:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// function: canClaimReward</span>
+<span class="nx">Interceptor</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="nx">Module</span><span class="p">.</span><span class="nx">findBaseAddress</span><span class="p">(</span><span class="dl">'</span><span class="s1">libil2cpp.so</span><span class="dl">'</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">0x1ABE890</span><span class="dl">'</span><span class="p">),</span> <span class="p">{</span>
+    <span class="na">onEnter</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">function was called</span><span class="dl">"</span><span class="p">)</span>
+
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">arg0: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">// some pointer, not sure to what</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">arg1: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1">// usually first parameter to function</span>
+
+        <span class="c1">// uncomment below to change first parameter value as the function is called, the ptr function is necessary, please look at the Frida docs if needed</span>
+        <span class="c1">// args[1] = ptr('0x1')</span>
+    <span class="p">},</span>
+        <span class="na">onLeave</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ret_val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// change return value of this Boolean function to always be true</span>
+
+            <span class="nx">ret_val</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="mh">0x1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nx">ret_val</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Or even call functions outright based on their offsets:</p>
+
+<p class="codeblock-label">Run function based on offset:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func_ptr</span> <span class="o">=</span> <span class="nx">Module</span><span class="p">.</span><span class="nx">findBaseAddress</span><span class="p">(</span><span class="dl">'</span><span class="s1">libil2cpp.so</span><span class="dl">'</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">0x1ABE890</span><span class="dl">'</span><span class="p">)</span>
+<span class="c1">// NativeFunction(func_ptr, return datatype, argument datatypes)</span>
+<span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NativeFunction</span><span class="p">(</span><span class="nx">func_ptr</span><span class="p">,</span> <span class="dl">'</span><span class="s1">void</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="dl">'</span><span class="s1">int</span><span class="dl">'</span><span class="p">])</span>
+<span class="nx">f</span><span class="p">(</span><span class="mh">0x1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I don’t want to get too deep here because there is a lot of documentation, but those are some examples of hooking java classes, altering function arguments and return values, and hooking/calling functions directly out of an .so binary. I encourage you to look at the Frida api documentation and examples people have posted online for further guidance.</p>
+
+<p>Well, this is pretty much a summary of a couple weeks of research and experimentation. Hopefully someone finds it useful. This was all done on an unrooted device. Mileage may vary.</p>
+
+</div>
+
+<br>
+<br>
+<br>
+<!-- Related Posts -->
+<!-- 
+<div class="relatedPosts">
+  <h2>Related Posts</h2>
+
+  
+  
+  
+
+    
+
+      
+      
+
+      
+
+      <ul>
+      
+        <li>
+          <a href="/2021/10/11/Adventures-in-open-source-contributing-Joplin.html">Adventures in Open Source Contributing&#x3a; Joplin</a>
+          Common Tags:  <span class="label label-default">JavaScript</span> 
+        </li>
+        
+        
+      
+      </ul>
+
+    
+
+      
+      
+
+      
+
+      <ul>
+      
+      </ul>
+
+     -->
+
+    <!-- Comments -->
+    <hr>
+    <h1>Comments</h1>
+    <script src="https://utteranc.es/client.js"
+      repo="alecmaly/blog"
+      issue-term="pathname"
+      label="test label"
+      theme="photon-dark"
+      crossorigin="anonymous"
+      async>
+    </script>
+</div>
+            </section>
+        </div>
+
+        <button onclick="topFunction()" id="jump-to-top-btn" title="Go to top">Top</button>
+        <script src="/assets/js/jump_to_top.js"></script>
+        <footer>
+            <!-- This is a footer -->
+        </footer>
+    </div>
+</body>
+
+</html>

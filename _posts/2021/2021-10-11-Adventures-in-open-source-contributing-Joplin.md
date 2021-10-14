@@ -49,7 +49,9 @@ Since I have already written about the problem in detail, here is a link to my o
 
 If you didn't read or understand the github issue linked above, I'll explain it a little bit here.
 
-When syncing a new device using OneDrive as a data source, Joplin would issue so many requests (depending on your # of threads setting) that OneDrive would send back throttling responses that Joplin didn't know how to handle, the app would kill the sync process entirely and you would have to manually start it. Manually restarting the sync would cause another influx of requests to OneDrive, which then throttles again even faster this time due to the previous influx of requests, and kill the sync process again. Ad infinitum. This was annoying for syncing new devices.
+When syncing a new device using OneDrive as a data source, Joplin would issue so many requests (depending on your # of threads setting) that OneDrive would send back throttling responses that Joplin didn't know how to handle, the app would kill the sync process entirely and you would have to manually restart it. Manually restarting the sync would cause another influx of requests to OneDrive, which then throttles again - even faster this time due to the bulk requests that were previously sent, and kill the sync process again... ad infinitum. 
+
+This was annoying for syncing new devices like my new phone, so it's something I decided to fix myself.
 
 ## Issue Resolution
 
@@ -70,7 +72,7 @@ At this point, I **ASSUMED** these tests pass for everyone else, so I get to deb
 
 The explanation is quite involved, you can find my analysis in a github comment [here](https://github.com/laurent22/joplin/pull/5246#issuecomment-888483705) if you are interested.
 
-Ultimately, it came down to timezones. I was in EST, and the test code was pushing mock notes in UTC, then searching for the notes it inserted using Joplin's search feature, however it was searching using my local timezone of EST and not finding the expected data. Thus, failing the tests.
+Ultimately, it came down to timezones. I was in EST, and the test code was pushing mock notes in UTC, then searching for the notes it inserted using Joplin's search feature, however it was searching using my local timezone of EST and not finding the expected data. Thus, the tests failed when running them locally on my machine.
 
 ## Timezones: The Developer's Arch Nemesis
 
@@ -80,7 +82,7 @@ After posting [my explanation](https://github.com/laurent22/joplin/pull/5246#iss
 
 ![](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-22.png)
 
-Once again proving that timezones are the bane of every developer's existence. For the ininitiated, please check out this very well done (and hilarious) YouTube video by Computerphile titled [The Problem with Time & Timezones](https://www.youtube.com/watch?v=-5wpm-gesOY), it's amazing.
+Once again proving that timezones are the bane of every developer's existence. For the unininitiated, please check out this very well done (and hilarious) YouTube video by Computerphile titled [The Problem with Time & Timezones](https://www.youtube.com/watch?v=-5wpm-gesOY), it's amazing.
 
 # Conclusion
 

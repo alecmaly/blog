@@ -42,6 +42,8 @@ Custom domain (DNS)
     - Put on left navigation?
 - Table of Contents [jekyll-toc](https://github.com/allejo/jekyll-toc)
     - Put in left navigation?
+- Set thumbnail for Facebook / links
+    - https://stackoverflow.com/questions/39214375/how-can-you-get-thumbnails-for-jekyll-posts-when-the-post-has-no-images
 
 ## Content
 - https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/

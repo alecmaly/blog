@@ -43,7 +43,7 @@ plugins:
 # post page - pagination
 paginate: 10
 
-
+future: false
 
 ## 3d Party 
 # Google analytics

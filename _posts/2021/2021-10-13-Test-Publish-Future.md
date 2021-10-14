@@ -1,13 +1,12 @@
 ---
 layout: post
-title: Android Hacking Tips and Tricks with Frida & BurpSuite
+title: Test Publish Future
 description:
     Learning by modifying an android .apk, intercepting + decrypting network traffic, 
     and poking at game memory (changing function arguments + return values / calling functions by virtual address). 
-tags: Android android-unrooted Frida BurpSuite .apk JavaScript Java linux il2cpp adb
 toc: true
 published: true
-date: 2021-10-13 22:34
+date: 2021-10-13 21:35
 ---
 
 > I originally posted this on [GuidedHacking](https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/) (excellent website) and figured it would be worthwhile to port it to my new blog! 

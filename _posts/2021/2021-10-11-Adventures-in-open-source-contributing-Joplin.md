@@ -94,4 +94,4 @@ Once again proving that timezones are the bane of every developer's existence. F
 What happens when you want to add functionality to an electron.js app, but that feature would never be accepted into a release because it doesn't suit the majority of users, you ask? 
 
 Just inject the custom code yourself, it's super easy! 
-Read about my journey in hacking Joplin in my next post: [Hacking Electron Apps: Joplin](/2021/10/12/Hacking-Electron-Apps-Joplin.md).
+Read about my journey in hacking Joplin in my next post: [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.md' | relative_url }}).

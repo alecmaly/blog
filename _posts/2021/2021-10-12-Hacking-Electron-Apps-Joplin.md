@@ -24,17 +24,22 @@ While I started with the first use case, I ended up implementing a few more that
 In my learning I often take useful information and add it to my notes. I then annotate and add more information or links I find useful. In one instance, I have read through and copied what I found to be the most useful for [linux privilege escalation by hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation).
 
 The total document is about 1655 lines long in markdown, quite large.
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-12-46-35.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)
 
 In Joplin, I've added a table of contents to jump around the massive document (shown on the right).
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-12-50-07.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-50-07.png)
 
 While this is useful, I would like a way to filter this massive file to just the most important items and expand my scope from there as I move forward.
 
 To do this, I ended up 'marking' important sections in my note with stars:
-    - Four stars (****) for very important sections
-    - Three stars (***) for the next important sections
-    - For each section, I would like to display a certain number of sections above or below depending on relevant content
+    - Four stars (\*\*\*\*) for very important sections
+    - Three stars (\*\*\*) for the next important sections
+    - For each section, I would like to display a certain number of sections above or below depending on relevant content, so I add a prefix or suffix number to show that many pages. For example, 2\*\*\*\*4 indicates I want to show 2 sections before the target and 4 sections after it, they may be related or important info.
+
+The filtering is controlled by (a) buttons that can toggle between 3/4 stars, anything marked with a star, and showing the entire document with the "Clear Stars" button.
+
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-16-53-23.png)
+
 
 ## Use Case 2: Filtering Workbooks
 
@@ -43,11 +48,11 @@ Typically, when searching in Joplin (a) it will search your notes, however, your
 <div>
     <div style="display: inline-block; width: 49%;">
         Before
-        <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-12-56-29.png' | relative_url}}" alt="notebook search before"/>
+        <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-56-29.png' | relative_url}}" alt="notebook search before"/>
     </div>
     <div style="display: inline-block; width: 49%; vertical-align: top">
         After
-        <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-13-10-33.png' | relative_url}}" alt="notebook search before"/>
+        <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-10-33.png' | relative_url}}" alt="notebook search before"/>
     </div>
 </div>
 
@@ -56,29 +61,26 @@ As you can see, the filtered list in the "After" image is much cleaner and allow
 
 ## Use Case 3: Copy button on code snippets
 
-Sometimes I want to just copy a cody snippet, so I added a button to add the content of a code block to my clipboard.
+Sometimes I want to just copy a code snippet, so I added a button to add the content of a code block to my clipboard.
 
-![copy to clipboard](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-13-52-06.png)
+![copy to clipboard](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-52-06.png)
 
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
+<hr>
+With these use cases in mind as the goal, it's time to get into the process of actually modifying the Joplin client! 
+<hr>
 
 # Hacking Electron Apps
 
-I'm not going to rehash things that can be easily found on the internet or go into too much depth, but here are the basics. 
+I prefer to avoid explaining information that is better explained elsewhere using a simple google search, but here are the basics.
 
 ## Basic Electron.js Structure
 
 Electron apps are typically installed and code is executed out of an .asar file.
 
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-14-05-22.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-05-22.png)
 
-These .asar files are essentially .zip files in the sense that they are compressed.
+These .asar files are essentially .zip files in the sense that they are a compressed collection of files.
 
 <p class="codeblock-label">To unpack it, just install the <a href='https://github.com/electron/asar'>asar cli</a> using npm:</p>
 ```bash
@@ -145,15 +147,15 @@ Running the script results in:
 
 - (a) app folder with Joplin source code .js/.ts files and (b) app.asar renamed to app.asar.bak.
 
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-14-50-07.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-50-07.png)
 
 - The contents of /app now include my payload `joplin_inject_codoe.js` file
 
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-14-51-33.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-51-33.png)
 
 - And my import statement to my payload being added to `\app\app.js` with the unique marker to prevent multiple import statements on subsequent runs of `patch_joplin.ps1`.
 
-![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin-a-Case-Study/2021-10-14-14-49-31.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-49-31.png)
 
 
 

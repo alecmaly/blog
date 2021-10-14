@@ -78,7 +78,7 @@ exclude:
 
 
 # debug
-debug: false
+debug: true
 
 
 

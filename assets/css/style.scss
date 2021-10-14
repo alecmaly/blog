@@ -4,7 +4,7 @@
 
 
 // mobile variables
-$mobile_maxWidth: 500px;
+$mobile_maxWidth: 900px;
 $navLinkSize: 1.5em;
 $navLinkSize_mobile: 1.2em;
 
@@ -227,4 +227,10 @@ main {
   display: block;
   height: 150px;
   margin: -150px 0 0;
+}
+
+// debug data
+#debug-data {
+  margin-right: 10px;
+  float: right;
 }

@@ -35,12 +35,6 @@ linkedin_username: alecmaly
 # theme: minima
 theme: jekyll-theme-hacker
 
-# default thumbnail
-image:
-  path: /assets/images/tech-thumbnail.jpg
-  height: 100
-  width: 100
-
 plugins:
   - jekyll-toc
   - jekyll-feed
@@ -85,3 +79,17 @@ exclude:
 
 # debug
 debug: false
+
+
+
+## SEO settings
+author:
+  name: Alec Maly
+  url: https://alecmaly.com
+  
+# default thumbnail
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/tech-thumbnail.jpg

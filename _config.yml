@@ -34,7 +34,12 @@ linkedin_username: alecmaly
 # Build settings
 # theme: minima
 theme: jekyll-theme-hacker
-default_thumbnail: /assets/images/tech-thumbnail.jpg
+
+# default thumbnail
+image:
+  path: /assets/images/tech-thumbnail.jpg
+  height: 100
+  width: 100
 
 plugins:
   - jekyll-toc

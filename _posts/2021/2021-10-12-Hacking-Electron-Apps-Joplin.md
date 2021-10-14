@@ -10,7 +10,7 @@ toc: true
 
 In my previous post, [Adventures in Open Source Contributing&#x3a; Joplin]({{ '/2021/10/11/Adventures-in-open-source-contributing-Joplin.html' | relative_url }}), I went over how I have contributed a useful feature to the Joplin open source project. 
 
-But what do you do if you want to change functionality to fit your specific use case, but nobody else needs that functionality? 
+But what do you do if you want to change functionality to fit your extremely specific use case? A use case that nobody else needs Ior even wants at all)?
 
 <div style='color:red; font-size: 2em; text-align:center'>You hack it!</div>
 
@@ -40,6 +40,7 @@ The filtering is controlled by (a) buttons that can toggle between 3/4 stars, an
 
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-16-53-23.png)
 
+As you can see, there is no way this would be added as the design is so clunky it just feels weird and unpolished. That said, I want it, and the idea of hacking the client app (for learning purposes) is just too juicy to pass up.
 
 ## Use Case 2: Filtering Workbooks
 
@@ -56,12 +57,12 @@ Typically, when searching in Joplin (a) it will search your notes, however, your
     </div>
 </div>
 
-As you can see, the filtered list in the "After" image is much cleaner and allows me to easily find some results that are still relevant while not showing up in normal search results.
+Clearly, the filtered list in the "After" image is much cleaner and allows me to easily find some results that are still relevant while not showing up in normal search results. Implementing my own version here will take less time than digging through the code's source to figure out a way to do it properly. 
 
 
 ## Use Case 3: Copy button on code snippets
 
-Sometimes I want to just copy a code snippet, so I added a button to add the content of a code block to my clipboard.
+Sometimes I want to just copy a code snippet with a single button click, so I added a button to add the content of a code block to my clipboard.
 
 ![copy to clipboard](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-52-06.png)
 
@@ -137,7 +138,7 @@ The entry point I identified is located at the relative path `\app\app.js`.
 
 This flow of this script is as follows:
 - Select `rebase` OR `update`
-    - A `rebase` will essentially extract the .asar to a folder, rename the original .asar to .asar.bak, and inject your custom code into the entrypoint of `\app\app.js`.
+    - A `rebase` will essentially extract the .asar to a folder, rename the original .asar to .asar.bak, and inject your custom code into the entrypoint of `\app\app.js` using some regex to place the payload exactly where I want it.
     - A `update` will just try to reinject the custom code if needed.
 - Both `rebase` and `update` will copy the payload from this repository into the Joplin repository `C:\Program Files\Joplin\resources\app\joplin_inject_code.js`
 

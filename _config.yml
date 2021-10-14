@@ -76,12 +76,6 @@ exclude:
   - tag_generator.py
 
 
-
-# debug
-debug: false
-
-
-
 ## SEO settings
 author:
   name: Alec Maly

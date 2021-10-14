@@ -33,15 +33,18 @@
         <!-- header -->
         <header class='sticky'>
             
-            <!-- ASPECT RATIO SETTINGS: TESTING -->
-            {% if site.debug == true %}
+
+            <!-- DEBUG -- ASPECT RATIO SETTINGS -- TESTING -->
             <span id='debug-data'></span>
             <script>
-                setInterval(() => {     
-                    document.querySelector('#debug-data').innerText = window.outerWidth + ':' + window.outerHeight
-                }, 1000)
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                if (urlParams.get('debug') === 'true') {
+                    setInterval(() => {     
+                        document.querySelector('#debug-data').innerText = window.outerWidth + ':' + window.outerHeight
+                    }, 500)
+                }
             </script>
-            {% endif %}
 
             <div class="container">
                 <a id="a-title" href="{{ '/' | relative_url }}">

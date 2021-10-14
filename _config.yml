@@ -43,8 +43,10 @@ plugins:
 # post page - pagination
 paginate: 10
 
-# Don't show future posts
+#Publishing defaults
+show_drafts: false
 future: false
+timezone: America/Detroit
 
 ## 3d Party 
 # Google analytics

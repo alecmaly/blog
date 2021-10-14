@@ -43,6 +43,7 @@ plugins:
 # post page - pagination
 paginate: 10
 
+# Don't show future posts
 future: false
 
 ## 3d Party 

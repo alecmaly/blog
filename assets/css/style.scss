@@ -15,10 +15,13 @@ $titleSize_mobile: 1.5em;
 $linkPink: rgb(216, 29, 216);
 $linkPurple: rgb(98, 16, 250);
 $linkGreen: #b5e853;
-$codeblockColor: orange;
+$orange: orange;
 $bannerColor: #1d1d1d;
 
 
+.currently-learning {
+  color: $orange
+}
 
 #a-title h1 {
   font-size: $titleSize;
@@ -166,7 +169,7 @@ main {
 .codeblock-label {
   text-align: center;
   font-weight: bold;
-  color: $codeblockColor;
+  color: $orange;
 
   /*  adding a gradient to text */
   // background: -webkit-linear-gradient(135deg, $linkPink 40%, $linkPurple 75%);

@@ -5,7 +5,10 @@
 <p align="left">I'm passionate about software development and application security. I very much enjoy enabling people with technology, improving processes with automation, and making our modern technological landscape safer for the average person.</p>
 
 <div style='text-align: center'>
-    🌱 I’m currently learning **Reverse Engineering and shellcoding**
+    🌱 I’m currently learning <span class='currently-learning'>
+        Reverse Engineering / Shellcoding<br>
+        + Web Appplication Pentesting
+    </span>
     <br>
     <br>
 </div>

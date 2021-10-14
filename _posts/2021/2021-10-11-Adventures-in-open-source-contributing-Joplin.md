@@ -3,7 +3,7 @@ layout: post
 title: Adventures in Open Source Contributing&#x3a; Joplin
 description: Fixing a bug in open source software leads to diagnosing a systemic unit testing bug.
 tags: Electronjs Joplin PowerShell JavaScript
-image: /assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-41-23.png
+# image: /assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-41-23.png
 toc: true
 ---
 

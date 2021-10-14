@@ -2,8 +2,7 @@
 layout: post
 title: Test Publish Future
 description:
-    Learning by modifying an android .apk, intercepting + decrypting network traffic, 
-    and poking at game memory (changing function arguments + return values / calling functions by virtual address). 
+    Test Publish Future
 toc: true
 published: true
 date: 2021-10-13 21:45

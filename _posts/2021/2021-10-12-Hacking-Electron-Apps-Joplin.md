@@ -16,7 +16,7 @@ But what do you do if you want to change functionality to fit your specific use 
 
 # The Use Cases
 
-While I started with the first use case, I ended up implementing a few more that I found useful and it was easier than going through the effort of updating the main project since I am currently focused on other efforts to investigate the proper way to implement some of these solutions.
+While I started with the first use case, I ended up implementing a few more that I found useful; it was easier than going through the effort of updating the main project.
 
 
 ## Use Case 1: Filtering long pages by markers

@@ -106,6 +106,7 @@
             <button onclick="topFunction()" id="jump-to-top-btn" title="Go to top">Top</button>
             <script src="{{ '/assets/js/jump_to_top.js' | relativeurl}}"></script>
             <footer class='container'>
+                <hr>
                 <!-- This is a footer -->
                 
                 <!-- Toggle mode -->
@@ -125,14 +126,40 @@
         document.body.className = localStorage.getItem('theme') || 'light-mode'
         document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
 
+        // add utterences
+        var script = document.createElement('script')
+        script.setAttribute('src', "https://utteranc.es/client.js")
+        script.setAttribute('repo', "alecmaly/blog")
+        script.setAttribute('issue-term', "https://utteranc.es/client.js")
+        script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
+        script.setAttribute('crossorigin', "anonymous")
+        
+        document.getElementById('utterences-container').appendChild(script)
+        
+        function removeAllChildNodes(parent) {
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
+            }
+        }
+
         function changeTheme() {
+            // set local storage
             if (document.getElementById('toggle-theme').checked) {
                 localStorage.setItem('theme', 'dark-mode')
             } else {
                 localStorage.setItem('theme', 'light-mode')
             }
-
+            
+            // set theme
             document.body.className = localStorage.getItem('theme') || 'light-mode'
+            
+            // add utterences
+            if (document.querySelector('[class="utterances-frame"]')) {
+                var href = new URL(document.querySelector('[class="utterances-frame"]').src);
+                href.searchParams.set('theme', localStorage.getItem('theme') == 'light-mode' ? 'github-light' : 'photon-dark');
+
+                document.querySelector('[class="utterances-frame"]').src = href.toString()
+            }
         }
     </script>
 </html>

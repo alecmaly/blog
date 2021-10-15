@@ -33,11 +33,15 @@ What am I looking for in my note-taking app?
 
 ## Some Competitors
 
+What about other note-taking solutions?<br>
+Here is my experience with a few of them:
+
 - [Microsoft OneNote](https://www.onenote.com) - Honestly, overall a pretty nice note-taking app. The offline/online syncs work wonderfully and it's overall a nice experience. My major gripe is that you can only do two "levels" of nesting and for my use case I really wanted to nest sort of like folders. For example, one of my notes is located in `Tech - Learning Content > Hacking > Privilege Escalation > Linux Privelege Escalation > lxd group escalation`, I'm not sure how I would achieve the same level of organization in OneNote, however this was probably my second favorite app in terms of functionality.
 - [Notion.so](https://www.notion.so/) - I thought Notion was GREAT! Until it wasn't... The user experience was fantastic and their mobile app is the beez kneez. That said, it has some major issues for my use case. For one, the data is all on Notion servers and the offline capabilities are very limited. Perhaps the largest issue I have with the app is load times. I swap pages of notes several times as I pivot techniques when, for instance, testing a web application for vulnerabilities. The load times were significant and made the app completely unusable for me. 
 - [evernote](https://evernote.com/) - Too simple for my purposes.
 - [obsidian.md](https://obsidian.md/) - This solution seems VERY interesting, however, it lacked a mobile app when I originally looked at it. A mobile app has been released in the past few months, so I may have to circle back and reevaluate this product.
 
+Now I must say, Joplin is far from perfect. It's mobile experience is definitely not as clean as Notion's and searching only works for the content of notes, not the names of notebooks (resolved by some of my injected code for the desktop client; see my related post [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }}). Overall, it fits my requirements the most and I can work around most of it's limitations. 
 
 # The Problem: OneDrive Throttling Kills Sync Process
 

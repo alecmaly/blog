@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hacking Electron Apps&#x3a; Joplin
-description: Adding custom functionality to the Joplin note-taking app.
+description: Adding custom functionality to the Joplin note-taking app by injecting arbitrary JavaScript into source code.
 tags: Electronjs Joplin JavaScript TypeScript reverse-engineering PowerShell
 toc: true
 ---
@@ -14,10 +14,13 @@ But what do you do if you want to change functionality to fit your extremely spe
 
 <div style='color:red; font-size: 2em; text-align:center'>You hack it!</div>
 
+Ok, I should mention here that Joplin actually does have a plugin system with various available [API's](https://joplinapp.org/api/overview/) to extend Joplin's core functionality, and there are some really cool projects like [Note Tabs](https://github.com/benji300/joplin-note-tabs) that provide some great functionality such as pinning a collection of notes you plan to reference repeatedly. 
+
+That said, after poking around briefly, I noticed I couldn't inject custom code as it's a security risk (good on you Joplin devs), and I lacked the willingness to learn the API deeper to work through my issue... that, and hacking the client seems **so much more fun**!
+
 # The Use Cases
 
-While I started with the first use case, I ended up implementing a few more that I found useful; it was easier than going through the effort of updating the main project.
-
+While I started with the first use case, I ended up implementing a few more that I found useful; it was easier than going through the effort of updating the main project or creating a plugin since I will be able to execute arbitrary JavaScript.
 
 ## Use Case 1: Filtering long pages by markers
 
@@ -48,11 +51,11 @@ Typically, when searching in Joplin (a) it will search your notes, however, your
 
 <div>
     <div style="display: inline-block; width: 49%;">
-        Before
+        <p class="codeblock-label">Before</p>
         <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-56-29.png' | relative_url}}" alt="notebook search before"/>
     </div>
     <div style="display: inline-block; width: 49%; vertical-align: top">
-        After
+        <p class="codeblock-label">After</p>
         <img src="{{ '/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-10-33.png' | relative_url}}" alt="notebook search before"/>
     </div>
 </div>

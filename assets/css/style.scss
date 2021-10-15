@@ -3,6 +3,8 @@
 @import "{{ site.theme }}";
 
 
+$top_nav_height: 140px;
+
 // mobile variables
 $mobile_maxWidth: 900px;
 $navLinkSize: 1.5em;
@@ -18,6 +20,16 @@ $linkGreen: #b5e853;
 $orange: orange;
 $bannerColor: #1d1d1d;
 
+
+.site-header {
+  color: $linkGreen !important;
+  font-size: $titleSize;
+}
+
+.custom-h1-header {
+  color: $linkGreen !important;
+  font-size: 1.75em;
+}
 
 .currently-learning {
   color: $orange
@@ -211,7 +223,12 @@ main {
 
 
 // mobile view transformations
-@media only screen and (max-width: $mobile_maxWidth) {
+@media only screen and (max-width: $mobile_maxWidth) {  
+  .site-header {
+    color: $linkGreen !important;
+    font-size: $titleSize_mobile;
+  }
+
   #a-title h1 {
     font-size: $titleSize_mobile;
   }  
@@ -231,11 +248,10 @@ main {
 
 // Fix TOC jump to proper height (due to fixed navbar)
 // FIX TO BE MORE DYNAMIC!! 
-#main_content h1:before {
-  content: "";
-  display: block;
-  height: 150px;
-  margin: -150px 0 0;
+#main_content h2,h3,h4 {
+  // display: block;
+  padding-top: $top_nav_height;
+  margin-top: -$top_nav_height
 }
 
 // debug data

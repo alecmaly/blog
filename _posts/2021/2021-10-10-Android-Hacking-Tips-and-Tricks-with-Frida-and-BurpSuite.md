@@ -12,7 +12,7 @@ published: true
 > I originally posted this on [GuidedHacking](https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/) (excellent website) and figured it would be worthwhile to port it to my new blog! 
 
 
-# Introduction
+## Introduction
 
 Hello,
 
@@ -42,12 +42,12 @@ I'm using kali linux where a few of these tools come pre-installed, but instilla
 Alright, lets get started. The example app I am going to use is called Hustle Castle: Medieval RPG. Fantasy Kingdom. At this point the game has been out for a couple years. Pretty much everything I poked at was validated server side, which is probably why the developers didn't put any obfuscation on the code base itself. The game loads and runs as a self-signed .apk without any preventative measures, thus we can tamper with it no problemo. It's a nice game to play with as I wouldn't feel comfortable giving out actual working hacks against someone else's source of income.
 
 
-# 1) Prepwork​
+## 1) Prepwork​
 
 Although we do not need root, there are some features we need to enable on the device. First, you'll have to enable Developer options – consult the oracle (Google) and do that. Next, in Developer options we will need to toggle a couple settings: (enable) "USB Debugging" and (disable) "Verify apps over USB", this will be important when we resign the app and push it to our device, we don't want our modified .apk to be rejected due to a self-signed certificate.
 
 
-# 2) Getting the APK​
+## 2) Getting the APK​
 
 There are a couple ways to do this. One would be to download from a website that provides .apk files such as apkpure.com. If you're like me, you feel weird downloading random stuff from websites, especially when you don't have to. So, an alternative that seems to work, at least for this game, is to download it on the Android device like any other app - from the Google Play Store. Great, now you have the app installed, lets pull the .apk files to our computer. Adb (Android Device Bridge) is a tool used to interact with a connected Android device. This is easily installed on a linux based machine using the built-in package manager (e.g. apt-get install adb). Now, I don't want to drive too deep into a full-blown tutorial, but the jist of this process looks something like this:
 
@@ -75,6 +75,7 @@ Ok, I want to stop here for a moment and take note of something. This applicatio
 
 Back to it:
 
+
 <p class="codeblock-label">Pull .apk files from device:</p>
 
 ```bash
@@ -91,7 +92,7 @@ That's it, you should now have your .apk files on your computer.
 <hr>
 <br>
 
-# 3) Unzipping / Unpacking the .apk​
+## 3) Unzipping / Unpacking the .apk​
 
 It's important to know that .apk files are basically just .zip files. If you are on a linux based device, you can literally just unzip the .apk itself
 
@@ -139,7 +140,7 @@ With -r
 
 ![apktool output with -r](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-04.png)
 
-# 4) Decompilation and Static Analysis​
+## 4) Decompilation and Static Analysis​
 
 Ok, this is where it starts getting a bit interesting. Let's go into the 'unzipped' folder to inspect files we extracted in section 3, above. You'll notice a few .dex files.
 
@@ -246,7 +247,7 @@ It's important to note that this code may only go so far. This game, for instanc
 While I hesitate to dive too deep, I want to give some more detail on using this code we decompiled in a practical way.
 
 
-# 5) Using the static analysis data and decoding some intercepted network traffic​
+## 5) Using the static analysis data and decoding some intercepted network traffic​
 
 Here is a practical example of using this data gathered from static analysis. It's a bit game specific but can be abstracted to other situations you may encounter. I will try to avoid going too deep into a tutorial because again, you can just google the specifics and this post would be even longer if I got into that.
 
@@ -362,7 +363,7 @@ In this game, this doesn't do much for us, but perhaps it will be more useful in
 ![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-41.png)
 
 
-# 6) Dynamic Analysis with… wait… let's talk about logs.​
+## 6) Dynamic Analysis with… wait… let's talk about logs.​
 
 Before I get into a brief overview of Frida, I'd like to point out something that is useful for both the Dynamic Analysis section and the Static Analysis mentioned above. While programming, many developers leave interesting console output statements in code that are not always removed when the application is pushed to production. While running the game, you can attach your Android through USB and use 'adb' to inspect device logs.
 
@@ -399,7 +400,7 @@ I now know this is a firebase token and that MRSGPushNotificationHandler.java ma
 This leads me to the next phase of this progression, dynamic analysis.
 
 
-# 7) Injecting Frida and building our modified .apk​
+## 7) Injecting Frida and building our modified .apk​
 
 Let's talk about Frida. It's a dynamic analysis framework that works by injecting a binary into the application. In this case since the phone is not rooted, we will be modifying the application code to call the Frida binary upon startup, which then spins up a server listening on a port that you can connect to and run JavaScript code to interact with your app – effectively hooking into the running application. Much like any other game, I would imagine using open source tooling is a quick way to get caught, but it can also be useful to very quickly iterate on a game, poke at some game logic, and learn exactly where to write your custom cheats, mods, or whatever you crazy kids do these days.
 
@@ -497,7 +498,7 @@ adb install-multiple signed_base.apk signed_split_config.apk
 If the app did not have multiple .apk files, you could simply use 'adb install signed_base.apk' and be good to go.
 
 
-# 8) Dynamic Analysis with Frida​
+## 8) Dynamic Analysis with Frida​
 
 Alright, so we have Frida injected into the game, it's time to load the game and connect.
 

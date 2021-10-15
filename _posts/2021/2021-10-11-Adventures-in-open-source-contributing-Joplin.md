@@ -7,19 +7,19 @@ tags: Electronjs Joplin TypeScript JavaScript
 toc: true
 ---
 
-# Introduction
+## Introduction
 
 [Joplin](https://github.com/laurent22/joplin) is an open source note-taking app. This is a story about my contribution to the project and how fixing a OneDrive sync issue in Joplin lead to me debugging the cause behind failing unit tests (it was date logic + timezones). 
 
 This situation ocurred months ago so I do not have recent screenshots to show, I will be linking to the github issue throughout this post where more detail is provided.
 
-# Why Joplin?
+## Why Joplin?
 
 > Finding the right note-taking app can be difficult, so I'll include a section on my experience here.
 
 After some trial and error with other note-taking apps, I came to the conclusion that Joplin was the right fit for me. In case you are interested, here is the breakdown of where apps fell short for my use case.
 
-## My Requirements
+### My Requirements
 
 What am I looking for in my note-taking app?
 1. Offline capability, I should be able to find content when not connected to the internet.
@@ -31,7 +31,7 @@ What am I looking for in my note-taking app?
 7. Syncing across several devices (Desktop, phone, etc.)
 8. Not mandatory, but saving my notes in my own repository like OneDrive would be preferable. I don't like the idea of a 3rd party owning my data.
 
-## Some Competitors
+### Some Competitors
 
 What about other note-taking solutions?<br>
 Here is my experience with a few of them:
@@ -43,13 +43,13 @@ Here is my experience with a few of them:
 
 Now I must say, Joplin is far from perfect. It's mobile experience is definitely not as clean as Notion's and searching only works for the content of notes, not the names of notebooks (resolved by some of my injected code for the desktop client; see my related post [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }}). Overall, it fits my requirements the most and I can work around most of it's limitations. 
 
-# The Problem: OneDrive Throttling Kills Sync Process
+## The Problem: OneDrive Throttling Kills Sync Process
 
 What's the best part about open source software? You can fix it yourself! 
 
 Since I have already written about the problem in detail, here is a link to my original [github issue](https://github.com/laurent22/joplin/issues/5244).
 
-## Issue Summary
+### Issue Summary
 
 If you didn't read or understand the github issue linked above, I'll explain it a little bit here.
 
@@ -57,11 +57,11 @@ When syncing a new device using OneDrive as a data source, Joplin would issue so
 
 This was annoying for syncing new devices like my new phone, so it's something I decided to fix myself.
 
-## Issue Resolution
+### Issue Resolution
 
 The details of this again are in the github issue linked above, but in summary I just implemented some [Microsoft best practices to handle throttling in SharePoint/OneDrive](https://docs.microsoft.com/en-us/sharepoint/dev/general-development/how-to-avoid-getting-throttled-or-blocked-in-sharepoint-online#best-practices-to-handle-throttling) by setting the User-Agent header and leveraging the [retry-after HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After) to set a timeout to wait when being throttled. The code changes are quite small and can be found [here](https://github.com/laurent22/joplin/commit/071e1649bc2fd5c3e8a76ce13415e882df332e9c).
 
-# Another Problem: Unit Tests Failing?!
+## Another Problem: Unit Tests Failing?!
 
 Ok, so I've made the changes and just need to publish them, great. 
 
@@ -78,7 +78,7 @@ The explanation is quite involved, you can find my analysis in a github comment 
 
 Ultimately, it came down to timezones. I was in EST, and the test code was pushing mock notes in UTC, then searching for the notes it inserted using Joplin's search feature, however it was searching using my local timezone of EST and not finding the expected data. Thus, the tests failed when running them locally on my machine.
 
-## Timezones: The Developer's Arch Nemesis
+### Timezones: The Developer's Arch Nemesis
 
 After posting [my explanation](https://github.com/laurent22/joplin/pull/5246#issuecomment-888483705), it seems like others had the same issue.
 
@@ -88,14 +88,14 @@ After posting [my explanation](https://github.com/laurent22/joplin/pull/5246#iss
 
 Once again proving that timezones are the bane of every developer's existence. For the unininitiated, please check out this very well done (and hilarious) YouTube video by Computerphile titled [The Problem with Time & Timezones](https://www.youtube.com/watch?v=-5wpm-gesOY), it's amazing.
 
-# Conclusion
+## Conclusion
 
 - Open source software is great and you can fix your own things!
 - Communicate! 
     - Talk with other people about your issues, they may have seen them too. I spent hours on debugging the timezone issue, however, if it were known by another developer, them just letting me know it's a known issue would have saved me a lot of time.
 - Timezones are the worst.
 
-# ... And Beyond!!
+## ... And Beyond!!
 
 What happens when you want to add functionality to an electron.js app, but that feature would never be accepted into a release because it doesn't suit the majority of users, you ask? 
 

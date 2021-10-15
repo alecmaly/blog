@@ -6,7 +6,7 @@ tags: Electronjs Joplin JavaScript TypeScript reverse-engineering PowerShell
 toc: true
 ---
 
-# Introduction
+## Introduction
 
 In my previous post, [Adventures in Open Source Contributing&#x3a; Joplin]({{ '/2021/10/11/Adventures-in-open-source-contributing-Joplin.html' | relative_url }}), I went over how I have contributed a useful feature to the Joplin open source project. 
 
@@ -18,11 +18,11 @@ Ok, I should mention here that Joplin actually does have a plugin system with va
 
 That said, after poking around briefly, I noticed I couldn't inject custom code as it's a security risk (good on you Joplin devs), and I lacked the willingness to learn the API deeper to work through my issue... that, and hacking the client seems **so much more fun**!
 
-# The Use Cases
+## The Use Cases
 
 While I started with the first use case, I ended up implementing a few more that I found useful; it was easier than going through the effort of updating the main project or creating a plugin since I will be able to execute arbitrary JavaScript.
 
-## Use Case 1: Filtering long pages by markers
+### Use Case 1: Filtering long pages by markers
 
 In my learning I often take useful information and add it to my notes. I then annotate and add more information or links I find useful. In one instance, I have read through and copied what I found to be the most useful for [linux privilege escalation by hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation).
 
@@ -45,7 +45,7 @@ The filtering is controlled by (a) buttons that can toggle between 3/4 stars, an
 
 As you can see, there is no way this would be added as the design is so clunky it just feels weird and unpolished. That said, I want it, and the idea of hacking the client app (for learning purposes) is just too juicy to pass up.
 
-## Use Case 2: Filtering Workbooks
+### Use Case 2: Filtering Workbooks
 
 Typically, when searching in Joplin (a) it will search your notes, however, your notebooks (b) will remain unfiltered. I would like to add functionality to filter the workbooks as it sometimes helps me find related content quickly.
 
@@ -63,7 +63,7 @@ Typically, when searching in Joplin (a) it will search your notes, however, your
 Clearly, the filtered list in the "After" image is much cleaner and allows me to easily find some results that are still relevant while not showing up in normal search results. Implementing my own version here will take less time than digging through the code's source to figure out a way to do it properly. 
 
 
-## Use Case 3: Copy button on code snippets
+### Use Case 3: Copy button on code snippets
 
 Sometimes I want to just copy a code snippet with a single button click, so I added a button to add the content of a code block to my clipboard.
 
@@ -74,11 +74,11 @@ Sometimes I want to just copy a code snippet with a single button click, so I ad
 With these use cases in mind as the goal, it's time to get into the process of actually modifying the Joplin client! 
 <hr>
 
-# Hacking Electron Apps
+## Hacking Electron Apps
 
 I prefer to avoid explaining information that is better explained elsewhere using a simple google search, but here are the basics.
 
-## Basic Electron.js Structure
+### Basic Electron.js Structure
 
 Electron apps are typically installed and code is executed out of an .asar file.
 
@@ -97,7 +97,7 @@ npm install -g asar
 asar extract <app.asar> <destination_folder>
 ```
 
-## Injecting custom code
+### Injecting custom code
 
 To inject custom code, you must:
 
@@ -112,7 +112,7 @@ require('.\\joplin_inject_code.js')
 ```
 5. Rename/delete the original .asar such that reloading the app will look in our .js files in the extracted folder for the code to execute.
 
-# My Project: Joplin Example
+## My Project: Joplin Example
 
 Source code can be found [here](https://github.com/alecmaly/joplin-customization); note that this is set up for a Windows 10 environment.
 
@@ -128,11 +128,11 @@ cd joplin-customization
 .\patch_joplin.ps1
 ```
 
-## joplin_inject_code.js ([source](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js))
+### joplin_inject_code.js ([source](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js))
 
 This is just the custom .js code that will be injected into the process; it implements the use cases described above. It is copied to `C:\Program Files\Joplin\resources\app\joplin_inject_code.js` where it can be modified in the future and will be loaded upon reloading the application via the hook (`require('.\joplin_inject_code.js')`) in the entry point file `\app\app.js`.
 
-## patch_joplin.ps1 ([source](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1))
+### patch_joplin.ps1 ([source](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1))
 
 The purpose of this PowerShell script is to automate the process of injecting the custom JavaScript into the Joplin source code.
 
@@ -163,9 +163,9 @@ Running the script results in:
 
 
 
-# Customization via. Injection
+## Customization via. Injection
 
-## Pros / Cons
+### Pros / Cons
 
 **Pros**
 - Customizability. Ultimately, it's really easy to modify and add whatever custom functionality you want.
@@ -175,11 +175,11 @@ Running the script results in:
 - Must be reapplied with every update.
 
 
-## Discord, Microsoft Teams, Github Desktop, VS Code, and Beyond
+### Discord, Microsoft Teams, Github Desktop, VS Code, and More!
 
 There are several electron.js apps these days which can be found listed [here](https://www.electronjs.org/apps). 
 
-### Microsoft Teams: A thought experiment
+**Microsoft Teams: A thought experiment**
 
 > Be aware of EULA and laws when tinkering with any software. Stay ethical, don't do bad things, don't break the law.
 
@@ -187,10 +187,10 @@ Microsoft Teams is a popular tele conferencing /chat app (and more). One of the 
 
 One can imagine a scenario where it would be nice to see if others have read your messages while blocking the other party from seeing if you have read their messages. Enter injection. The perfect solution to this problem as this feature will never be added by Microsoft.
 
-### Other Examples / Use Cases
+**Other Examples / Use Cases**
  
 Others have injected/modified code to change the looks or behavior of apps like [skype](https://www.codepicky.com/hacking-electron-restyle-skype/) or [discord](https://dev.to/essentialrandom/adventures-in-hacking-electron-apps-3bbm) to modify the minimum window size.
 
-# Conclusion
+## Conclusion
 
 Electron apps have become pretty popular due to their portability, and lucky for the aspiring modder they are super easy to customize! Please remember to act responsibly and never stop exploring the possibilities! 

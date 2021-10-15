@@ -118,48 +118,47 @@
                     </label>
                     <svg class='toggle-icon' aria-hidden="true" focusable="false" viewBox="0 0 24 24" height="17.25" width="17.25" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="icon theme-switcher-module--darkMode--_dK8n"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
+                <br>
+                <br>
             </footer>
         </div>
     </body>
 
     <script>
-        document.body.className = localStorage.getItem('theme') || 'light-mode'
-        document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
-
-        // add utterences
-        var script = document.createElement('script')
-        script.setAttribute('src', "https://utteranc.es/client.js")
-        script.setAttribute('repo', "alecmaly/blog")
-        script.setAttribute('issue-term', "https://utteranc.es/client.js")
-        script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
-        script.setAttribute('crossorigin', "anonymous")
-        
-        document.getElementById('utterences-container').appendChild(script)
-        
         function removeAllChildNodes(parent) {
             while (parent.firstChild) {
                 parent.removeChild(parent.firstChild);
             }
         }
 
+        function ReloadUtterencesScript() {
+            var utterences_script = document.createElement('script')
+            utterences_script.setAttribute('src', "https://utteranc.es/client.js")
+            utterences_script.setAttribute('repo', "alecmaly/blog")
+            utterences_script.setAttribute('issue-term', "https://utteranc.es/client.js")
+            utterences_script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
+            utterences_script.setAttribute('crossorigin', "anonymous")
+            removeAllChildNodes(document.getElementById('utterences-container'))
+            document.getElementById('utterences-container').appendChild(utterences_script)
+        }
+
+
         function changeTheme() {
-            // set local storage
             if (document.getElementById('toggle-theme').checked) {
                 localStorage.setItem('theme', 'dark-mode')
             } else {
                 localStorage.setItem('theme', 'light-mode')
             }
+            document.body.className = localStorage.getItem('theme')
             
-            // set theme
-            document.body.className = localStorage.getItem('theme') || 'light-mode'
-            
-            // add utterences
-            if (document.querySelector('[class="utterances-frame"]')) {
-                var href = new URL(document.querySelector('[class="utterances-frame"]').src);
-                href.searchParams.set('theme', localStorage.getItem('theme') == 'light-mode' ? 'github-light' : 'photon-dark');
-
-                document.querySelector('[class="utterances-frame"]').src = href.toString()
-            }
+            // update utterences
+            ReloadUtterencesScript()
         }
+
+        document.body.className = localStorage.getItem('theme') || 'light-mode'
+        document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
+
+        // add utterences
+        ReloadUtterencesScript()
     </script>
 </html>

@@ -26,8 +26,10 @@ While I started with the first use case, I ended up implementing a few more that
 
 In my learning I often take useful information and add it to my notes. I then annotate and add more information or links I find useful. In one instance, I have read through and copied what I found to be the most useful for [linux privilege escalation by hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation).
 
+
 The total document is about 1655 lines long in markdown, quite large.
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)
+
 
 In Joplin, I've added a table of contents to jump around the massive document (shown on the right).
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-50-07.png)

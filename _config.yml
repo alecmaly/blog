@@ -39,6 +39,7 @@ plugins:
   - jekyll-toc
   - jekyll-feed
 
+
 # post page - pagination
 paginate: 10
 

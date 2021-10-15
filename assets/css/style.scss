@@ -26,6 +26,11 @@ $orange: orange;
 $bannerColor: #1d1d1d;
 
 
+:root {
+  --title-size: 2em;
+  --title-size-mobile: 1em;
+}
+
 
 //  THEMES
 
@@ -45,7 +50,7 @@ $bannerColor: #1d1d1d;
   --color-top-nav-link: LightSeaGreen;
   --color-link: #1ab1cc;
   --color-link-secondary: rgb(37, 226, 147);
-  --color-link-hover: plum;
+  --color-link-hover: rgb(216, 29, 216);
   --color-codeblock-label:rgb(231, 84, 129);
   --hr: black;
   
@@ -66,6 +71,10 @@ $bannerColor: #1d1d1d;
   a {
     color: var(--color-link);
     text-shadow: 0 0 1px rgb(26, 177, 204 / .5);
+  }
+
+  a:hover:not(.icon) {
+    text-shadow: 0 0 1px rgb(216, 29, 216 / .5);
   }
 
   // codeblocks 
@@ -122,6 +131,9 @@ $bannerColor: #1d1d1d;
     text-shadow: 0 0 3px rgb(99, 192, 245 / .5);
   }
 
+  a:hover {
+    text-shadow: 0 0 2px rgb(216, 29, 216 / .5);
+  }
   
   // codeblocks 
   .codeblock-label {

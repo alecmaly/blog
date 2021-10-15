@@ -130,11 +130,13 @@ cd joplin-customization
 .\patch_joplin.ps1
 ```
 
-### joplin_inject_code.js ([source](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js))
+### joplin_inject_code.js 
+[source code](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js)
 
 This is just the custom .js code that will be injected into the process; it implements the use cases described above. It is copied to `C:\Program Files\Joplin\resources\app\joplin_inject_code.js` where it can be modified in the future and will be loaded upon reloading the application via the hook (`require('.\joplin_inject_code.js')`) in the entry point file `\app\app.js`.
 
-### patch_joplin.ps1 ([source](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1))
+### patch_joplin.ps1
+[source code](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1)
 
 The purpose of this PowerShell script is to automate the process of injecting the custom JavaScript into the Joplin source code.
 

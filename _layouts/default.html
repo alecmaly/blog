@@ -1,110 +1,138 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
 
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+        {% include head-custom.html %}
 
-    <!-- import font-awesome -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <!-- import font-awesome -->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <!-- google analytics -->
-    {% if site.google_analytics_gtag %}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_gtag }}"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', '{{ site.google_analytics_gtag }}');
-        </script>
-    {% endif %}
-
-    {% seo %}
-</head>
-
-<body>
-    <!-- App Container -->
-    <div class="App">
-        <!-- header -->
-        <header class='sticky'>
-            
-
-            <!-- DEBUG -- ASPECT RATIO SETTINGS -- TESTING -->
-            <span id='debug-data'></span>
+        <!-- google analytics -->
+        {% if site.google_analytics_gtag %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_gtag }}"></script>
             <script>
-                const queryString = window.location.search;
-                const urlParams = new URLSearchParams(queryString);
-                if (urlParams.get('debug') === 'true') {
-                    setInterval(() => {     
-                        document.querySelector('#debug-data').innerText = window.outerWidth + ':' + window.outerHeight
-                    }, 500)
-                }
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ site.google_analytics_gtag }}');
             </script>
+        {% endif %}
 
-            <div class="container">
-                <a class='icon mail-icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
-                    <i class="fa fa-fw fa-envelope"></i>
-                </a>
+        {% seo %}
+    </head>
 
-                <a id="a-title" href="{{ '/' | relative_url }}">
-                    <div class='site-header'>./{{ site.title }}</div>
-                </a>
-                <!-- <h2 id='site-description' style='margin-bottom: 2px'>{{ site.description }}</h2> -->
-    
-                <!-- Top / Global Navigation -->
-                <nav class='top-nav'>
-                    <ul>
-                        <li>
-                            <a href="{{ '/aboutme' | relative_url }}">About</a>
-                            <a href="{{ '/alltags' | relative_url }}">Tags</a>
-                        </li>
-                        <li style='float:right'>
-                            <!-- <a class='icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
-                                <i class="fa fa-fw fa-envelope"></i>
-                            </a> -->
-                            {% if site.linkedin_username %}
-                                <a class='icon' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" style="text-decoration:none">
-                                    <i class="fab fa-fw fa-linkedin"></i>
+    <body>
+        <!-- App Container -->
+        <div class="App">
+            <!-- header -->
+            <header class='sticky'>
+                
+
+                <!-- DEBUG -- ASPECT RATIO SETTINGS -- TESTING -->
+                <span id='debug-data'></span>
+                <script>
+                    const queryString = window.location.search;
+                    const urlParams = new URLSearchParams(queryString);
+                    if (urlParams.get('debug') === 'true') {
+                        document.getElementById('debug-data').onclick = () => {
+                            document.body.className =  document.body.className == 'light-mode' ? 'dark-mode' : 'light-mode'
+                        }
+
+                        setInterval(() => {     
+                            document.querySelector('#debug-data').innerText = window.outerWidth + ':' + window.outerHeight
+                        }, 500)
+                    }
+                </script>
+
+                <div class="container">
+                    <a class='icon icon-right' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
+                        <i class="fa fa-fw fa-envelope"></i>
+                    </a>
+
+                    <a id="a-title" href="{{ '/' | relative_url }}">
+                        <div class='site-header'>./{{ site.title }}</div>
+                    </a>
+                    <!-- <h2 id='site-description' style='margin-bottom: 2px'>{{ site.description }}</h2> -->
+        
+                    <!-- Top / Global Navigation -->
+                    <nav class='top-nav'>
+                        <ul>
+                            <li>
+                                <a href="{{ '/aboutme' | relative_url }}">About</a>
+                                <a href="{{ '/alltags' | relative_url }}">Tags</a>
+                            </li>
+                            <li style='float:right'>
+                                <!-- <a class='icon' href="mailto:{{ site.email }}" target="_blank" style="text-decoration:none">
+                                    <i class="fa fa-fw fa-envelope"></i>
+                                </a> -->
+                                {% if site.linkedin_username %}
+                                    <a class='icon' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" style="text-decoration:none">
+                                        <i class="fab fa-fw fa-linkedin"></i>
+                                    </a>
+                                {% endif %}
+                                {% if site.github_username %}
+                                    <a class='icon' href="https://github.com/{{site.github_username}}" target="_blank" style="text-decoration:none">
+                                        <i class="fab fa-fw fa-github"></i>
+                                    </a>
+                                {% endif %}
+                                {% if site.youtube_username %}
+                                    <a class='icon' href="https://youtube.com/c/{{site.youtube_username}}" target="_blank" style="text-decoration:none">
+                                        <i class="fab fa-fw fa-youtube"></i>
+                                    </a>
+                                {% endif %}  
+                                | 
+                                <a class='icon' href="{{ '/feed.xml' | relative_url }}" target="_blank" style="text-decoration:none">
+                                    <i class="fa fa-fw fa-rss"></i>
                                 </a>
-                            {% endif %}
-                            {% if site.github_username %}
-                                <a class='icon' href="https://github.com/{{site.github_username}}" target="_blank" style="text-decoration:none">
-                                    <i class="fab fa-fw fa-github"></i>
-                                </a>
-                            {% endif %}
-                            {% if site.youtube_username %}
-                                <a class='icon' href="https://youtube.com/c/{{site.youtube_username}}" target="_blank" style="text-decoration:none">
-                                    <i class="fab fa-fw fa-youtube"></i>
-                                </a>
-                            {% endif %}  
-                            | 
-                            <a class='icon' href="{{ '/feed.xml' | relative_url }}" target="_blank" style="text-decoration:none">
-                                <i class="fa fa-fw fa-rss"></i>
-                            </a>
-                            <a></a> <!-- Empty element fixes safari? -->
-                        </li>
-                    </ul>
-                </nav>
+                                <a></a> <!-- Empty element fixes safari? -->
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <!-- Body / Content -->
+            <div class="container content">
+                <section id="main_content">
+                    {{ content }}
+                </section>
             </div>
-        </header>
-        <!-- Body / Content -->
-        <div class="container content">
-            <section id="main_content">
-                {{ content }}
-            </section>
+
+            <button onclick="topFunction()" id="jump-to-top-btn" title="Go to top">Top</button>
+            <script src="{{ '/assets/js/jump_to_top.js' | relativeurl}}"></script>
+            <footer class='container'>
+                <!-- This is a footer -->
+                
+                <!-- Toggle mode -->
+                <button id='btn-theme'>
+                    <svg class='toggle-icon' aria-hidden="true" focusable="false" viewBox="0 0 24 24" height="17.25" width="17.25" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" class="icon theme-switcher-module--lightMode--3WSSC"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <label class="switch" >
+                        <input id='toggle-theme' type="checkbox" onchange="changeTheme()">
+                        <span class="slider round"></span>
+                    </label>
+                    <svg class='toggle-icon' aria-hidden="true" focusable="false" viewBox="0 0 24 24" height="17.25" width="17.25" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="icon theme-switcher-module--darkMode--_dK8n"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </footer>
         </div>
+    </body>
 
-        <button onclick="topFunction()" id="jump-to-top-btn" title="Go to top">Top</button>
-        <script src="{{ '/assets/js/jump_to_top.js' | relativeurl}}"></script>
-        <footer>
-            <!-- This is a footer -->
-        </footer>
-    </div>
-</body>
+    <script>
+        document.body.className = localStorage.getItem('theme') || 'light-mode'
+        document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
 
+        function changeTheme() {
+            if (document.getElementById('toggle-theme').checked) {
+                localStorage.setItem('theme', 'dark-mode')
+            } else {
+                localStorage.setItem('theme', 'light-mode')
+            }
+
+            document.body.className = localStorage.getItem('theme') || 'light-mode'
+        }
+    </script>
 </html>

@@ -96,12 +96,16 @@ layout: default
     <!-- Comments -->
     <hr>
     <div class='custom-h1-header'>Comments</div>
-    <script src="https://utteranc.es/client.js"
-      repo="alecmaly/blog"
-      issue-term="pathname"
-      label="test label"
-      theme="photon-dark"
-      crossorigin="anonymous"
-      async>
+    <div id='utterences-container'></div>
+
+    <script>
+      var script = document.createElement('script')
+      script.setAttribute('src', "https://utteranc.es/client.js")
+      script.setAttribute('repo', "alecmaly/blog")
+      script.setAttribute('issue-term', "https://utteranc.es/client.js")
+      script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
+      script.setAttribute('crossorigin', "anonymous")
+    
+      document.getElementById('utterences-container').appendChild(script)
     </script>
 </div>

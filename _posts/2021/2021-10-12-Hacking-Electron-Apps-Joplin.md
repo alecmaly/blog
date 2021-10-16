@@ -10,7 +10,7 @@ toc: true
 
 In my previous post, [Adventures in Open Source Contributing&#x3a; Joplin]({{ '/2021/10/11/Adventures-in-open-source-contributing-Joplin.html' | relative_url }}), I went over how I have contributed a useful feature to the Joplin open source project. 
 
-But what do you do if you want to change functionality to fit your extremely specific use case? A use case that nobody else needs Ior even wants at all)?
+But what do you do if you want to change functionality to fit your extremely specific use case? A use case that nobody else needs or even wants at all)?
 
 <div style='color:red; font-size: 2em; text-align:center'>You hack it!</div>
 
@@ -24,10 +24,10 @@ While I started with the first use case, I ended up implementing a few more that
 
 ### Use Case 1: Filtering long pages by markers
 
-In my learning I often take useful information and add it to my notes. I then annotate and add more information or links I find useful. In one instance, I have read through and copied what I found to be the most useful for [linux privilege escalation by hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation).
+In my learning, I often take useful information and add it to my notes. I then annotate and add more information or links I find useful. In one instance, I have read through and copied what I found to be the most useful for [linux privilege escalation by hacktricks](https://book.hacktricks.xyz/linux-unix/privilege-escalation).
 
 
-The total document is about 1655 lines long in markdown, quite large.
+The document is about 1655 lines long in markdown, quite large.
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)
 
 
@@ -37,9 +37,9 @@ In Joplin, I've added a table of contents to jump around the massive document (s
 While this is useful, I would like a way to filter this massive file to just the most important items and expand my scope from there as I move forward.
 
 To do this, I ended up 'marking' important sections in my note with stars:
-    - Four stars (\*\*\*\*) for very important sections
-    - Three stars (\*\*\*) for the next important sections
-    - For each section, I would like to display a certain number of sections above or below depending on relevant content, so I add a prefix or suffix number to show that many pages. For example, 2\*\*\*\*4 indicates I want to show 2 sections before the target and 4 sections after it, they may be related or important info.
+- Four stars (\*\*\*\*) for very important sections
+- Three stars (\*\*\*) for the next important sections
+- For each section, I would like to display a certain number of sections above or below depending on relevant content, so I add a prefix or suffix number to show that many pages. For example, 2\*\*\*\*4 indicates I want to show 2 sections before the target and 4 sections after it, they may be related or important info.
 
 The filtering is controlled by (a) buttons that can toggle between 3/4 stars, anything marked with a star, and showing the entire document with the "Clear Stars" button.
 
@@ -49,7 +49,7 @@ As you can see, there is no way this would be added as the design is so clunky i
 
 ### Use Case 2: Filtering Workbooks
 
-Typically, when searching in Joplin (a) it will search your notes, however, your notebooks (b) will remain unfiltered. I would like to add functionality to filter the workbooks as it sometimes helps me find related content quickly.
+Typically, when (a) searching in Joplin it will search your notes, however, your notebooks (b) will remain unfiltered. I would like to add functionality to filter the workbooks as it sometimes helps me find related content quickly.
 
 <div>
     <div style="display: inline-block; width: 49%;">
@@ -78,9 +78,9 @@ With these use cases in mind as the goal, it's time to get into the process of a
 
 ## Hacking Electron Apps
 
-I prefer to avoid explaining information that is better explained elsewhere using a simple google search, but here are the basics.
+I prefer to avoid rehashing information that is better explained elsewhere using a simple google search, but here are the basics.
 
-### Basic Electron.js Structure
+### The Electron Archive (.asar) file
 
 Electron apps are typically installed and code is executed out of an .asar file.
 
@@ -105,7 +105,7 @@ To inject custom code, you must:
 
 1. Unpack the .asar file into a folder
 2. Find a suitable entrypoint for your code
-    - Ideally this is a .js file that is executed only once, where you will inject your custom .js payload.
+    - Ideally this is a section of JavaScript file that is executed only once by the target application - this is where you will inject your custom .js payload.
 3. Write your payload.js
 4. Inject into the entry-point (step 2) and load your payload (step 3)
 ```javascript
@@ -114,14 +114,14 @@ require('.\\joplin_inject_code.js')
 ```
 5. Rename/delete the original .asar such that reloading the app will look in our .js files in the extracted folder for the code to execute.
 
-## My Project: Joplin Example
+## My Project: Joplin Example ([source](https://github.com/alecmaly/joplin-customization))
 
-Source code can be found [here](https://github.com/alecmaly/joplin-customization); note that this is set up for a Windows 10 environment.
+> Note: this is set up for a Windows 10 environment.
 
 The main two files in this repo are the driver [patch_joplin.ps1](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1) and [joplin_inject_code.js](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js).
 
-Ultimately, if I update joplin, all I have to do is clone the repo and run `.\patch_joplin.ps1` to reinject my payload automatically.
-> This assumes dependencies such as npm and asar are installed.<br>
+Ultimately, if I update Joplin, all I have to do is clone the repo and run `.\patch_joplin.ps1` to reinject my payload automatically.
+> This assumes dependencies such as npm and the asar package are installed.<br>
 > Must be run as Administrator if the target .asar / folder has restricted permissions (as it should).
 
 ```powershell
@@ -130,13 +130,11 @@ cd joplin-customization
 .\patch_joplin.ps1
 ```
 
-### joplin_inject_code.js 
-[source code](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js)
+### joplin_inject_code.js ([source](https://github.com/alecmaly/joplin-customization/blob/master/joplin_inject_code.js))
 
 This is just the custom .js code that will be injected into the process; it implements the use cases described above. It is copied to `C:\Program Files\Joplin\resources\app\joplin_inject_code.js` where it can be modified in the future and will be loaded upon reloading the application via the hook (`require('.\joplin_inject_code.js')`) in the entry point file `\app\app.js`.
 
-### patch_joplin.ps1
-[source code](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1)
+### patch_joplin.ps1 ([source](https://github.com/alecmaly/joplin-customization/blob/master/patch_Joplin.ps1))
 
 The purpose of this PowerShell script is to automate the process of injecting the custom JavaScript into the Joplin source code.
 
@@ -147,7 +145,7 @@ This flow of this script is as follows:
 - Select `rebase` OR `update`
     - A `rebase` will essentially extract the .asar to a folder, rename the original .asar to .asar.bak, and inject your custom code into the entrypoint of `\app\app.js` using some regex to place the payload exactly where I want it.
     - A `update` will just try to reinject the custom code if needed.
-- Both `rebase` and `update` will copy the payload from this repository into the Joplin repository `C:\Program Files\Joplin\resources\app\joplin_inject_code.js`
+- Both `rebase` and `update` will copy the payload from this repository into the Joplin repository `C:\Program Files\Joplin\resources\app\joplin_inject_code.js`. This copied file will be the source code that is injected into Joplin. 
 
 This script also does some sanity checks to make sure Joplin is closed when you run it, and includes a marker with the injection such that if the script is run a second time it does not repeatedly inject into the target entry point. 
 
@@ -157,11 +155,11 @@ Running the script results in:
 
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-50-07.png)
 
-- The contents of /app now include my payload `joplin_inject_codoe.js` file
+- The contents of /app now include my payload `joplin_inject_code.js` file
 
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-51-33.png)
 
-- And my import statement to my payload being added to `\app\app.js` with the unique marker to prevent multiple import statements on subsequent runs of `patch_joplin.ps1`.
+- And my import statement to my payload is added to `\app\app.js` with the unique marker to prevent multiple import statements on subsequent runs of `patch_joplin.ps1`.
 
 ![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-49-31.png)
 
@@ -176,7 +174,7 @@ Running the script results in:
     
 **Cons**
 - Highly fragile. May have to modify injected code depending on updates to the main program.
-- Must be reapplied with every update.
+- Must be reapplied with every Joplin update.
 
 
 ### Discord, Microsoft Teams, Github Desktop, VS Code, and More!
@@ -185,16 +183,16 @@ There are several electron.js apps these days which can be found listed [here](h
 
 **Microsoft Teams: A thought experiment**
 
-> Be aware of EULA and laws when tinkering with any software. Stay ethical, don't do bad things, don't break the law.
+> Be aware of EULAs and laws when tinkering with any software. Stay ethical, don't do bad things, don't break the law.
 
-Microsoft Teams is a popular tele conferencing /chat app (and more). One of the features is a chat feature that includes read receipts. This feature can be disabled so others cannot see that you read their message, however, this also means that you cannot see if they read your message. Both parties must have this feature enabled to see if the other has read their messages.
+Microsoft Teams is a popular tele conferencing and chat app (+ more). One of the features is a chat feature that includes read receipts. This feature can be disabled so others cannot see that you read their messages, however, this also means that you cannot see if they read your messages. Both parties must have this feature enabled to see if the other has read their messages.
 
-One can imagine a scenario where it would be nice to see if others have read your messages while blocking the other party from seeing if you have read their messages. Enter injection. The perfect solution to this problem as this feature will never be added by Microsoft.
+One can imagine a scenario where it would be nice to see if others have read your messages while blocking the other party from seeing if you have read their messages. Enter injection - just block your 'read, confirmed' packet from being sent over the wire! A potential solution to this problem as this feature will never be added by Microsoft.
 
 **Other Examples / Use Cases**
  
-Others have injected/modified code to change the looks or behavior of apps like [skype](https://www.codepicky.com/hacking-electron-restyle-skype/) or [discord](https://dev.to/essentialrandom/adventures-in-hacking-electron-apps-3bbm) to modify the minimum window size.
+Others have personalized electron.js apps by [adding a personalized style in Skype](https://www.codepicky.com/hacking-electron-restyle-skype/) or [modified the minimum window size in Discord](https://dev.to/essentialrandom/adventures-in-hacking-electron-apps-3bbm).
 
 ## Conclusion
 
-Electron apps have become pretty popular due to their portability, and lucky for the aspiring modder they are super easy to customize! Please remember to act responsibly and never stop exploring the possibilities! 
+Electron apps have become pretty popular due to their portability and (lucky for the aspiring modder) they are super easy to customize! Please remember to act responsibly and never stop exploring the possibilities!

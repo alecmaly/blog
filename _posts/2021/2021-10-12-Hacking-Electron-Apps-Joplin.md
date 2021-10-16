@@ -181,7 +181,7 @@ Running the script results in:
 
 There are several electron.js apps these days which can be found listed [here](https://www.electronjs.org/apps). 
 
-**Microsoft Teams: A thought experiment**
+**Microsoft Teams: A Thought Experiment**
 
 > Be aware of EULAs and laws when tinkering with any software. Stay ethical, don't do bad things, don't break the law.
 

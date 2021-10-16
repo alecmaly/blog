@@ -48,7 +48,7 @@ $bannerColor: #1d1d1d;
   --color-primary: #0080ff;
   --color-secondary: #32bbff;
   --color-top-nav-link: LightSeaGreen;
-  --color-link: #1ab1cc;
+  --color-link: #18a7c1;
   --color-link-secondary: rgb(37, 226, 147);
   --color-link-hover: rgb(216, 29, 216);
   --color-codeblock-label:rgb(231, 84, 129);
@@ -142,9 +142,16 @@ $bannerColor: #1d1d1d;
     color: var(--color-codeblock-label);
     text-shadow: 0 0 .5px rgb(255, 166, 0 / .5);
   }
+
+  // make bold font more readable in dark mode
+  strong {
+    font-family: "Arial Black";
+  }
 }
 
-
+strong {  
+  font-weight: 900;
+}
 
 .light-mode li {  
   list-style-image: none;
@@ -296,13 +303,11 @@ a:hover {
 }
 
 
-
-
-
 body {
   margin: 0;
   padding: 0;
   overflow-wrap: break-word;
+  line-height: 1.475;
 }
 
 .App {

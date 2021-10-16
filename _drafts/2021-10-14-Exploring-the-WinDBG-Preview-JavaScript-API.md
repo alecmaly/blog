@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Exploring the WinDBG Preview JavaScript API
+title: DRAFT | Exploring the WinDBG Preview JavaScript API
 description: >-
     Trying to recreate the x64dbg stacktrace feature in WinDBG Preview. 
 tags: windbg windbg-preview JavaScript x64dbg

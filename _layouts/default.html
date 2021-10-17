@@ -122,43 +122,49 @@
                 <br>
             </footer>
         </div>
-    </body>
 
-    <script>
-        function removeAllChildNodes(parent) {
-            while (parent.firstChild) {
-                parent.removeChild(parent.firstChild);
+        
+        <!-- import lightbox for images -->
+        <script type="text/javascript" src="/assets/js/lightbox.js"></script>
+        <link rel="stylesheet" href="/assets/css/lightbox.css">
+
+        <!-- script for changing theme -->
+        <script>
+            function removeAllChildNodes(parent) {
+                while (parent.firstChild) {
+                    parent.removeChild(parent.firstChild);
+                }
             }
-        }
 
-        function ReloadUtterencesScript() {
-            var utterences_script = document.createElement('script')
-            utterences_script.setAttribute('src', "https://utteranc.es/client.js")
-            utterences_script.setAttribute('repo', "alecmaly/blog")
-            utterences_script.setAttribute('issue-term', "https://utteranc.es/client.js")
-            utterences_script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
-            utterences_script.setAttribute('crossorigin', "anonymous")
-            removeAllChildNodes(document.getElementById('utterences-container'))
-            document.getElementById('utterences-container').appendChild(utterences_script)
-        }
-
-
-        function changeTheme() {
-            if (document.getElementById('toggle-theme').checked) {
-                localStorage.setItem('theme', 'dark-mode')
-            } else {
-                localStorage.setItem('theme', 'light-mode')
+            function ReloadUtterencesScript() {
+                var utterences_script = document.createElement('script')
+                utterences_script.setAttribute('src', "https://utteranc.es/client.js")
+                utterences_script.setAttribute('repo', "alecmaly/blog")
+                utterences_script.setAttribute('issue-term', "https://utteranc.es/client.js")
+                utterences_script.setAttribute('theme', localStorage.getItem('theme') == 'dark-mode' ? 'photon-dark' : 'github-light' )
+                utterences_script.setAttribute('crossorigin', "anonymous")
+                removeAllChildNodes(document.getElementById('utterences-container'))
+                document.getElementById('utterences-container').appendChild(utterences_script)
             }
-            document.body.className = localStorage.getItem('theme')
-            
-            // update utterences
+
+
+            function changeTheme() {
+                if (document.getElementById('toggle-theme').checked) {
+                    localStorage.setItem('theme', 'dark-mode')
+                } else {
+                    localStorage.setItem('theme', 'light-mode')
+                }
+                document.body.className = localStorage.getItem('theme')
+                
+                // update utterences
+                ReloadUtterencesScript()
+            }
+
+            document.body.className = localStorage.getItem('theme') || 'light-mode'
+            document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
+
+            // add utterences
             ReloadUtterencesScript()
-        }
-
-        document.body.className = localStorage.getItem('theme') || 'light-mode'
-        document.getElementById('toggle-theme').checked = localStorage.getItem('theme') == 'dark-mode'
-
-        // add utterences
-        ReloadUtterencesScript()
-    </script>
+        </script>
+    </body>
 </html>

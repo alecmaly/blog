@@ -88,13 +88,13 @@ Once again proving that timezones are the bane of every developer's existence. F
 ## Conclusion
 
 - Open source software is great and you can fix your own things!
-- Communicate! 
-    - Talk with other people about your issues, they may have seen them too. I spent hours on debugging the timezone issue, however, if it were known by another developer, them just letting me know it's a known issue would have saved me a lot of time.
+- Communicate! Talk with other people about your issues, they may have seen them too. I spent hours on debugging the timezone issue, however, if it were known by another developer, them just letting me know it's a known issue would have saved me a lot of time.
 - Timezones are the worst.
 
 ## ... And Beyond!!
 
-What happens when you want to add functionality to an electron.js app, but that feature would never be accepted into a release because it doesn't suit the majority of users, you ask? 
+What happens when you want to add functionality to an open source electron.js app, but the feature doesn't fit the majority of use cases? 
 
-Just inject the custom code yourself, it's super easy! 
+Just inject custom code into your client app, it's super easy!
+
 Read about my journey in hacking Joplin in my next post: [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }}).

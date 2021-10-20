@@ -4,7 +4,7 @@ title: Android Hacking Tips and Tricks with Frida & BurpSuite
 description:
     Learning by modifying an android .apk, intercepting + decrypting network traffic, 
     and poking at game memory (changing function arguments + return values / calling functions by virtual address). 
-tags: Android Frida BurpSuite .apk JavaScript Java linux il2cpp adb reverse-engineering
+tags: Android Frida BurpSuite .apk JavaScript Java linux il2cpp adb reverse-engineering mobile
 toc: true
 published: true
 ---

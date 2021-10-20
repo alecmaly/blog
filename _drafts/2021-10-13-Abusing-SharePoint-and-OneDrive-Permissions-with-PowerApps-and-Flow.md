@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DRAFT | Abusing SharePoint and OneDrive Permissions with Power Apps and Power Automate (Microsoft Flow)
+title: DRAFT | Abusing SharePoint and OneDrive Permissions API with Power Apps and Power Automate (Microsoft Flow)
 description: >-
     An internal phishing POC leveraging Office 365 citizen development tools.
     Subtly gain access to a target user's OneDrive / SharePoint sites they own.
@@ -36,6 +36,21 @@ So, let's jump into the meat of the workflow as it's the asset doing all the wor
 
 
 
+### Importing
+
+[![](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-21-03.png)](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-21-03.png)
+
+Then fix all connections by (1) clicking the broken connection and (2) using your login credentials
+
+[![](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-23-12.png)](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-23-12.png)
+
+
+The permissions are ambiguous.
+[![](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-18-08-15-44.png)](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-18-08-15-44.png)
+
+Not only does it not show OneDrive listed, but clicking "View Permissions" yields a screen that doesn't seem to fully indicate that this app can force you to grant permissions on your OneDrive or SharePoint sites to another user.
+
+[![](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-18-08-17-38.png)](/assets/posts/2021-10-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-18-08-17-38.png)
 
 
 

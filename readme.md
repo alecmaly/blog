@@ -49,6 +49,8 @@ Custom domain (DNS)
     - https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
     - nav - responsive w/ CSS Grid OR Flexbox
 
+- Cleanup unused photos script
+
 ## Content
 - https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/
 - SharePoint/OneDrive permissions

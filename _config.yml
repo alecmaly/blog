@@ -23,7 +23,7 @@
 title: Alec's Tech Blog
 email: alecjmaly@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A tech blog centered around software and cybersecurity. 
+  Alec Maly's software and cybersecurity tech blog. 
   I try to post content others can learn from or personal projects I found to be interesting.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://alecmaly.com" # the base hostname & protocol for your site, e.g. http://example.com

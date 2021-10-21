@@ -39,6 +39,7 @@ theme: jekyll-theme-hacker
 plugins:
   - jekyll-toc
   - jekyll-feed
+  - jekyll-sitemap
 
 
 # post page - pagination

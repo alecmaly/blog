@@ -44,12 +44,12 @@ Custom domain (DNS)
     - Put in left navigation?
 - Set thumbnail for Facebook / links
     - https://stackoverflow.com/questions/39214375/how-can-you-get-thumbnails-for-jekyll-posts-when-the-post-has-no-images
-
 - Dynamic font size
     - https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/
     - nav - responsive w/ CSS Grid OR Flexbox
-
 - Cleanup unused photos script
+- ~~Sitemap.xml~~
+    - https://github.com/jekyll/jekyll-sitemap
 
 ## Content
 - https://guidedhacking.com/threads/android-hacking-tips-and-tricks-with-frida-burpsuite.14489/

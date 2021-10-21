@@ -265,7 +265,7 @@ Why is this interesting?
 
 Well, if you are fuzzing an application for vulnerabilities and have sent some user input, chances are that input was put on the heap at some point and will be read later. So say, for instance, you sent the payload "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" and wanted to see where it ends up. Just run `!TTDHeapReads` to view all the read memory and look for your payload!
 
-The output will show the address of the data, the size, some commands you can copy/paste back into the console to view the memory using [DML](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/customizing-debugger-output-using-dml) or breakpoint so you can break on the read and step through the instructions from there. 
+The output will show the address of the data, the size, some commands you can copy/paste back into the console to view memory using [Debugging Markup Language (DML)](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/customizing-debugger-output-using-dml) or breakpoint so you can break on the read and step through the instructions from there. 
 
 [![](/assets/posts/2021-10-18-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-58-35.png)](/assets/posts/2021-10-18-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-58-35.png)
 

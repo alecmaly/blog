@@ -32,3 +32,4 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 # CUSTOM gems
 gem "jekyll-toc"
 gem "github-pages", group: :jekyll_plugins
+gem 'jekyll-sitemap'

@@ -11,11 +11,30 @@ title: Tags
 <br>
 <br>
 <!-- Display posts for each tag -->
-{% for tag in site.tags %}
+<!-- {% for tag in site.tags %}
   <h3 id="#{{ tag[0] }}">{{ tag[0] }} [{{ tag[1].size }}]</h3>
   <ul>
     {% for post in tag[1] %}
       <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
+{% endfor %} -->
+
+<!-- sorted -->
+{% capture temptags %}
+    {% for tag in site.tags %}
+        {{ tag[1].size | plus: 1000 }}#{{ tag[0] }}#{{ tag[1].size }}
+    {% endfor %}
+{% endcapture %}
+{% assign sortedtemptags = temptags | split:' ' | sort | reverse %}
+{% for temptag in sortedtemptags %}
+    {% assign tagitems = temptag | split: '#' %}
+    {% capture tagname %}{{ tagitems[1] }}{% endcapture %}
+    <h3 id="#{{ tagname }}">{{ tagname }} [{{ site.tags[tagname].size }}]</h3>
+    <ul>
+      {% for post in site.tags[tagname] %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
 {% endfor %}
+

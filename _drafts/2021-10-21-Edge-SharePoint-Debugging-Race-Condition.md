@@ -28,10 +28,33 @@ WHY?
 https://ntp.msn.com/edge/ntp?locale=en-US&title=New%20tab&dsp=1&sp=Bing&query=enterprise&prerender=1
 
 
-**LOOK FOR XSS BUG PAGE ntp.msn.com**
+## Packet capture
+
+Tried burp (interfered with Windows Integrated Authentication WIA)
+Frida - required root
+
+Solution?
+Command line! 
+
+Works with electron.js apps and chromium based browsers!
 
 
-# Resolution
+## Fiddler
+
+Reading the output from above can be done in Fiddler using extension [FiddlerImportNetlog extension](https://github.com/ericlaw1979/FiddlerImportNetlog)
+
+**>> ADD COLUMNS for POST request**
+
+## SharePoint
+
+
+## Edge Functionality: New Tab Page (NTP)
+Interesting post [xss New Tab Page](https://leucosite.com/Edge-Chromium-EoP-RCE/)
+
+
+
+
+## Resolution
 I think the GPO is machine level, but maybe user? I'm not sure.
 
 

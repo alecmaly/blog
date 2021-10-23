@@ -2,7 +2,7 @@
 layout: post
 title: Exploring the WinDbg Preview JavaScript API
 description: >-
-    Trying to recreate the x32dbg/x64dbg stacktrace and dereferencing features in WinDbgPreview by leveraging the JavaScript API. Additionally, playing with Time Travel Debugging (TTD) and inspecting memory on the heap.
+    Trying to recreate the x32dbg/x64dbg stacktrace and dereferencing features in WinDbg Preview by leveraging the JavaScript API. Additionally, playing with Time Travel Debugging (TTD) and inspecting memory on the heap.
 tags: WinDbg WinDb-Preview JavaScript x32dbg x64dbg POC mona.py pykd  
 toc: true
 published: true
@@ -12,17 +12,17 @@ published: true
 
 In my spare time I have been slowly inching my way toward the Offensive Security [OSED Certification](https://www.offensive-security.com/exp301-osed/#course-info). Great open source projects such as [vulnserver](https://github.com/stephenbradshaw/vulnserver) and [phoenix](https://exploit.education/phoenix/) as well as wonderful blogs by [epi](https://epi052.gitlab.io/notes-to-self/), [hombre](https://h0mbre.github.io/), [purpl3 f0x](https://www.purpl3f0xsecur1ty.tech/), and others have resulted in some rich content to familiarize myself with related material before actually purchasing the course and lab time.
 
-My reverse engineering experience has centered around [x32dbg/x64dbg](https://x64dbg.com) as my main debugger and the NSA's [Ghidra](https://ghidra-sre.org) as a static binary analyzer, disassembler, and decompiler. That said, the OSED requires use of [WinDbg \| WinDbgPreview](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) and  [ida free](https://hex-rays.com/ida-free/), so I have been slowly getting aquatinted with these tools as well.
+My reverse engineering experience has centered around [x32dbg/x64dbg](https://x64dbg.com) as my main debugger and the NSA's [Ghidra](https://ghidra-sre.org) as a static binary analyzer, disassembler, and decompiler. That said, the OSED requires use of [WinDbg \| WinDbg Preview](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) and  [ida free](https://hex-rays.com/ida-free/), so I have been slowly getting aquatinted with these tools as well.
 
 ## Why WinDbg Preview?
 
 Other than the restrictions of the OSED exam, WinDbg offers some advantages over x32dbg/x64dbg. It is more closely integrated with the Windows OS and, perhaps most importantly, it can act as a kernel debugger for debugging the kernel and system drivers. It is most definitely a fantastic tool to learn if you want to learn reverse engineering or low level debugging on Windows.
 
-Beyond that, [WinDbgPreview](https://www.microsoft.com/en-us/p/WinDbg-preview/9pgjgd53tn86) offers some interesting functionality over the classic WinDbg such as: [Time Travel Debugging (TTD)](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview), a [JavaScript API](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/javascript-debugger-example-scripts), a modernized UI, and some performance improvements as well. It's not all roses though, I find the lack of multiple memory windows quite limiting and the Time Travel Debugging output can be a bit buggy when looking at x86 executables, so there are definitely some cons to consider.
+Beyond that, [WinDbg Preview](https://www.microsoft.com/en-us/p/WinDbg-preview/9pgjgd53tn86) offers some interesting functionality over the classic WinDbg such as: [Time Travel Debugging (TTD)](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/time-travel-debugging-overview), a [JavaScript API](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/javascript-debugger-example-scripts), a modernized UI, and some performance improvements as well. It's not all roses though, I find the lack of multiple memory windows quite limiting and the Time Travel Debugging output can be a bit buggy when looking at x86 executables, so there are definitely some cons to consider.
 
 ## The WinDbg Preview Shortcoming
 
-As I have some experience with x32dbg/x64dbg, I quickly noticed a feature that has not been implemented in WinDbgPreview - the ability to see, at a glance, related symbols/dereferenced strings on both the stack and from addresses in registers. 
+As I have some experience with x32dbg/x64dbg, I quickly noticed a feature that has not been implemented in WinDbg Preview - the ability to see, at a glance, related symbols/dereferenced strings on both the stack and from addresses in registers. 
 
 Here are some screenshots to demonstrate what I am talking about using 32bit Vulnserver.exe as an example debugging target. 
 
@@ -59,7 +59,7 @@ ncat localhost 9999
 Help - User input send to vulnserver
 ```
 
-### WinDbgPreview: Before
+### WinDbg Preview: Before
 
 This is WinDbg Preview's output.
 
@@ -70,11 +70,11 @@ Note that:<br>
 (2) the stack memory also shows no dereferenced values.
 
 
-### WinDbgPreview: After
+### WinDbg Preview: After
 
 My POC JavaScript file looks something like this at the time of posting (there is much to be improved): [windbg_script.js](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/windbg_script.js)
 
-After saving the script to the Desktop and loading it in WinDbgPreview with:
+After saving the script to the Desktop and loading it in WinDbg Preview with:
 ```powershell
 .scriptload C:\Users\IEUser\Desktop\windbg_script.js
 ```

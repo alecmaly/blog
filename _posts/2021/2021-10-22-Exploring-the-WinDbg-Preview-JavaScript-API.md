@@ -3,7 +3,7 @@ layout: post
 title: Exploring the WinDbg Preview JavaScript API
 description: >-
     Trying to recreate the x32dbg/x64dbg stacktrace and dereferencing features in WinDbg Preview by leveraging its JavaScript API. Additionally, playing with Time Travel Debugging (TTD) and inspecting memory on the heap.
-tags: WinDbg WinDbg-Preview JavaScript x32dbg x64dbg POC mona.py pykd reverse-engineering
+tags: WinDbg WinDbg-Preview JavaScript x32dbg x64dbg POC mona.py pykd Reverse-Engineering
 toc: true
 published: true
 ---

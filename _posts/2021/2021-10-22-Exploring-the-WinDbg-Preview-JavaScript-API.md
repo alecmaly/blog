@@ -3,7 +3,7 @@ layout: post
 title: Exploring the WinDbg Preview JavaScript API
 description: >-
     Trying to recreate the x32dbg/x64dbg stacktrace and dereferencing features in WinDbg Preview by leveraging its JavaScript API. Additionally, playing with Time Travel Debugging (TTD) and inspecting memory on the heap.
-tags: WinDbg WinDbg-Preview JavaScript x32dbg x64dbg POC mona.py pykd  
+tags: WinDbg WinDbg-Preview JavaScript x32dbg x64dbg POC mona.py pykd Reverse-Engineering
 toc: true
 published: true
 ---
@@ -316,7 +316,7 @@ Add-AppPackage WinDbg_Preview.appx
 
 A [github issue](https://github.com/microsoftfeedback/WinDbg-Feedback/issues/19) has been opened for shipping WinDbg Preview out of the Microsoft Store - it may be worth checking it's status periodically.
 
-### Python version
+### Python versions
 
 Make sure python is the same bit version as the program you are debugging. When loading the pykd modules, you'll notice the bit version and paths of the python.dll being used is different for each bit versionn.
 

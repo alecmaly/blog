@@ -2,7 +2,7 @@
 layout: post
 title: Hacking Electron Apps&#x3a; Joplin
 description: Adding custom functionality to the Joplin note-taking app by injecting arbitrary JavaScript into source code.
-tags: Electronjs Joplin JavaScript TypeScript reverse-engineering PowerShell POC
+tags: Electronjs Joplin JavaScript TypeScript Reverse-Engineering PowerShell POC
 toc: true
 ---
 

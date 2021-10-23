@@ -27,7 +27,7 @@ As I have some experience with x32dbg/x64dbg, I quickly noticed a feature that h
 Here are some screenshots to demonstrate what I am talking about using 32bit Vulnserver.exe as an example debugging target. 
 
 In x32dbg, I have hooked the recv function of the ws2_32.dll module and sent the following commands: 
-[![vulnserver test input - WinDbg](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-18-21-13-47.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-18-21-13-47.png)
+[![vulnserver test input - WinDbg](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-18-21-13-47.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-18-21-13-47.png)
 
 (1) connect to vulnserver<br>
 (2) send some custom user input
@@ -35,7 +35,7 @@ In x32dbg, I have hooked the recv function of the ws2_32.dll module and sent the
 
 You'll notice in x32dbg/x64dbg:
 
-[![WinDbgGUI](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-18-21-19-02.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-18-21-19-02.png)
+[![WinDbgGUI](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-18-21-19-02.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-18-21-19-02.png)
 
 (1) registers are printing some symbol locations and dereferenced string values. <br>
 (2) The same is true for the addresses on the stack.
@@ -63,7 +63,7 @@ Help - User input send to vulnserver
 
 This is WinDbg Preview's output.
 
-[![WinDbgBefore](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-31-14.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-31-14.png)
+[![WinDbgBefore](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-31-14.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-31-14.png)
 
 Note that:<br>
 (1) the registers do not show any dereferenced information<br>
@@ -72,7 +72,7 @@ Note that:<br>
 
 ### WinDbg Preview: After
 
-My POC JavaScript file looks something like this at the time of posting (there is much to be improved): [windbg_script.js](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/windbg_script.js)
+My POC JavaScript file looks something like this at the time of posting (there is much to be improved): [windbg_script.js](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/windbg_script.js)
 
 After saving the script to the Desktop and loading it in WinDbg Preview with:
 ```powershell
@@ -89,14 +89,14 @@ I now have access to a few commands.
 
 `!chelp` shows me my custom help menu:<br>
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-34-15.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-34-15.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-34-15.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-34-15.png)
 
 (1) functions for dumping the current state of the registers/stack, as well as some TTD functions I will discuss later<br>
 (2) some utility functions for dumping memory information given a specific address
 
 The output of the `!s` 'show state' command is as follows:
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-40-28.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-09-40-28.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-40-28.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-09-40-28.png)
 
 **Vertical sections:**<br>
 (1a) shows the dereferenced hex value for the given address<br>
@@ -124,7 +124,7 @@ In this section I will discuss the other functions in my `!chelp` command that I
 
 In order to run TTD functions, you must run WinDbg Preview as an Administrator and ensure the "Record with Time Travel Debugging" option is selected.
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-12-00-17.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-12-00-17.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-12-00-17.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-12-00-17.png)
 
 Once execution has been captured, you can open the capture file and explore the lifecycle of the process through WinDbg Preview.
 
@@ -132,7 +132,7 @@ Once execution has been captured, you can open the capture file and explore the 
 
 This command will find calls to particular functions of interest. Running the command `!TTDFindCalls` with no arguments displays a help menu with some possible example commands that may be of interest. The wildcard `*` can also be used when using the module!function format. 
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-12-04-18.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-12-04-18.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-12-04-18.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-12-04-18.png)
 
 When looking for vulnerabilities in a binary, these commands can be useful for finding "vulnerable functions" that process user input; you can then immediately step to the point in time that input was processed in the TTD session, as shown in the examples below.
 
@@ -147,7 +147,7 @@ When looking for vulnerabilities in a binary, these commands can be useful for f
 
 The output will contain a list of calls.
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-13-08.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-13-08.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-13-08.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-13-08.png)
 
 (1) is the first call to recv() - when we first connected using the command:<br>
 `ncat localhost 9999`<br>
@@ -160,11 +160,11 @@ Clicking on link (2) in the image above (when the custom user input was entered)
 
 It will then run command (1) in the image below, and (2) set the current time in the debugging session to when that function was called.
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-16-33.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-16-33.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-16-33.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-16-33.png)
 
 From here, I can quickly get the state of the registers and stack from when this function was called by calling my custom function `!s`.
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-17-45.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-17-45.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-17-45.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-17-45.png)
 
 The output shows:<br>
 (1) EIP register points to ws2_32!recv<br>
@@ -178,11 +178,11 @@ As another example, say I wanted to see all calls to printf:
 ```shell
 !TTDFindCalls "*!*printf"
 ```
-[![ttdfindcalls printf output](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-01-57.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-01-57.png)
+[![ttdfindcalls printf output](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-01-57.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-01-57.png)
 
 These strings are displayed to the vulnserver.exe window throughought the lifecycle of the process.
 
-[![vulnserver.exe output](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-16-20.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-16-20.png)
+[![vulnserver.exe output](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-16-20.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-16-20.png)
 
 We can see, at a glace, the first couple parameters to each call of printf.
 
@@ -195,19 +195,19 @@ To view calls to str*cmp:
 
 Here, we see (3) strncmp() is called with parameters (1) and (2)
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-06-42.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-06-42.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-06-42.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-06-42.png)
 
 
 This is expected as, if you are familiar with vulnserver.exe, it will compare the user input with several of the possible commands.
 
 Shown in IDA's graph view, each of vulnserver's possible commands are being checked on the user input 'Str1' using strncmp().
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-12-44.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-12-44.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-12-44.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-12-44.png)
 
 This lines up with the commands available in vulnserver. The program checks the start of the user input string against each of the commands available from the HELP menu of vulnserver.exe to determine the code path - basically a set of nested if statements.
 
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-54-10.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-54-10.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-54-10.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-54-10.png)
 
 **BUGS**
 
@@ -224,7 +224,7 @@ Running `!TTDFindCalls "*!str*cmp"` to dump function calls again yields in more 
 
 
 The user string that is being compared is still visible, however, we cannot see the second string being compared
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-42-27.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-42-27.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-42-27.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-42-27.png)
 
 I'll mention here that the commands run in the script can also be run from the console, like so.
 
@@ -237,7 +237,7 @@ dx -r1 @$cursession.TTD.Calls("*!str*cmp")[3].Parameters
 
 The console output displays:
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-46-06.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-46-06.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-46-06.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-46-06.png)
 
 (1) details regarding the addresses of the function call<br>
 (2) parameters for the function call
@@ -247,17 +247,17 @@ Navigating to the point in time the function was called by clicking the TimeStar
 We can see the output shows:<br>
 (1) 'RTIME ' as the second string being compared against at address (2) `0x181df9cc` on the stack, with a pointer to the string at address `0x0040439b`
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-48-32.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-13-48-32.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-48-32.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-13-48-32.png)
 
 The astute observer will at this point notice that the addresses listed from the TTD api are different because values are being read as 64bit addresses vs. 32bit addresses... the vulnserver.exe is a 32bit application.
 
 <p class="codeblock-label">Parameters (addresses) of 32 bit process being read as if 64 bit</p>
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-23-27.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-21-14-23-27.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-23-27.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-21-14-23-27.png)
 
 This clumping of values complicates things. I did some magic hand waving in my code to try and split the 64bit values into 32bit values and get a more sensible output. As you can see, the comparisons are much clearer.
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-46-46.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-46-46.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-15-46-46.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-15-46-46.png)
 
 I wanted to point this difference in 64bit and 32bit because the TTD api is still quite new, so it may be a bit buggy. Although, in all fairness, I have no idea what I'm doing, and there may be a way to configure the output to display 32bit values given the program being debugged is 32bit. My expectation would be WinDbg would detect this upfront by either looking at PE header info or by some other means, but this doesn't seem to be the case right now. Thus, my hacky solution seems to work, just know that it is very much a POC and I claim no robustness in its results.
 
@@ -276,7 +276,7 @@ Well, if you are fuzzing an application for vulnerabilities and have sent some u
 
 The output will show the address of the data, the size, some commands you can copy/paste back into the console to view memory using [Debugging Markup Language (DML)](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/customizing-debugger-output-using-dml) or a breakpoint command so you can break on the read and step through the instructions from there. 
 
-[![](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-58-35.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-19-15-58-35.png)
+[![](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-15-58-35.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-19-15-58-35.png)
 
 Right now the output is quite overwhelming and the console gets locked. However, some modification to optimize and search for your payload may prove fruitful. 
 
@@ -321,11 +321,11 @@ A [github issue](https://github.com/microsoftfeedback/WinDbg-Feedback/issues/19)
 Make sure python is the same bit version as the program you are debugging. When loading the pykd modules, you'll notice the bit version and paths of the python.dll being used is different for each bit versionn.
 
 **x86** - debugging target: 32 bit vulnserver.exe
-[![windbg python 32](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-22-26.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-22-26.png)
+[![windbg python 32](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-22-26.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-22-26.png)
 
 
 **x64** - debugging 64 bit calc.exe
-[![windbg python 64](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-20-42.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-20-42.png)
+[![windbg python 64](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-20-42.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-20-42.png)
 
 Also note that to use python 2.7, you can just use the `-2` parameter in WinDbg Preview:
 
@@ -372,22 +372,22 @@ Second, per the [mona installation instructions](https://github.com/corelan/wind
 
 You may notice mona.py still won't run.
 
-[![mona failure](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-38-50.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-38-50.png)
+[![mona failure](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-38-50.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-38-50.png)
 
 This message is not very verbose.
 We can modify the mona.py script to print a more useful error message.
 
 <p class="codeblock-label">Script - Before:</p>
 
-[![mona failure - code](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-37-36.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-37-36.png)
+[![mona failure - code](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-37-36.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-37-36.png)
 
 <p class="codeblock-label">Script - After:</p>
 
-[![updated mona.py](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-40-14.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-40-14.png)
+[![updated mona.py](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-40-14.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-40-14.png)
 
 <p class="codeblock-label">The new error message:</p>
 
-[![mona helpful error message](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-40-50.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-40-50.png)
+[![mona helpful error message](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-40-50.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-40-50.png)
 
 From here, it was a bit tricky to download as I didn't have pip installed for the x86 version of mona.py.
 
@@ -406,7 +406,7 @@ C:\Python27.x86\python.exe -m pip install pykd
 !py -2 mona.py 
 ```
 
-[![mona output](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-12-21-29.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-12-21-29.png)
+[![mona output](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-12-21-29.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-12-21-29.png)
 
 <p class="codeblock-label">A test command to test things are working</p>
 
@@ -414,7 +414,7 @@ C:\Python27.x86\python.exe -m pip install pykd
 !py -2 mona seh
 ```
 
-[![successful mona.py call](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-57-10.png)](/assets/posts/2021-10-22-Exploring-the-WinDBG-Preview-JavaScript-API/2021-10-22-11-57-10.png)
+[![successful mona.py call](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-57-10.png)](/assets/posts/2021-10-22-Exploring-the-WinDbg-Preview-JavaScript-API/2021-10-22-11-57-10.png)
 
 Very nice!
 

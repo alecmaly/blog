@@ -10,7 +10,7 @@ published: true
 
 ## Introduction
 
-In my spare time I have been slowly inching my way toward the Offensive Security [OSED Certification](https://www.offensive-security.com/exp301-osed/#course-info). Great open source projects such as [vulnserver](https://github.com/stephenbradshaw/vulnserver) and [phoenix](https://exploit.education/phoenix/) as well as wonderful blogs by [epi](https://epi052.gitlab.io/notes-to-self/), [hombre](https://h0mbre.github.io/), and others has resulted in some rich content to familiarize myself with related material before actually purchasing the course and lab time.
+In my spare time I have been slowly inching my way toward the Offensive Security [OSED Certification](https://www.offensive-security.com/exp301-osed/#course-info). Great open source projects such as [vulnserver](https://github.com/stephenbradshaw/vulnserver) and [phoenix](https://exploit.education/phoenix/) as well as wonderful blogs by [epi](https://epi052.gitlab.io/notes-to-self/), [hombre](https://h0mbre.github.io/), [purpl3 f0x](https://www.purpl3f0xsecur1ty.tech/), and others have resulted in some rich content to familiarize myself with related material before actually purchasing the course and lab time.
 
 My reverse engineering experience has centered around [x32dbg/x64dbg](https://x64dbg.com) as my main debugger and the NSA's [Ghidra](https://ghidra-sre.org) as a static binary analyzer, disassembler, and decompiler. That said, the OSED requires use of [WinDbg \| WinDbgPreview](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-download-tools) and  [ida free](https://hex-rays.com/ida-free/), so I have been slowly getting aquatinted with these tools as well.
 

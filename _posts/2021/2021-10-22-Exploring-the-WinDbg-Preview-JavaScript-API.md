@@ -466,7 +466,7 @@ write-host WinDbgX $cmd_args
 start-process -wait -filepath "WinDbgX " -verb RunAs -argumentlist $cmd_args
 ```
 
-This seemed to work for me. It changes the way arguements are parsed and passed to the start-process command for WinDbg. It may not be perfect as I was just playing around, but hopefully this speeds up your time of getting working script for WinDbg Preview. Note that passing any argument that requires double quotes will fail, so this does get a bit finnicky. 
+This seemed to work for me. It changes the way arguments are parsed and passed to the start-process command for WinDbg. It may not be perfect as I was just playing around, but hopefully this speeds up your time of getting a workable script for WinDbg Preview. Note that passing any argument that requires double quotes will fail, so this does get a bit finnicky. 
 
 <p class="codeblock-label">An example usage, using absolute paths (loads pykd.dll + my custom .js script):</p>
 

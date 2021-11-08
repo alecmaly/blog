@@ -28,11 +28,11 @@ In my learning, I often take useful information and add it to my notes. I then a
 
 
 The document is about 1655 lines long in markdown, quite large.
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-46-35.png)]
 
 
 In Joplin, I've added a table of contents to jump around the massive document (shown on the right).
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-50-07.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-50-07.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-12-50-07.png)]
 
 While this is useful, I would like a way to filter this massive file to just the most important items and expand my scope from there as I move forward.
 
@@ -43,7 +43,7 @@ To do this, I ended up 'marking' important sections in my note with stars:
 
 The filtering is controlled by (a) buttons that can toggle between 3/4 stars, anything marked with a star, and showing the entire document with the "Clear Stars" button.
 
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-16-53-23.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-16-53-23.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-16-53-23.png)]
 
 As you can see, there is no way this would be added as the design is so clunky it just feels weird and unpolished. That said, I want it, and the idea of hacking the client app (for learning purposes) is just too juicy to pass up.
 
@@ -73,7 +73,7 @@ Clearly, the filtered list in the "After" image is much cleaner and allows me to
 
 Sometimes I want to just copy a code snippet with a single button click, so I added a button to add the content of a code block to my clipboard.
 
-[![copy to clipboard](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-52-06.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-52-06.png)
+![copy to clipboard](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-13-52-06.png)]
 
 
 <hr>
@@ -88,7 +88,7 @@ I prefer to avoid rehashing information that is better explained elsewhere using
 
 Electron apps are typically installed and code is executed out of an .asar file.
 
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-05-22.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-05-22.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-05-22.png)]
 
 These .asar files are essentially .zip files in the sense that they are a compressed collection of files.
 
@@ -157,15 +157,15 @@ Running the script results in:
 
 - (a) app folder with Joplin source code .js/.ts files and (b) app.asar renamed to app.asar.bak.
 
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-50-07.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-50-07.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-50-07.png)]
 
 - The contents of /app now include my payload `joplin_inject_code.js` file
 
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-51-33.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-51-33.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-51-33.png)]
 
 - And my import statement to my payload is added to `\app\app.js` with the unique marker to prevent multiple import statements on subsequent runs of `patch_joplin.ps1`.
 
-[![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-49-31.png)](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-49-31.png)
+![](/assets/posts/2021-10-12-Hacking-Electron-Apps-Joplin/2021-10-14-14-49-31.png)]
 
 
 

@@ -67,7 +67,7 @@ I didn't even make that many changes to the code!
 
 I pull a fresh instance of Joplin and the tests still fail!!
 
-[![joplin build failed](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-14-55.png)](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-14-55.png)
+![joplin build failed](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-14-55.png)]
 
 At this point, I **ASSUMED** these tests pass for everyone else, so I get to debugging and stepping through the code. 
 
@@ -79,9 +79,9 @@ Ultimately, it came down to timezones. I was in EST, and the test code was pushi
 
 After posting [my explanation](https://github.com/laurent22/joplin/pull/5246#issuecomment-888483705), it seems like others had the same issue.
 
-[![](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-07.png)](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-07.png)
+![](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-07.png)]
 
-[![](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-22.png)](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-22.png)
+![](/assets/posts/2021-10-11-Adventures-in-open-source-contributing-Joplin/2021-10-14-12-20-22.png)]
 
 Once again proving that timezones are the bane of every developer's existence. For the unininitiated, please check out this very well done (and hilarious) YouTube video by Computerphile titled [The Problem with Time & Timezones](https://www.youtube.com/watch?v=-5wpm-gesOY), it's amazing.
 

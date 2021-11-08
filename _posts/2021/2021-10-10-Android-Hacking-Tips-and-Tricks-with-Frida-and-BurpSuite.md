@@ -71,7 +71,7 @@ adb shell pm path com.my.hc.rpg.kingdom.simulator
 
 Ok, I want to stop here for a moment and take note of something. This application actually has TWO .apks installed. This will be important later. With my limited research, I believe this started occurring when Android introduced project bundling, but I just wanted to point this out as it will affect a few of our later steps.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-12-43-20.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-12-43-20.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-12-43-20.png)]
 
 Back to it:
 
@@ -134,17 +134,17 @@ You'll immediately note a difference in the output of apktool.
 
 Without -r
 
-[![apktool output without -r](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-32-38.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-32-38.png)
+![apktool output without -r](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-32-38.png)]
 
 With -r
 
-[![apktool output with -r](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-04.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-04.png)
+![apktool output with -r](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-04.png)]
 
 ## 4) Decompilation and Static Analysis​
 
 Ok, this is where it starts getting a bit interesting. Let's go into the 'unzipped' folder to inspect files we extracted in section 3, above. You'll notice a few .dex files.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-48.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-48.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-33-48.png)]
 
 You'll notice that there is a classes.dex and a classes2.dex. Similar to how the .apk was split into two .apk packages, as Android apps got larger they started to split java classes resources into multiple .dex packages. I'm not sure why, the rhyme or reason, but just be aware to check out both as interesting code can be found in each.
 
@@ -185,7 +185,7 @@ Pretty much the simplest to get started with, it's very fast and effective. Just
 
 Here is what the tool looks like. My text may be small or look wonky because apps don't typically scale well 4k 13" laptop monitors:
 
-[![jd-gui output](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-38-09.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-38-09.png)
+![jd-gui output](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-38-09.png)]
 
 - [Procyon](https://bitbucket.org/mstrobel/procyon/wiki/Java%20Decompiler) (java 8):
 This is a nice .jar to decompile into java 8, which introduced several features such as lambda functions, the :: operator, etc. What worked really well for me is to decompile the entire .jar (both of them in this case) to an output directory and open that directory in an editor such as VS Code to inspect the .java files – this results in an experience similar to jd-gui with just the added overhead of downloading procyon and running a few commands for setup.
@@ -264,11 +264,11 @@ Note that you will need to re-download the Burp Suite certificate as you change 
 
 2. Second, You'll want to disable the Interceptor for now so setting up the proxy doesn't stop traffic. From the (a) proxy tab, (b) disable the 'Intercept' button
 
-    [![burp1](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-07.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-07.png)
+    ![burp1](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-07.png)]
 
     Create a new proxy listener. This can be done by (a) going to the proxy tab, (b) options, (c) add, (d) bind to an unused port and select 'All Interfaces', then click Ok.
 
-    [![burp2](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-41.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-41.png)
+    ![burp2](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-40-41.png)]
 
 3. Third, get the ip address of your computer running Burp Suite (e.g. using 'ip addr/ifconfig' on Linux or 'ipconfig' on windows terminal looking for inet/IPv4 parameters, respectively).
 
@@ -276,23 +276,23 @@ Note that you will need to re-download the Burp Suite certificate as you change 
 
 5. Fifth, configure the target WiFi network settings on the android device to 'Manual' proxy mode and set the ip address of your host machine and port you specified using Burp Suite – it's in the advanced settings of your current network settings (settings for the current target SSID)… I hope that makes sense because there is another network settings page we will use shortly to install a certificate. Google will help you configure a proxy on your android device if needed. I've provided a screenshot below of the proper settings button to provide clarity.
 
-    [![android wifi settings](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-41-23.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-41-23.png)
+    ![android wifi settings](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-41-23.png)]
 
 6. Sixth, from the android device, go to [http://burp](http://burp) and download the CA Certificate on the top right.
 
-    [![download burp certificate](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-13.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-13.png)
+    ![download burp certificate](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-13.png)]
 
 7. Seventh, open an android app such as 'EX File Manager' or 'FX File Manager' because we are going to have to rename the certificate that was just downloaded. It is downloaded as a .der, but you need to rename it as a .crt or a .cer for Android to recognize it.
 
 8. Eighth, from the Android device, you should now go into the Advanced WiFi settings (not the settings of the current SSID) and 'Install network certificates', select the downloaded certificate and name it whatever you want.
 
-    [![android settings 2](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-43.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-43.png)
+    ![android settings 2](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-42-43.png)]
 
     Great, you can now test going to a page like test.com on the Android device and check the HTTP History tab in Burp Suite to ensure you are capturing traffic.
 
     Check the `Proxy > HTTP History` tabs. In this example I went to blah.com on my android device. Note that some sites that require HTTPS may not work because Chrome, Firefox, and potentially other browsers validate certificates with built in good/bad certificate lists due to past exploitation. You'll get a warning message to proceed and at best it's just extra clicks. Here, blah.com was a quick way to test.
 
-    [![test interception](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-43-35.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-43-35.png)
+    ![test interception](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-43-35.png)]
 
 Now that we have a proxy on our network traffic, you can play the game and notice a few calls being made to different servers. One is much more strongly obfuscated than the other. For this instance, we are going to look at the network traffic with base64 encoded payloads.
 
@@ -300,11 +300,11 @@ Now that we have a proxy on our network traffic, you can play the game and notic
 Using methods described earlier, I found an interesting file
 You'll notice a file called MRGS Define which contains a few keys in the form of byte[] and a function to convert them to a String. Encript is spelt with an 'i' here.. tricky tricky.
 
-[![code](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-06.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-06.png)
+![code](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-06.png)]
 
 Using previous techniques, we can now grep through the code base to quickly find interesting files with this function call.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-25.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-25.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-44-25.png)]
 
 Where we land into another file with a decode function.
 It gets a bit deeper, only in the sense that there are some decode functions to call other decode functions. I'm not going to post another bunch of screenshots, but I would like to illustrate a few more points.
@@ -344,14 +344,14 @@ Base64 from a server response, captured in Burp Suite:
 OOSiN+qRISyRbVuBavlaWIz5R1/NmHVYskxkRgql+D4eMEhpBRmN5bhrACFnUrpuyR/9uXjFv+QvfT5yIUd5uhhwdKP3I8iiQ/4MdpDOoSI=
 ```
 
-[![burp captured traffic](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-28.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-28.png)
+![burp captured traffic](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-28.png)]
 
 You'll notice standard base64 decoding results in gibberish:
 
-[![base64 decoded data](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-54.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-54.png)
+![base64 decoded data](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-48-54.png)]
 
 But our local java program with the proper keys and decryption algorithm:
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-20.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-20.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-20.png)]
 
 
 Hurray for symmetric keys!!
@@ -360,7 +360,7 @@ Hurray for symmetric keys!!
 
 In this game, this doesn't do much for us, but perhaps it will be more useful in another game. The rest of the traffic is not decoded with this algorithm, it looks more like this and is encoded somewhere in the game logic, deeper than the .smali code. It looks something like this (screenshot below), and after much effort trying to deserialize or find some other encryption method (even going down to a Huffman encoding schema I found in the okio library because all responses started with a 1 in their binary representation), it is clear this encoding was probably done in the .so binary layer.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-41.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-41.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-49-41.png)]
 
 
 ## 6) Dynamic Analysis with… wait… let's talk about logs.​
@@ -388,11 +388,11 @@ A quick example of log usage:
 
 This game has network traffic with encoded payloads, but oddly enough, there are a few variables in plain text.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-51-21.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-51-21.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-51-21.png)]
 
 I can run `adb logcat > log` to pipe log data into a log file which I can grep through. Running `cat log | grep d_7V` I get the following output
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-52-02.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-52-02.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-52-02.png)]
 
 I now know this is a firebase token and that MRSGPushNotificationHandler.java may be interesting to look at. Even if that .java file contains nothing, the fact this is a firebase token arms me with more data. I can grep through the .java or other useful files looking for calls to functions like getFirebaseToken() or looking for what may be building a POST request with a firebase token in the payload. I hope I've illustrated the point and utility of logs when you are stuck, they could be that golden ticket that keeps you going. You can then also hook these functions using Frida (below) and possibly find the code that is being used to send/receive data to/from the server.
 
@@ -464,7 +464,7 @@ I won't get too deep about how I chose this for this specific game as methodolog
 
 This code just sets a string variable to the name of the frida-gadget.so and loads the library.
 
-[![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-56-02.png)](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-56-02.png)
+![](/assets/posts/2021-10-13-Android Hacking Tips and Tricks with Frida & BurpSuite/2021-10-13-13-56-02.png)]
 
 At this point we are ready to rebuild the .apk and push it to our device. This step must be repeated for all .apk files. I will post some code as a reference, but I encourage you to google for a better understanding of what is happening. Some of functions you may need to do multiple times if you are repeatedly messing with smali code and seeing how it affects the game, it may be useful to make a few shell scripts such as build.sh and sign.sh to aid in this process. Note that there are other tools that may do this automatically for you.
 

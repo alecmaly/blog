@@ -13,9 +13,10 @@
 
 
 <h3 align="left">My other public profiles:&nbsp;
-    <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img style='background-color:#fcfcfc; border-radius:7px' align="center" src="https://raw.githubusercontent.com/alecjmaly/alecjmaly/main/pentesterlab.png" alt="pentesterlab" height="50" /></a>&nbsp;
-    <a href="https://app.hackthebox.eu/profile/69305" target="blank"><img style='background-color:#fcfcfc; border-radius:7px' align="center" src="https://raw.githubusercontent.com/alecjmaly/alecjmaly/main/hackthebox.png" alt="hackthebox" height="50" /></a>&nbsp;
-    <a href="https://tryhackme.com/p/Kauv" target="blank"><img style='background-color:#fcfcfc; border-radius:7px' align="center" src="https://raw.githubusercontent.com/alecjmaly/alecjmaly/main/tryhackme.png" alt="tryhackme" height="45" /></a>
+    <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img style='border-radius:7px' align="center" src="{{ '/assets/images/pentesterlab.png' | relative_url }}" alt="pentesterlab" height="50" /></a>&nbsp;
+    <a href="https://app.hackthebox.eu/profile/69305" target="blank"><img style='border-radius:7px' align="center" src="{{ '/assets/images/hackthebox.png' | relative_url }}" alt="hackthebox" height="50" /></a>&nbsp;
+    <a href="https://tryhackme.com/p/Kauv" target="blank"><img style='border-radius:7px' align="center" src="{{ '/assets/images/tryhackme.png' | relative_url }}" alt="tryhackme" height="45" /></a>
+    <a href="https://blueteamlabs.online/public/user/fd85fc01e19d6c48c85085" target="blank"><img style='border-radius:7px' align="center" src="{{ '/assets/images/blueteamlabsonline.png' | relative_url }}" alt="tryhackme" height="45" /></a>
 </h3>
 <!-- Statistics from: 
     https://github.com/alecjmaly/github-stats) 

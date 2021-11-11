@@ -11,6 +11,8 @@
     <br>
 </div>
 
+<h3>Certifications:</h3>
+<a href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img style='max-width: 8em' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
 
 <h3 align="left">My other public profiles:<br>
     <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/pentesterlab.png' | relative_url }}" alt="pentesterlab" height="50" /></a>

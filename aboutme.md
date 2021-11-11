@@ -12,9 +12,10 @@
 </div>
 
 
-<h3 align="left">My other public profiles:
+<h3 align="left">My other public profiles:<br>
     <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/pentesterlab.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
     <a href="{{ '/assets/images/portswigger_progress.jpg' | relative_url }}" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/portswigger.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
+    <a href="{{ '/assets/images/VHL_certificates.jpg' | relative_url }}" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/VHL.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
     <a href="https://app.hackthebox.eu/profile/69305" target="blank"><img style='background-color:#eee; border-radius:7px ; margin: 5px' align="center" src="{{ '/assets/images/hackthebox.png' | relative_url }}" alt="hackthebox" height="50" /></a>
     <a href="https://tryhackme.com/p/Kauv" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/tryhackme.png' | relative_url }}" alt="tryhackme" height="50" /></a>
     <a href="https://blueteamlabs.online/public/user/fd85fc01e19d6c48c85085" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/blueteamlabsonline.png' | relative_url }}" alt="tryhackme" height="50" /></a>

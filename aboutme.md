@@ -11,6 +11,17 @@
     <br>
 </div>
 
+<h3>Social Media</h3>
+<a class='icon-social-media' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">
+    <i class="fab fa-fw fa-linkedin"></i>
+</a>
+<a class='icon-social-media' href="https://github.com/{{site.github_username}}" target="_blank">
+    <i class="fab fa-fw fa-github"></i>
+</a>
+<a class='icon-social-media' href="https://youtube.com/c/{{site.youtube_username}}" target="_blank">
+    <i class="fab fa-fw fa-youtube"></i>
+</a>
+
 <h3>Certifications:</h3>
 <a href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img style='max-width: 8em' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
 

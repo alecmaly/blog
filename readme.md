@@ -1,3 +1,11 @@
+# Alec's Website Notes
+
+## Query Params
+
+- `debug=true` - show debug info, namely screen size
+- `dev=1` - enable dev mode - don't send google analytics data
+    - `dev=0` - disable dev mode
+
 
 # Install
 ```bash
@@ -15,6 +23,7 @@ sudo apt-get install ubuntu-dev-tools
 > ```bash
 > python3 tag_generator.py
 > ```
+
 
 # useful tools
 - https://marketplace.visualstudio.com/items?itemName=telesoho.vscode-markdown-paste-image

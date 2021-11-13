@@ -122,7 +122,7 @@ Number in image above:
 
 3. Last script tag is **IS** required for this payload
 
-I should not that even a payload of `<script src=https://do6.us/>` (trailing `/>`) yields the same rendering results.
+I should note that even a payload of `<script src=https://do6.us/>` (trailing `/>`) yields the same rendering results.
 
 In this example only a single line was not shown in the rendered page source for the non-closed `<script>` payload. However, if the XSS injection point is high enough in the page, this behavior can result in the majority of page content disappearing and is a massive red flag to anyone that views the page. For stealth, adding the trailing `</script>` tag in the XSS payload is preferrable. 
 

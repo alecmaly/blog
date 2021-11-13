@@ -1,4 +1,4 @@
-<h1 align="center">👨‍💻 About me</h1>
+<h1 class='page-title'>👨‍💻 About me</h1>
 
 <p align="left">I'm passionate about software development and application security. I enjoy enabling people with technology, improving processes with automation, and making technology safer for the average person.</p>
 

@@ -168,7 +168,7 @@ Moving forward I will be leveraging services like [privacy.com](https://privacy.
 
 So, to continue on, I then sent a POST request to `http://www.business.url/confirm_payment.php` with the 46 parameters and my account was credited. They do not validate that the request came from paypal.com and there is no signature validation! 
 
-After some tinkering, I parsed the payload down to something like this. In an attempt to trim the personal data and keep the request as clean as possible.
+After some tinkering, I parsed the payload down in an attempt to trim the personal data and keep the request as clean as possible.
 
 ```text
 curl -XPOST http://www.business.url/confirm_payment.php -d 'mc_gross=500.00&payment_status=Completed&option_selection1=76543&mc_currency=USD&item_number=business-1&receipt_id=1234-5678-9101-2131'
@@ -176,7 +176,7 @@ curl -XPOST http://www.business.url/confirm_payment.php -d 'mc_gross=500.00&paym
 
 Where: 
 - `mc_gross` = amount paid
-- `option_selection1` = is my username
+- `option_selection1` = my username
 - `receipt_id` = GUID (I changed my original GUID and the payment was still processed)
 
 Each time this POST request is sent, my account is credited $500. Easy peasy. 

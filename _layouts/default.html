@@ -12,15 +12,31 @@
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
         <!-- google analytics -->
+        
         {% if site.google_analytics_gtag %}
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_gtag }}"></script>
             <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
 
-            gtag('config', '{{ site.google_analytics_gtag }}');
+                const dev = urlParams.get('dev')
+                // set dev mode
+                if (dev == 0) {
+                    localStorage.setItem('dev', 'false')
+                } else if (dev == 1) {
+                    localStorage.setItem('dev', 'true')
+                }
+
+                // only send google analytics data when browsing from alecmaly.com and not in dev mode
+                if (window.location.host === 'alecmaly.com' && localStorage.getItem('dev') !== 'true') {
+                    console.log('google analytics code running')
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '{{ site.google_analytics_gtag }}');
+                }
             </script>
         {% endif %}
 
@@ -37,14 +53,8 @@
                 <!-- DEBUG -- ASPECT RATIO SETTINGS -- TESTING -->
                 <span id='debug-data'></span>
                 <script>
-                    const queryString = window.location.search;
-                    const urlParams = new URLSearchParams(queryString);
                     if (urlParams.get('debug') === 'true') {
-                        document.getElementById('debug-data').onclick = () => {
-                            document.body.className =  document.body.className == 'light-mode' ? 'dark-mode' : 'light-mode'
-                        }
-
-                        setInterval(() => {     
+                         setInterval(() => {     
                             document.querySelector('#debug-data').innerText = window.outerWidth + ':' + window.outerHeight
                         }, 500)
                     }

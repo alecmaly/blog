@@ -4,12 +4,17 @@
 
 <div style='text-align: center'>
     🌱 I’m currently learning <span class='currently-learning'>
-        Reverse Engineering / Shellcoding<br>
-        + Web Appplication Pentesting
+        blueteamlabs.online content
     </span>
     <br>
     <br>
 </div>
+
+<h3>Primary Interests</h3>
+- (Web / Native) Application Security
+- Reverse Engineering
+- Shellcoding + Exploit Development
+- Tooling + Automation
 
 <h3>Social Media</h3>
 <a class='icon-social-media' href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">

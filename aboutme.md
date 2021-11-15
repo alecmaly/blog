@@ -12,7 +12,7 @@
 
 <h3>Primary Interests</h3>
 
-- (Web / Native) Application Security
+- Application Security
 - Reverse Engineering
 - Shellcoding + Exploit Development
 - Tooling + Automation

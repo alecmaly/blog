@@ -167,6 +167,7 @@ Moving forward I will be leveraging services like [privacy.com](https://privacy.
 ### Infinite Monies
 
 So, to continue on, I then sent a POST request to `http://www.business.url/confirm_payment.php` with the 46 parameters and my account was credited. They do not validate that the request came from paypal.com and there is no signature validation! 
+> In more complicated cases, other techniques may be used to try and bypass signature validation. See hackerone report: <a href='https://hackerone.com/reports/1295844'>https://hackerone.com/reports/1295844</a>
 
 After some tinkering, I parsed the payload down in an attempt to trim the personal data and keep the request as clean as possible.
 

@@ -29,8 +29,8 @@
 </a>
 
 <h3>Certifications:</h3>
-<a alt='certification: OSCP' href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img style='max-width: 7em' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
-<a alt='certification: burp suite certified practitioner' href='https://portswigger.net/web-security/E/C/3BF9F2BDAAC74879' target="blank"><img style='max-width: 7em' src="{{ '/assets/images/certifications/burp-suite-certified-practitioner.svg' | relative_url }}"></a>
+<a alt='certification: OSCP' href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img style='max-width: 7.5em' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
+<a alt='certification: burp suite certified practitioner' href='https://portswigger.net/web-security/E/C/3BF9F2BDAAC74879' target="blank"><img style='max-width: 7.5em' src="{{ '/assets/images/certifications/burp-suite-certified-practitioner.svg' | relative_url }}"></a>
 
 
 

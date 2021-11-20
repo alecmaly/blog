@@ -29,17 +29,17 @@
 </a>
 
 <h3>Certifications:</h3>
-<a alt='certification: OSCP' href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img style='max-width: 8em' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
-<a alt='certification: burp suite certified practitioner' href='https://portswigger.net/web-security/E/C/3BF9F2BDAAC74879' target="blank"><img style='max-width: 8em' src="{{ '/assets/images/certifications/burp-suite-certified-practitioner.svg' | relative_url }}"></a>
+<a alt='certification: OSCP' href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img class='public-profile certification-profile' style='background: rgba(0,0,0,0)' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
+<a alt='certification: burp suite certified practitioner' href='https://portswigger.net/web-security/E/C/3BF9F2BDAAC74879' target="blank"><img class='public-profile certification-profile' src="{{ '/assets/images/certifications/burp-suite-certified-practitioner.svg' | relative_url }}"></a>
 
 
 <h3 align="left">My other public profiles:<br>
-    <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/pentesterlab.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
-    <a href="{{ '/assets/images/portswigger_progress.jpg' | relative_url }}" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/portswigger.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
-    <a href="{{ '/assets/images/VHL_certificates.jpg' | relative_url }}" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/VHL.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
-    <a href="https://app.hackthebox.eu/profile/69305" target="blank"><img style='background-color:#eee; border-radius:7px ; margin: 5px' align="center" src="{{ '/assets/images/hackthebox.png' | relative_url }}" alt="hackthebox" height="50" /></a>
-    <a href="https://tryhackme.com/p/Kauv" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/tryhackme.png' | relative_url }}" alt="tryhackme" height="50" /></a>
-    <a href="https://blueteamlabs.online/public/user/fd85fc01e19d6c48c85085" target="blank"><img style='background-color:#eee; border-radius:7px; margin: 5px' align="center" src="{{ '/assets/images/blueteamlabsonline.png' | relative_url }}" alt="tryhackme" height="50" /></a>
+    <a href="https://www.pentesterlab.com/profile/Alec_M" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/pentesterlab.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
+    <a href="{{ '/assets/images/portswigger_progress.jpg' | relative_url }}" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/portswigger.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
+    <a href="{{ '/assets/images/VHL_certificates.jpg' | relative_url }}" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/VHL.png' | relative_url }}" alt="pentesterlab" height="50" /></a>
+    <a href="https://app.hackthebox.eu/profile/69305" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/hackthebox.png' | relative_url }}" alt="hackthebox" height="50" /></a>
+    <a href="https://tryhackme.com/p/Kauv" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/tryhackme.png' | relative_url }}" alt="tryhackme" height="50" /></a>
+    <a href="https://blueteamlabs.online/public/user/fd85fc01e19d6c48c85085" target="blank"><img class='public-profile' align="center" src="{{ '/assets/images/blueteamlabsonline.png' | relative_url }}" alt="tryhackme" height="50" /></a>
 </h3>
 <!-- Statistics from: 
     https://github.com/alecjmaly/github-stats) 

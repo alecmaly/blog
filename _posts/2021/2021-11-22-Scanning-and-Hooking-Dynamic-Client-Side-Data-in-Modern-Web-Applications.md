@@ -55,7 +55,7 @@ s.new().scanValues_loose_equals("searchterm")
 s.new().scanValues_between(min, max)
 ```
 
-Note that each command has a `.new()` scan. By default, each subsequent scan will be based off the last scan. `.new()` will re-define the base object as the top level `window` DOM object.
+Note that each command has a `.new()` scan. By default, each subsequent scan will be based off the last scan so DOM objects with changing values can be tracked as their value changes. `.new()` will re-define the base object as the top level `window` DOM object.
 
 
 ## Scanning: PowerApps Example

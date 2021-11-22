@@ -2,7 +2,7 @@
 layout: post
 title: Scanning and Hooking Dynamic, Client-Side Data in Modern Web Applications
 description: >-
-    Scanning the DOM for interesting data + modifying code execution. Demonstrating POC with a PowerApps example.
+    Scanning the DOM for interesting data + hooking getters/setters. Demonstrating POC w/ a PowerApps example.
 tags: JavaScript reverse-engineering POC PowerApps Dynamic-Testing WebApp Debugging
 toc: true
 published: true

@@ -86,7 +86,6 @@ Running `window['_r10']['_scopeVaribles']['1.role']['1']` shows me the same `use
 
 At this point, I try to change the value by running `window['_r10']['_scopeVariables']['1.role']['1'] = 'meow'`, however, the app remains unaffected. It's time to try something else.
 
-
 # Hooking
 
 I have slapped together a quick hooking function based off the information in this [github project: break-on-access](https://github.com/paulirish/break-on-access). 
@@ -145,6 +144,7 @@ Now the variable has been set to `admin` and the app state has changed according
 
 ![result](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-27-23.png)
 
+At this point I have now hooked a shared function; this function that controls all scope variable assignments in the app. From here it's quite easy to set conditional breakpoints and/or just watch the data that passes through this function - and, potentially, modify it at will to affect app behavior.
 
 # Conclusion
 

@@ -74,7 +74,7 @@ I mean, seriously... this is the output of the `window` object.
 
 ![window output](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-47-47.png)
 
-1. This is the scroll wheel on the output, there are a MASSIVE amount of first-level objects. 
+1. This is the scroll wheel on the output, there are a MASSIVE amount of top-level properties. 
 2. Even after expanding the _r10 property, you can't really tell the values that are embedded at a deeper level.
 
 Good luck finding this manually. I'll see you in a few years...

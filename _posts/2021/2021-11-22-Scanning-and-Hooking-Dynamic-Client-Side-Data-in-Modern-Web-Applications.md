@@ -70,7 +70,7 @@ Running a scan using `s.new().scanValues_loose_equals('user')`, I see the result
 
 The output shows all the DOM objects off of the `window` object that have these values. `window['_r10']['_scopeVaribles']['1.role']['1']` seems interesting as it includes some key terms in the key/value names such as `scopeVariables` and `1.role`. However, it's buried in a strange object called `_r10` which would have been difficult to find manually.
 
-I mean, seriously... this is the output of the window object.
+I mean, seriously... this is the output of the `window` object.
 
 ![window output](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-47-47.png)
 

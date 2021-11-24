@@ -4,7 +4,6 @@
 
 <div style='text-align: center'>
     🌱 I’m currently learning <span class='currently-learning'><br>
-        reverse engineering<br>
         shellcoding + exploit development<br>
         blueteamlabs.online content
     </span>

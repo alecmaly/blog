@@ -3,15 +3,18 @@
 <p align="left">I'm passionate about software development and application security. I enjoy enabling people with technology, improving processes with automation, and making technology safer for the average person.</p>
 
 <div style='text-align: center'>
-    🌱 I’m currently learning <span class='currently-learning'>
+    🌱 I’m currently learning <span class='currently-learning'><br>
+        reverse engineering<br>
+        shellcoding + exploit development<br>
         blueteamlabs.online content
     </span>
     <br>
     <br>
 </div>
 
-<h3>Primary Interests</h3>
 
+
+<h3>Primary Interests</h3>
 - Application Security
 - Reverse Engineering
 - Shellcoding + Exploit Development

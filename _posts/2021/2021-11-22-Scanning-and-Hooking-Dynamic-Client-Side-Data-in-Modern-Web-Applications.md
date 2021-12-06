@@ -8,7 +8,7 @@ toc: true
 published: true
 ---
 
-# Introduction
+## Introduction
 
 This is not very useful. Well, it could be, but it's often not worth the effort. Nonetheless, it was a fun side project for a couple days that may be worth having in my back pocket. 
 
@@ -22,7 +22,7 @@ The main goal of this tool is to output the exact `window` object paths that sto
 
 All that said, I still found this to be fun and interesting, so here goes.
 
-# The Setup
+## The Setup
 
 As an example, I have created a [Microsoft PowerApp](https://docs.microsoft.com/en-us/powerapps/powerapps-overview) to use as a test. PowerApps is a low code/no code solution and as such will create it's own virtual DOM and do a bunch of magic to render the final application.
 
@@ -38,7 +38,7 @@ Additionally, if the `role` value becomes `admin`, the text box will fill <span 
 
 ![](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-58-13.png)
 
-# Scanning
+## Scanning
 
 As for a basic scanner, the code can be found [here: scanner.js](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/scanner.js).
 
@@ -60,7 +60,7 @@ s.new().scanValues_between(min, max)
 Note that each command has a `.new()` scan. By default, each subsequent scan will be based off the last scan so DOM objects with changing values can be tracked as their value changes. `.new()` will re-define the base object as the top level `window` DOM object.
 
 
-## Scanning: PowerApps Example
+### Scanning: PowerApps Example
 
 Now, looking at this app, I can see I am a `user`.
 
@@ -88,7 +88,7 @@ Running `window['_r10']['_scopeVaribles']['1.role']['1']` shows me the same `use
 
 At this point, I try to change the value by running `window['_r10']['_scopeVariables']['1.role']['1'] = 'meow'`, however, the app remains unaffected. It's time to try something else.
 
-# Hooking
+## Hooking
 
 I have slapped together a quick hooking function based off the information in this [github project: break-on-access](https://github.com/paulirish/break-on-access). 
 
@@ -96,7 +96,7 @@ The function I will use in this example can be found [here: hook.js](/assets/pos
 
 In essence, this will allow me to hook the getter/setter of the property such that I will trigger the debugger when this value is read or written to.
 
-## Hooking: PowerApps Example
+### Hooking: PowerApps Example
 
 Now that I know the object I want to hook is: `window['_r10']['_scopeVariables']['1.role']['1']`
 
@@ -129,7 +129,7 @@ bp.disable()
 
 After resuming normal app execution, I press the button again to set the variable and trigger the breakpoint again.
 
-# Abuse
+## Abuse
 
 Now that I have a breakpoint triggered and I see variable names:
 
@@ -148,7 +148,7 @@ Now the variable has been set to `admin` and the app state has changed according
 
 At this point I have now hooked a shared function; this function that controls all scope variable assignments in the app. From here it's quite easy to set conditional breakpoints and/or just watch the data that passes through this function - and, potentially, modify it at will to affect app behavior.
 
-# Conclusion
+## Conclusion
 
 In summary, while this isn't the most useful, it can be fun and interesting to play around with. Client side data should always be validated server side and obfuscation from modern frameworks can not be assumed to result in a more secure application.
 

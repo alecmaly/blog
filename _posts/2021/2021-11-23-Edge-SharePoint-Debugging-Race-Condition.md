@@ -8,20 +8,20 @@ toc: true
 published: true
 ---
 
-# Introduction
+## Introduction
 
 I recently debugged an issue at work that I thought was worthy of a blog post. It yields some insight into how Edge and SharePoint operate, as well as a useful trick to trace network traffic for chromium based browsers as well as electron.js apps when external proxies don't work well.
 
 Since it's work related I have opted to not include any screenshots or sensitive information, hopefully you can follow my word soup without a visual aid...
 
-# Problem Info
+## Problem Info
 
 A user was using the default Edge browser and had their homepage set to a SharePoint site. Upon launching Microsoft Edge, the user would be taken to their O365 login screen, and after login they would be redirectetd to a random SharePoint site; more accurately, the user would be redirected to the logo of a random SharePoint site. Clearing cache sometimes fixes the issue - more often, it doesn't.
 
 
-# Problem Analysis
+## Problem Analysis
 
-## Capturing Network Traffic
+### Capturing Network Traffic
 
 The first thing I did was open up the Network tab in the debugging tools and save the network traffic as I wanted to see the redirects. However, this didn't capture the initial network traffic that the browser initiates on launch. In essense, we would launch Edge, a bunch of redirects would route from sharepoint > ms online login, at which point I was finally able to open the developer console and capture traffic. This was too late. I needed to see all network traffic upon Edge startup.
 
@@ -36,7 +36,7 @@ This also works with electron.js apps and chromium based browsers! Super handy!
 
 From here, we logged in and reproduced the issue. A ReproNetlog.json file would be created with the network traffic since msedge.exe was launched. Reading the output can be done in Fiddler using the [FiddlerImportNetlog extension](https://github.com/ericlaw1979/FiddlerImportNetlog).
 
-## Traffic Analysis
+### Traffic Analysis
 
 Upon analyzing the traffic, I see a few more redirects than expected.
 
@@ -55,7 +55,7 @@ The interesting thing is that there was quite a bit of network traffic peppered 
 
 I also noticed a few calls to domains I didn't recognize.
 
-## ntp: New Tab Page
+### ntp: New Tab Page
 
 One of the interesting locations was an address:
 ```
@@ -74,7 +74,7 @@ The last critical piece of the puzzle is that Edge has a setting to pre-load the
 
 ![edge settings: preload new tab page](/assets/posts/2021-11-22-Edge-SharePoint-Debugging-Race-Condition/2021-11-22-14-50-46.png)
 
-## Root Cause
+### Root Cause
 
 So, I now know that there are a series of redirects when logging in, and that a cookie is used after logging into login.microsoft.com to redirect you to the SharePoint site you originally requested.
 
@@ -88,13 +88,13 @@ I can now deduce that the phases in the login flow looks something like this:
 The result is the user being redirected randomly on login. Clearing cache may or may not fix the issue temporarily.
 
 
-## Resolution
+### Resolution
 For the user, we just disabled pre-load in the Edge settings and it seemed to work. 
 
 This can be applied globally as a GPO to the enterprise if it is a more widespread issue (e.x. if your default enterprise homepage is a SharePoint site).
 
 Additionally, there are more GPO settings such that you can disable web fetching on the new tab page or set the page to a local, offline page `chrome-search://local-ntp/local-ntp.html`.
 
-# Conclusion
+## Conclusion
 
 This was an interesting race condition to debug and I learned quite a bit about the behavior of Edge/SharePoint, as well as a neat trick to capture network traffic of any chromium/electron.js based application at startup. I hope the reader has found something useful from this article as well.

@@ -3,7 +3,7 @@ layout: post
 title: Finding Vulnerabilities in an 18 Year Old MMO
 description: >-
     Finding and abusing size constrained XSS and a payment gateway bypass in an 18 year old MMO.
-tags: Browser Exploits XXS Payment-Gateway Paypal Game
+tags: Browser Exploits XXS Payment-Gateway Paypal Game-Hacking
 toc: true
 published: true
 ---

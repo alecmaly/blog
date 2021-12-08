@@ -9,8 +9,8 @@ tags: blog test-tag
 {% for post in paginator.posts %}
   <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time>
   <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-  
-  <!-- tags
+
+  <!-- tags -->
   {%  if post.tags.size > 0 %}
     <span class="post-tags">
       Tags: [&nbsp;
@@ -21,7 +21,7 @@ tags: blog test-tag
       ]
     </span>
   {%  endif %}
-  -->
+ 
 
   <p class="description">
     <div class="content">{{ post.description }}</span>

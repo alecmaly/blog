@@ -2,7 +2,7 @@
 layout: post
 title: Game Hacking | Extract Meshes to Make a Minimap HUD
 description: >-
-    Extracting game textures to create a minimap (HUD) Heads Up Display showing player position on the map.
+    Ripping game meshes to create a minimap Heads Up Display (HUD) showing player position on a minimap.
 tags: Game-Hacking reverse-engineering Tutorial Unity Blender
 toc: true
 published: true
@@ -10,13 +10,9 @@ published: true
 
 ## Introduction
 
-I originally [posted this on GuidedHacking](https://guidedhacking.com/threads/how-to-extract-meshes-to-make-a-minimap-hud.15884/) and thought it would be nice to port the writeup to my blog.
+I originally [posted this on GuidedHacking](https://guidedhacking.com/threads/how-to-extract-meshes-to-make-a-minimap-hud.15884/) and thought it would be nice to port the writeup to my blog. For context, this article works with the Maze game by LiveOverflow - more info can be found [here](https://www.youtube.com/watch?v=BRfzYNBpIpg)
 
-
-
-## Post
-
-### The Goal
+## The Goal
 
 I couldn't find much about texture/mesh ripping on the forum so I decided to throw together a post that may help some people or spark some ideas. This was done with a Unity game, I would hope this process would work for other game engines as well.
 
@@ -30,7 +26,7 @@ My goal was to rip game meshes/textures to create a mini HUD with my position in
 
 ^ The goal: minimap HUD showing maze layout + player position.
 
-### Failed Attempts
+## Failed Attempts
 
 Perhaps someone can provide clarity on a better way to do this, or maybe I was doing something wrong. After watching the video, I tried using Ninja Ripper. However, it functionally only dumps whatever is in the Draw Call buffer at the time (or whatever is rendered to the screen?) - meaning you’d have to run around the entire maze to rip everything piece by piece. I’m not sure what methodology the other person used to extract all game meshes using Ninja Ripper, but in my efforts I was not prepared to run around the entire maze ripping every 5 steps and I couldn’t find a way around it.
 
@@ -48,7 +44,7 @@ This is the result of running around a bit and ripping textures a few times. As 
 
 I then tried ripping textures using another tool, uTinyRipper ([mafaca/UtinyRipper](https://github.com/mafaca/UtinyRipper)). It failed. Building from source and debugging in Visual Studio I can see asset files picked up, however, it does not find a main game file and fails. I tried a few code changes to fix it but ultimately looked for another ripping tool.
 
-### AssetStudio
+## AssetStudio
 
 Enter AssetStudio ([Perfare/AssetStudio](https://github.com/Perfare/AssetStudio)).
 

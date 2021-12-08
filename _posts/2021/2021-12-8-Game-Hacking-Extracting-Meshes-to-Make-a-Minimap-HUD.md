@@ -92,6 +92,8 @@ Then select ‘Export > Selected Assets’
 
 Once the assets are exported, open Blender back up and import the Meshes: "File > Import > Wavefront (.obj)"
 
+## Putting It All Together
+
 At this point, we should have everything we need. We have a wireframe with a set of Empty objects that all have x,y,z coordinates and by the name of each Empty we can associate the proper Mesh. We also have all the Meshes we need loaded into Blender as well to use as source objects for the copy. It’s a good time to save because if anything messes up you don’t want to wait to load the .fbx and .obj files again as this process can take a while.
 
 The next step is to iterate over all Empty objects and copy the proper Mesh using the coordinates from the Empty object. Luckily, Blender has a handy python based scripting engine that makes this task enormously simpler than copying each wall by hand.

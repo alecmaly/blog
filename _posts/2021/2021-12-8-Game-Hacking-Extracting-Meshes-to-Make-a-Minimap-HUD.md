@@ -18,7 +18,7 @@ I couldn't find much about texture/mesh ripping on the forum so I decided to thr
 
 This post is half tutorial, half case study from my personal experience extracting game textures from this MMO Maze game: [Maze Players](http://maze.liveoverflow.com/).
 
-My goal was to rip game meshes/textures to create a mini HUD with my position in the maze, inspired by this video where liveoverflow discusses various people’s approach to his hacking challenges.
+My goal was to rip game meshes/textures to create a mini HUD with my position in the maze, inspired by this video where liveoverflow discusses various people's approach to his hacking challenges.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BRfzYNBpIpg?start=945" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -28,7 +28,7 @@ My goal was to rip game meshes/textures to create a mini HUD with my position in
 
 ## Failed Attempts
 
-Perhaps someone can provide clarity on a better way to do this, or maybe I was doing something wrong. After watching the video, I tried using Ninja Ripper. However, it functionally only dumps whatever is in the Draw Call buffer at the time (or whatever is rendered to the screen?) - meaning you’d have to run around the entire maze to rip everything piece by piece. I’m not sure what methodology the other person used to extract all game meshes using Ninja Ripper, but in my efforts I was not prepared to run around the entire maze ripping every 5 steps and I couldn’t find a way around it.
+Perhaps someone can provide clarity on a better way to do this, or maybe I was doing something wrong. After watching the video, I tried using Ninja Ripper. However, it functionally only dumps whatever is in the Draw Call buffer at the time (or whatever is rendered to the screen?) - meaning you'd have to run around the entire maze to rip everything piece by piece. I'm not sure what methodology the other person used to extract all game meshes using Ninja Ripper, but in my efforts I was not prepared to run around the entire maze ripping every 5 steps and I couldn't find a way around it.
 
 In any event, if you do proceed with Ninja Ripper, after ripping meshes you can install the NinjaRipper Blender plugin and import the .rip files to view the meshes in the 3d modeling software [Blender]. It looks like Blender 2.8 had some breaking changes and there are a few addons on the web, this is the NinjaRipper addon I used for Blender 2.83: [xpawelsky/RipImport](https://github.com/xpawelsky/RipImport)
 
@@ -48,7 +48,7 @@ I then tried ripping textures using another tool, uTinyRipper ([mafaca/UtinyRipp
 
 Enter AssetStudio ([Perfare/AssetStudio](https://github.com/Perfare/AssetStudio)).
 
-Using this tool you can import the unity assets into AssetStudio using: "File > Load file" or "File > Load folder" – for this particular game, you’re looking in the Maze_Data directory with the ‘level’ files. In particular, level2.
+Using this tool you can import the unity assets into AssetStudio using: "File > Load file" or "File > Load folder" – for this particular game, you're looking in the Maze_Data directory with the 'level' files. In particular, level2.
 
 ![prefare assetstudio output](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-01-14.png)
 
@@ -68,7 +68,7 @@ Now, of course here comes the curveball… import this extracted .fbx file into 
 
 In Blender, an Empty object holds a few properties, the most important to us is are the x,y,z coordinates and the name of the empty object (based on the name, we know which .obj (mesh) this Empty object is associated with, to be explained shortly).
 
-Now that we have extracted the framework of the maze, so we need to get the meshes as well to create a 3d rendition of the maze. Blender has a nice scripting engine, thus it’s rather trivial to enumerate over all objects and pull a unique set of meshes you need to export from AssetStudio and import into Blender. Alternatively, in AssetStudio you can look into the structure of Maze which we exported earlier and see the needed meshes.
+Now that we have extracted the framework of the maze, so we need to get the meshes as well to create a 3d rendition of the maze. Blender has a nice scripting engine, thus it's rather trivial to enumerate over all objects and pull a unique set of meshes you need to export from AssetStudio and import into Blender. Alternatively, in AssetStudio you can look into the structure of Maze which we exported earlier and see the needed meshes.
 
 ![asset studio](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-04-44.png)
 
@@ -86,7 +86,7 @@ From here, we have a list of objects we need to export from AssetStudio.<br>
 (2) search for the Mesh<br>
 (3) select the Mesh (make sure the Type = Mesh)
 
-Then select ‘Export > Selected Assets’
+Then select 'Export > Selected Assets'
 
 ![asset studio render](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-05-37.png)
 
@@ -94,7 +94,7 @@ Once the assets are exported, open Blender back up and import the Meshes: "File 
 
 ## Putting It All Together
 
-At this point, we should have everything we need. We have a wireframe with a set of Empty objects that all have x,y,z coordinates and by the name of each Empty we can associate the proper Mesh. We also have all the Meshes we need loaded into Blender as well to use as source objects for the copy. It’s a good time to save because if anything messes up you don’t want to wait to load the .fbx and .obj files again as this process can take a while.
+At this point, we should have everything we need. We have a wireframe with a set of Empty objects that all have x,y,z coordinates and by the name of each Empty we can associate the proper Mesh. We also have all the Meshes we need loaded into Blender as well to use as source objects for the copy. It's a good time to save because if anything messes up you don't want to wait to load the .fbx and .obj files again as this process can take a while.
 
 The next step is to iterate over all Empty objects and copy the proper Mesh using the coordinates from the Empty object. Luckily, Blender has a handy python based scripting engine that makes this task enormously simpler than copying each wall by hand.
 
@@ -165,7 +165,7 @@ And there you have it, we have placed each mesh at an offset and rebuilt the maz
 
 Success! Sort of…
 
-The map looks a bit jacked up, almost like the objects of different types have shifted, however, an overhead view mimics what we see in the YouTube video and it’s beautiful – we have achieved our goal of extracting a map of the maze.
+The map looks a bit jacked up, almost like the objects of different types have shifted, however, an overhead view mimics what we see in the YouTube video and it's beautiful – we have achieved our goal of extracting a map of the maze.
 
 Change to Orthographic Projection and we should have a pretty nice screenshot.
 

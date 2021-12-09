@@ -22,7 +22,7 @@ My goal was to rip game meshes/textures to create a mini HUD with my position in
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BRfzYNBpIpg?start=945" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-![minimap hud with player position](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-13-59-26.png)
+![minimap hud with player position](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-13-59-26.png)
 
 ^ The goal: minimap HUD showing maze layout + player position.
 
@@ -34,11 +34,11 @@ In any event, if you do proceed with Ninja Ripper, after ripping meshes you can 
 
 This is the result of running around a bit and ripping textures a few times. As you can see, the result has quite a bit of detail but is also missing a lot.
 
-![maze game screenshot](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-00-11.png)
+![maze game screenshot](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-00-11.png)
 
 ^ Actual Game
 
-![blender with imported .rip files](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-00-32.png)
+![blender with imported .rip files](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-00-32.png)
 
 ^ Blender w/ imported .rip files
 
@@ -50,7 +50,7 @@ Enter AssetStudio ([Perfare/AssetStudio](https://github.com/Perfare/AssetStudio)
 
 Using this tool you can import the unity assets into AssetStudio using: "File > Load file" or "File > Load folder" – for this particular game, you're looking in the Maze_Data directory with the 'level' files. In particular, level2.
 
-![prefare assetstudio output](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-01-14.png)
+![prefare assetstudio output](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-01-14.png)
 
 After the assets are loaded, you should be able to see assets pertaining to each file. Since my goal was to extract the maze, I assumed "Maze" was a good place to start.
 
@@ -60,17 +60,17 @@ To extract the Maze files:<br>
 
 The result will be a .fbx file – this can be loaded into a 3d modeling tool such as Blender.
 
-![.fbx file output](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-03-54.png)
+![.fbx file output](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-03-54.png)
 
 Now, of course here comes the curveball… import this extracted .fbx file into Blender and when your computer stops screaming you end up with this – essentially a set of Empty objects.
 
-![fbx in blender output](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-04-11.png)
+![fbx in blender output](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-04-11.png)
 
 In Blender, an Empty object holds a few properties, the most important to us is are the x,y,z coordinates and the name of the empty object (based on the name, we know which .obj (mesh) this Empty object is associated with, to be explained shortly).
 
 Now that we have extracted the framework of the maze, so we need to get the meshes as well to create a 3d rendition of the maze. Blender has a nice scripting engine, thus it's rather trivial to enumerate over all objects and pull a unique set of meshes you need to export from AssetStudio and import into Blender. Alternatively, in AssetStudio you can look into the structure of Maze which we exported earlier and see the needed meshes.
 
-![asset studio](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-04-44.png)
+![asset studio](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-04-44.png)
 
 I ended up with this list, there may have been more but this sufficed for me:<br>
 '_Env_Ceiling_06',<br>
@@ -88,7 +88,7 @@ From here, we have a list of objects we need to export from AssetStudio.<br>
 
 Then select 'Export > Selected Assets'
 
-![asset studio render](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-05-37.png)
+![asset studio render](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-05-37.png)
 
 Once the assets are exported, open Blender back up and import the Meshes: "File > Import > Wavefront (.obj)"
 
@@ -161,7 +161,7 @@ for mesh_name in mesh_names:
 
 And there you have it, we have placed each mesh at an offset and rebuilt the maze in Blender.
 
-![blender w/ meches](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-06-53.png)
+![blender w/ meches](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-06-53.png)
 
 Success! Sort of…
 
@@ -169,7 +169,7 @@ The map looks a bit jacked up, almost like the objects of different types have s
 
 Change to Orthographic Projection and we should have a pretty nice screenshot.
 
-![minimap HUD](/assets/posts/2021-12-8-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-07-42.png)
+![minimap HUD](/assets/posts/2021-12-08-Game-Hacking-Extracting-Meshes-to-Make-a-Minimap-HUD/2021-12-08-14-07-42.png)
 
 Take a screenshot or whatever to get the map. From here you can do the things (hook the game, plot your coordinates, etc.) to make this functional. The world is your oyster.
 

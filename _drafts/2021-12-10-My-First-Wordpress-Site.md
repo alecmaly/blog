@@ -2,9 +2,8 @@
 layout: post
 title: DRAFT | My First Wordpress Site | olgastherapy.com
 description: >-
-    My experience with trying to stay up to date with cybersec using inoreader.io, youtube, podcasts and other resources. These techniques can be leveraged for journalists or other 
-    people who need to stay in the know.
-tags: Wordpress Web Development
+    Ramping up my wife's private practice website and email.
+tags: Wordpress Web Development Email Configuration
 toc: true
 published: false
 ---

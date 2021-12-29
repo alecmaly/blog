@@ -43,6 +43,7 @@ plugins:
   - jekyll-sitemap
 
 
+
 # post page - pagination
 paginate: 10
 
@@ -91,3 +92,16 @@ defaults:
       path: ""
     values:
       image: /assets/images/tech-thumbnail.jpg
+  # exclude from sitemap
+  - scope:
+      path: "**/tag/**"
+    values:
+      sitemap:  false
+  - scope:
+      path: "**/rafts/**"
+    values:
+      sitemap:  false
+  - scope:
+      path: "**/assets/other/**"
+    values:
+      sitemap:  false

@@ -66,6 +66,8 @@ google_analytics_gtag: G-JF1EELZBK6
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
+
+
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -79,6 +81,8 @@ exclude:
   - vendor/ruby/
   - readme.md     # start custom files
   - tag_generator.py
+  - .jekyll-cache
+  - _site/
 
 
 ## SEO settings

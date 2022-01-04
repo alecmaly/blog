@@ -3,7 +3,7 @@ layout: post
 title: My First Wordpress Site | olgastherapy.com
 description: >-
     Configuring wordpress and email for a small business by leveraging an always free Oracle cloud VPS, Google Workspace, and an assortment of free/trial tooling.
-tags: Wordpress Web Development Email Configuration Oracle Cloud VPS Tutorial
+tags: Wordpress Web Development Email Oracle Cloud VPS Tutorial
 toc: true
 published: true
 ---

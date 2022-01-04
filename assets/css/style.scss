@@ -2,12 +2,6 @@
 ---
 @import "{{ site.theme }}";
 
-
-
-
-
-
-
 $top_nav_height: 140px;
 
 // mobile variables
@@ -33,7 +27,6 @@ $bannerColor: #1d1d1d;
 
 
 //  THEMES
-
 .light-mode {
   background: rgb(235, 235, 235);
   color: black;
@@ -387,6 +380,21 @@ main {
     font-size: $navLinkSize_mobile;
   }
 }
+
+
+// Change heading sizes
+#main_content h2 {
+  font-size: 28px;
+}
+
+#main_content h3 {
+  font-size: 25px;
+}
+
+#main_content h4 {
+  font-size: 22px;
+}
+
 
 // Fix TOC jump to proper height (due to fixed navbar)
 // FIX TO BE MORE DYNAMIC!! 

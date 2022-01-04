@@ -1,9 +1,9 @@
 ---
 layout: post
-title: DRAFT | My First Wordpress Site | olgastherapy.com
+title: My First Wordpress Site | olgastherapy.com
 description: >-
-    Learning wordpress and email hosting.
-tags: Wordpress Web Development Email Configuration
+    Configuring wordpress and email for a small business by leveraging an always free Oracle cloud VPS, Google Workspace, and an assortment of free/trial tooling.
+tags: Wordpress Web Development Email Configuration Oracle Cloud VPS
 toc: true
 published: true
 ---
@@ -41,7 +41,7 @@ I should note that my plan is a shared hosting environment, this is very cheap b
 Now, I was pretty frustrated with Bluehost's services. The server was crazy slow and I opted for a more performant solution that just requires a bit more technical knowhow. 
 
 Oracle offers an **ALWAYS FREE** VPS with 4 cpu, 24gb RAM, and 40GB of storage. This is AMAZING!
-[This youtube video](https://www.youtube.com/watch?v=i-9lo9s3uw8) was super helpful in getting this set up easily using [webinoly](https://webinoly.com/). I went from knowing nothing to setting this up in under an hour or two. 
+[This youtube video](https://www.youtube.com/watch?v=i-9lo9s3uw8) was super helpful in getting this set up easily using [webinoly](https://webinoly.com/) which makes Ubuntu and Nginx optimization a breeze. I went from knowing nothing to a fully configured server in under an hour or two. 
 
 
 <p class="codeblock-label">A couple extra commands to run for webinoly:</p>
@@ -78,7 +78,7 @@ Some nice sites to play around with color:
 
 [This was a great site](https://www.qrcode-monkey.com/) to create a custom QR code as it provides a lot of options for customization. We placed these business cards and it adds a unique touch.
 
-<img alt='olgas therapy qr code' width='250px' src='/assets/posts/2021-12-15-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-09-16-00.png'>
+<img alt='olgas therapy qr code' width='250px' src='/assets/posts/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-09-16-00.png'>
 
 ## Themes + Plugins
 
@@ -116,12 +116,13 @@ It would have been useful at the beginning to know that hosting providers pre-in
 
 Plugins that you are not using should be disabled and uninstalled as they not only may cause your site to load slower, but can also be the target of hackers. 
 
-### SEO
+### SEO Plugins
 
 [**Rank Math**](https://rankmath.com/) - FREE
 
-Yoast came pre-installed with bluehost, however, I opted to uninstall it and replace it with Math Rank as it's free version is pretty feature packed. The important note is that to take full advantage, you should fill out all the fields in the settings of plugin (e.g. business address, etc.). Just installing it only helps minimally. Also, in looking at other therapist websites, I notice FAQ pages on sites with Yoast installed that don't take advantage of structured metadata as to take advantage of it, you must use the yoast FAQ widget.
-https://yoast.com/how-to-build-an-faq-page/ 
+Yoast came pre-installed with bluehost, however, I opted to uninstall it and replace it with Math Rank as it's free version is pretty feature packed. The important note is that to take full advantage, you should fill out all the fields in the settings of plugin (e.g. business address, etc.) and configure [Google Analytics](https://rankmath.com/kb/install-google-analytics/). Just installing it only helps minimally. 
+
+Also, in looking at other therapist websites, I notice FAQ pages on sites with Yoast installed that don't take advantage of structured metadata as to take advantage of it, you must use the yoast FAQ widget. See this article for details: [yoast: how to build an faq page](https://yoast.com/how-to-build-an-faq-page/). The tip here is to make sure you are using your SEO plugin properly when placing content on your site.
 
 Not only that, but I see limited structured metadata and rich snippets using the ld+json \<script> tags across sites in general. While structured metadata may not affect SEO and get you to the top page, it definitely can improve the way your site looks within the search google search results section, improve user experience, and increase the chances someone looks at your site.
 
@@ -148,7 +149,7 @@ add_filter( 'rank_math/json_ld', function( $data, $jsonld ) {
 }, 99, 2 );;
 ```
 
-### Content Creation
+### Content Creation Plugins
 
 [**Elementor**](https://elementor.com/) - FREE
 
@@ -162,14 +163,14 @@ These all just offer more flexibility in page/blog creation.
 
 For a contact form so clients can reach out for an initial consultation.
 
-#### Blog Page
+#### Blog Page Plugins
 
 [**JetBlog For Elementor**](https://crocoblock.com/plugins/jetblog/) - PAID ($11.40)
 
 Since my wife wanted to have an option to blog, I added a plugin to easily build the blog page. Wordpress has a built-in page, however, I found I liked what this plugin had to offer for just $11 on Black Friday. I don't plan to purchase support for this plugin on a yearly basis, and my small investment made it easy to build a relatively nice blog landing page. 
 
 
-#### Social Media Tests
+#### Social Media Plugins
 
 [**Grow Social by Mediavine**](https://wordpress.org/plugins/social-pug/) - FREE
 
@@ -180,11 +181,11 @@ Social Media plugin to show share buttons on blog posts. I wrote a custom `funct
 Display Instagram feed.
 
 
-### Performance
+### Performance Plugins
 
-Where do I start, this was so confusing I spent an entire day just researching. There are a million plugin options and it's hard to understand where the overlap of each begins and ends. Make sure your features like “fuzzy loading” are not enabled in multiple plugins or they may interfere with each other and break the intended functionality, etc. In my first attempt at doing this for free, I landed on using optimole for responsive images, W3 Total Cache for local cache (make sure to disable fuzzy loading images as optimole will do that + disable minify as Cloudflare will do that), and Cloudflare as a CDN (enable minify of static assets). Other options for image caching that I may still test with are ShortPixel Adaptive Images and Imigafy.
+Where do I start, this was so confusing I spent an entire day just researching. There are a million plugin options and it's hard to understand where the overlap of each begins and ends. Make sure your features like “fuzzy loading” are not enabled in multiple plugins or they may interfere with each other and break the intended functionality, etc. In my first attempt at doing this for free, I landed on using optimole for responsive images, W3 Total Cache for local cache (make sure to disable fuzzy loading images as optimole will do that + disable minify as Cloudflare will do that), and Cloudflare as a CDN (enable minify of static assets). Other options for image caching that I may still test with are the ShortPixel Adaptive Images and Imigafy plugins.
 
-Getting caching and optimizations has been proven to be quite an intense experience. Mainly because there are sooo many choices, both free and paid. I just wasn't getting the results I wanted, and there were still things that were missing without paying extra (e.g. css critical path / removing unused css). Since I had a page builder plugin, the amount of CSS + JavaScript my page has to load is quite large, so I wanted to reduce that load as much as possible; free plugins could only go so far. My ending solution is below:
+Getting caching and optimization has been proven to be quite an intense experience. Mainly because there are sooo many choices, both free and paid. I just wasn't getting the results I wanted, and there were still things that were missing without paying extra (e.g. css critical path / removing unused css). Since I had a page builder plugin, the amount of CSS + JavaScript my site has to load is quite large, so I wanted to reduce that load as much as possible; free plugins could only go so far. My ending solution is below:
 
 [**Optimole**](https://optimole.com/) - FREE
 
@@ -203,9 +204,9 @@ Honestly, this isn't really needed for my static site, but whateves. It helps ca
 
 [**Asset CleanUp**](https://wordpress.org/plugins/wp-asset-clean-up/) - FREE
 
-This plugin is cool as it allows you to disable JS/CSS on specific pages. For example, the JetBlog plugin I bought for the blog page and WP Forms are loaded on every page. I have disabled these except on the pages they are needed, thus reducing the number of assets each page has to load.
+This plugin is cool as it allows you to disable JS/CSS on specific pages. For example, the JetBlog plugin I bought for the blog page and WP Form on my contact page are actually loaded on every page in my site. I have disabled these except on the pages they are needed, thus reducing the number of assets each page has to load.
 
-### Security
+### Security Plugins
 
 [**Loginizer**](https://wordpress.org/plugins/loginizer/) - FREE
 
@@ -213,22 +214,23 @@ This plugin can deter brute force attempts to log into your site by IP blocking.
 
 **Cloudflare**
 
-While this is not a plugin, per se, it is connected to the WP Rocket plugin. That said, hosting on Cloudflare offers some advantages such as DDOS protection and other Web Application Firewall (WAF) protection. While I am on the free plan and usually do not have WAF protection, Cloudflare is a great company that cares about security. In the event of a major vulnerability, they have [a history of implementing protections to even free customers](/assets/posts/2021-12-15-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-11-11-28.png). Kudos to them on that!
+While this is not a plugin, per se, it is connected to the WP Rocket plugin. That said, hosting on Cloudflare offers some advantages such as DDOS protection and other Web Application Firewall (WAF) protection. While I am on the free plan and usually do not have WAF protection, Cloudflare is a great company that cares about security. In the event of a major vulnerability, they have [a history of implementing protections to even free customers](/assets/posts/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-11-11-28.png). Kudos to them on that!
 
 This setup can be pretty technical since you will have to mess with SSL, DNS, DNSSEC, paging and other settings, etc. Just don't forget to disable caching when you are testing. Sometimes updates seem to not be working when they are.
 
-### Backups
+### Backup Plugins
 
 [**UpdraftPlus**](https://updraftplus.com/) - FREE
+
 Backups are important. I use the free version of UpdraftPlus and connected a new gmail account. I have some automation in my Office 365 environment that pulls the latest backup once a week so if my website gets hacked and they somehow delete all my backups in google cloud, I still have them in an unconnected environment.
 
-### Utility
+### Utility Plugins
 
 [**SVG Support**](https://wordpress.org/plugins/svg-support/)
 
 Allows uploading SVG files to Wordpress.
 
-### Maintenance
+### Maintenance Plugins
 
 [**WP Mail SMTP**](https://wpmailsmtp.com/) - FREE
 
@@ -242,10 +244,6 @@ By default, the WP Rocket caching plugin uses WP-Cron. I have read this can be f
 
 A great little utility to clean your WP database. WP Rocket has a database cleaning function as well, however it seems like WP-Sweep gets one or two more things that may prove to be useful in the future. I am holding off on deleting this until I better understand what gaps exist between WP Rocket and WP-Sweep for database cleanup.
 
-**Bluehost**
-
-This plugin is automatically installed by my hosting provider (Bluehost) and creates a bridge between Bluehost and my site.
-
 ## Additional Notes / Topics
 
 Here I will list several useful resources that may or may not directly relate to the Wordpress site itself. These should be useful for those creating their Wordpress site or starting a business.
@@ -257,7 +255,7 @@ A staging site is a duplicate of your Wordpress site where you can experiment wi
 
 This is a good resource for webionly to get a good idea of how to use the tool: [webionly full example tutorial](https://webinoly.com/tutorials/webinoly-full-example-tutorial/). 
 
-Since I now manage my own VPS, it's a good idea to go beyond the Updraft plugin I mentioned above and also take advantage of [webinoly backups](https://webinoly.com/documentation/webinolys/#backups).
+Since I now manage my own VPS, it's a good idea to go beyond the Updraft plugin I mentioned above and also take advantage of [webinoly backups](https://webinoly.com/documentation/webinolys/#backups) for server resouces.
 
 ### SEO + Structured Data
 There are so many sites and tools to manage SEO, it can be a bit overwhelming. Many tools overlap in functionality so it's difficult to determine when to use each. Below are a few tools to look into.
@@ -279,7 +277,7 @@ There are so many sites and tools to manage SEO, it can be a bit overwhelming. M
 - [UberSuggest](https://neilpatel.com/ubersuggest/)
     - This tool is not as accurate as the previous two tools, however, you can receive a few searches a day with valuable information and get a free trial. This tool is also much cheaper and can provide very useful data to begin your SEO journey. 
 
-**Google Structured Data Tools**
+**Google Structured Data (schema) Tools**
 - [https://developers.google.com/search/docs/advanced/structured-data](https://developers.google.com/search/docs/advanced/structured-data)
 
 **Website Speed Analytics**
@@ -311,14 +309,14 @@ Along with Google My Business, it's a good idea to publish your business listing
 
 Sometimes it helps to look at sites you like and inspect how they are made. You can open the page source in your browser's developer tools to look for fonts/colors and use tools like [builtwith](https://builtwith.com/) or an extension like [Wappalyzer](https://www.wappalyzer.com/) for further details on the technology used on the site.
 
-Don't forget to use the SEO tools I mentioned above (Ubersuggest\|SEMrush\|Ahrefs) to look at your competition. Most importantly, for what keywords they rank for and what backlinks they have. These tools can be quite expensive, so it may not make sense for a small business to shell out the money for them. My suggestion is when you're stack is almost ready to deploy from a technology standpoint, sign up for the free trials and look for backlinks / keyword suggestions. Take note, and apply those to your launch plans. For example, I noticed a competitor was listed on a mental health services page on umich.edu, a very reputable/valuable backlink. These free trials can be treasure-troves of useful information if used appropriately.
+Don't forget to use the SEO tools I mentioned above (Ubersuggest\|SEMrush\|Ahrefs) to look at your competition. Most importantly, for what keywords they rank for and what backlinks they have. These tools can be quite expensive, so it may not make sense for a small business to shell out the money for them. My suggestion is when you're almost ready to deploy from a technology standpoint, sign up for the free trials and look for backlinks / keyword suggestions. Take note, and apply those to your launch plans. For example, I noticed a competitor was listed on a mental health services page on umich.edu, a very reputable/valuable local backlink. These free trials can be treasure-troves of useful information if used appropriately.
 
 
 ### Branded Email
 
-Since I chose Bluehost as a provider and they have a mail server available. I first configured DNS so we could connect to our mail server and send/receive mail. However, in the end, we decided to spend a few dollars a month on [Gmail](https://workspace.google.com/products/gmail/) since they are HIPAA compliant and have a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html). See more on Google's HIPAA compliance [here](https://support.google.com/a/answer/3407054). 
+Since I originally chose Bluehost as a provider and they have a mail server available. I first configured DNS so we could connect to our mail server and send/receive mail. However, in the end, we decided to spend a few dollars a month on [Gmail](https://workspace.google.com/products/gmail/) since they are HIPAA compliant and have a [Business Associate Agreement (BAA)](https://www.hhs.gov/hipaa/for-professionals/covered-entities/sample-business-associate-agreement-provisions/index.html). See more on Google's HIPAA compliance [here](https://support.google.com/a/answer/3407054). 
 
-I will add the HIPAA compliant email through Gmail is about $6/mo, although you may be able to use protonmail for free or at a lesser cost. Since my wife has been used to Gmail/GSuite through her past work, we figure this would be nice to reduce the already steep learning curve of starting a new business.
+I will add the HIPAA compliant email through Gmail is about $6/mo, although you may be able to use protonmail for free or at a lesser cost. Since my wife has used to Gmail/GSuite through her past work, we figure this would be nice to reduce the already steep learning curve of starting a new business.
 
 If configuring your own email server, you should be aware of DMARC/DKIM/SPF and the difference between IMAP and POP3.
 
@@ -339,13 +337,14 @@ Finding an email client that supports [IMAP](https://en.wikipedia.org/wiki/Inter
 
 **Site Requirements - SEO + Design + Best Practices**
 
-There is a lot of science behind SEO and design. Make sure your site is easy to use, accessible to people with disabilities, and basic psychology to increase "conversions" in getting more clients/customers. Since we are not running a group practice and cannot take an infinite amount of clients, we are not concerned with 100% SEO optimizations and conversions; there are some design choices that I think should be done differently if the goal was to get as many clients as possible. For instance, the color scheme is nice, although some background/text colors may not be high enough contrast for ease of reading. The cursive font is slightly illegible at times, there are more opportunities to display call to action buttons to urge visitors to connect, and we could possibly pay some more attention to SEO. The point is that some sites/businesses may be more inclined to do this and get as many clients/customers as possible. Our goal with this site was to let my wife's personality shine through and above some of these "best practices" while still trying to make the site functional and easy to use (i.e. not difficult to find contact information). My wife's schedule has been filling fast, so there is no use trying to convert clients she cannot take. Thus my inexperienced advice is this, treat "best practices" with a grain of salt and evaluate what you actually need - they may not always be best for you.
+There is a lot of science behind SEO and design. Make sure your site is easy to use, accessible to people with disabilities, and use basic psychology to increase "conversions" in getting more clients/customers. Since we are not running a group practice and cannot take an infinite amount of clients, we are not concerned with 100% SEO optimizations and conversions; there are some design choices that I think should be done differently if the goal was to get as many clients as possible. For instance, the color scheme is nice, although some background/text colors may not be high enough contrast for ease of reading. The cursive font is slightly illegible at times, there are more opportunities to display call to action buttons to urge visitors to connect, and we could pay more attention to verbiage/keywords to truly optimize SEO. The point is that some sites/businesses may be more inclined to do this and get as many clients/customers as possible. Our goal with this site was to let my wife's personality shine through and above some of these "best practices" while still trying to make the site functional and easy to use (i.e. not difficult to find contact information). My wife's schedule has been filling fast, so there is no use trying to convert clients she cannot take. Thus my inexperienced advice is this, treat "best practices" with a grain of salt and evaluate what you actually need - they may not always be best for you.
 
 
 ## Conclusion
 
 In the end, I spent $99.75 dollars for the first year of running this site: 
 - $0 always free hosting through [Oracle cloud](https://www.oracle.com/cloud/)
+- $0 CDN through Cloudflare. A cheap option for better performance could be [bunny cdn](https://bunny.net) as they offer per usage plans that are very afforable. 
 - $44.25 on Astra theme for 1 year and plan to upgrade to a lifetime license for about $190.
 - $44.10 on plugin: wp-rocket
     - I haven't decided if I want to add yearly support/updates for this. We may pay $44 per year, or skip years as the plugin will continue to work while not subscribed.

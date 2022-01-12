@@ -9,11 +9,11 @@ toc: true
 published: false
 ---
 
-# Introduction
+## Introduction
 
 Staying up to date in today's world is tough (not that it's ever really been easy). There is an overabundance of information and it's scattered everywhere. Today I will share one of my favorite methods of catching interesting content (inoreader).
 
-# Inoreader
+## Inoreader
 
 Amazing site.
 

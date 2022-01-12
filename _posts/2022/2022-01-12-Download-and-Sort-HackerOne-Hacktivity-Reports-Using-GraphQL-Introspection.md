@@ -2,7 +2,7 @@
 layout: post
 title: Download and Sort HackerOne Hacktivity Reports Using GraphQL Introspection
 description: >-
-    HackerOne hacktivity reports can have very useful (and interesting) content for learning how to test real systems for vulnerabilities. The goal of this post is to provide a means of filtering/sorting HackerOne reports in an attempt to find valuable exploits, methodologies, and strategies.
+    HackerOne hacktivity reports can have very useful (and interesting) content for learning how to test real systems for vulnerabilities. Unfortunately, it's impossible to sort on interesting fields such as severity and bounty from within the Hacktivity web UI. The goal of this post is to demonstrate a means of filtering/sorting HackerOne reports in an attempt to find writeups with valuable techniques/methodologies/strategies or other interesting information.
 tags: GraphQL HackerOne BugBounty Pentesting 
 toc: true
 published: true

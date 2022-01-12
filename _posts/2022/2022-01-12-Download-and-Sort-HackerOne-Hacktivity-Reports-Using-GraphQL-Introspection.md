@@ -24,7 +24,7 @@ I will also mention I found [this resource](https://www.howtographql.com/graphql
 
 ## GraphQL 
 
-HackerOne Hacktivity data is collected through the `/graphql` endpoint. Information on GraphQL can be found [here](https://www.howtographql.com/). For our purposes, it's important to note that GraphQL is used to pull back specific fields of data. This can help improve security and performance on an application. Due to its targeted nature of pulling back data, I cannot submit a request such as `Select * FROM _table` to pull back all fields - GraphQL has no mechanism for selecting all possible columns from a table (that I'm aware of), as this would be contradictory to the whole purpose of using GraphQL. Thus, we must introspect the endpoint to determine what data is available, and formulate a query to return exactly the data we are looking for.
+HackerOne Hacktivity data is collected through the `/graphql` endpoint. Information on GraphQL can be found [here](https://www.howtographql.com/). For our purposes, it's important to note that GraphQL is used to pull back specific fields of data. This can help improve security and performance on an application. Due to its targeted nature of pulling back data, I cannot submit a request such as `Select * FROM _table` to pull back all fields - GraphQL has no mechanism for selecting all possible columns from a table (that I'm aware of), as this would be contradictory to the whole purpose of using GraphQL. Thus, we must introspect the endpoint to determine what fields are available, and formulate a query to return exactly the data we are looking for.
 
 ### Introspection (Dumping Schema)
 

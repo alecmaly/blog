@@ -139,7 +139,7 @@ Remove a `#` to uncomment. In this case, I left some examples to show all Publis
 I've written a quick and dirty PowerShell script to dump this data to a .csv so I can sort/filter in Excel: 
 <a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a>
 
-It downloads HackerOne reports and drop a .csv file to the Downloads directory.
+It downloads HackerOne reports and drops a .csv file to the Downloads directory.
 
 Output: 
 <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>hacktivity_data_disclosed_20220112.csv</a>

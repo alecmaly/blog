@@ -126,7 +126,7 @@ do {
     # TO DO: try / catch to retry if failed.... due to throttling
     Write-Host "[+] Querying next page of info..."
     $resp = Invoke-RestMethod -Method Post -Uri 'https://hackerone.com/graphql' -Headers $headers -Body (@{'query'= $next_query} | ConvertTo-Json) 
-    $next_query = $next_query = $query.Replace('__CURSOR_VAL__', ($resp.data.hacktivity_items.edges | select -last 1).cursor)
+    $next_query = $query.Replace('__CURSOR_VAL__', ($resp.data.hacktivity_items.edges | select -last 1).cursor)
 
     foreach ($node in $resp.data.hacktivity_items.nodes) {
         $obj = Flatten-Object $node

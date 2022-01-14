@@ -485,7 +485,10 @@
                                         (printedLines % 2) ? oddOrEven = 'odd' : oddOrEven = 'even';
                                         tableHTML += '<tr class="' + options.trClass + ' ' + oddOrEven + '">';
                                         $.each(items, function(itemCount, item) {
-                                            tableHTML += '<td class="' + options.tdClass + '">' + item + '</td>';
+                                            item.startsWith("https://") || item.startsWith("http://") ?
+                                                tableHTML += `<td class="${options.tdClass}"><a href='${item}' target='_blank'>${item}</a></td>` :
+                                                tableHTML += '<td class="' + options.tdClass + '">' + item + '</td>';                                            
+                                                
                                         });
                                         tableHTML += '</tr>';
                                     }

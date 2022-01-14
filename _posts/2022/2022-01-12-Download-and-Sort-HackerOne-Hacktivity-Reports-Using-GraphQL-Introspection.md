@@ -136,8 +136,8 @@ Remove a `#` to uncomment. In this case, I left some examples to show all Publis
 
 ### Dumping data to .csv.
 
-I've written a quick and dirty PowerShell script to dump this data to a .csv so I can sort/filter in Excel: 
-<a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a>
+I've written a quick and dirty PowerShell script to dump this data to a .csv so I can sort/filter in Excel:<br>
+<a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a> (HTML version: <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
 
 It downloads HackerOne reports and drops a .csv file to the Downloads directory.
 
@@ -167,7 +167,7 @@ The same data that was linked above, just consolidated here for easy access.
 **Raw Data**
 
 Here is the useful output for finding reports:
-- <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>Disclosed HackerOne Reports.csv</a>
+- <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>Disclosed HackerOne Reports.csv</a>  (HTML version: <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
     - Use this file to find interesting HackerOne reports!
 - <a href='https://hackerone.com/hacktivity?querystring=&filter=type:hacker-published&order_direction=DESC&order_field=popular' target="_blank">Published HackerOne Reports</a>
     - There are only 33 Published reports (reports published off the HackerOne platform), so it is easy enough to look at them through the GUI.

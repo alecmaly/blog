@@ -16,7 +16,7 @@ For context, this situation involved a text based browser game that plays like a
 
 They look something like this:
 
-![text based mmo example](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-08-07.png)
+![text based mmo example](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-08-07.png)
 
 While there were several bugs found around the site, the two most interesting that provided a great learning experience for me were: (Bug 1) a limited character XSS and (Bug 2) a Paypal gateway bypass.
 
@@ -34,7 +34,7 @@ An external XXS payload was needed, which required a domain to be registered as 
 
 <p class="codeblock-label">The final payload would look something like this (31 characters):</p>
 
-![final payload](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-14-22.png)
+![final payload](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-14-22.png)
 
 A few notes on this payload:
 1. The <span style='color: orange'>A</span> at the beginning is not required for the payload to work, it is there so the spot on the page where the payload is rendered doesn't look suspiciously blank. In this case, it was the character name, so without the prefixed 'A' a list of characters would have yielded one with no name; this would look strange and may prompt others to investigate.
@@ -55,7 +55,7 @@ This can be shown when viewing how the data is reflected in my limited character
 Character Name Input: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 
 As shown in XSS affected page:
-![A's](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-14-59-55.png)
+![A's](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-14-59-55.png)
 
 
 <p class="codeblock-label">Character Name: ℡㏛'s Sequence</p>
@@ -63,7 +63,7 @@ As shown in XSS affected page:
 Character Name Input: "℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛℡㏛"
 
 As shown in XSS affected page:
-![℡㏛](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-31-40.png)
+![℡㏛](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-31-40.png)
 
 As you can see, in a 31 character limited space, not even 3 iterations of this "2" character sequence are shown. This makes sense as the database is storing 7 bytes for each character sequence instead of the 1 byte for the ASCII 'A'. But wait, 7*3 is 21, so why aren't more iterations displayed?
 
@@ -72,7 +72,7 @@ Well, going back to edit my character name shows me some interesting output. My 
 &#8481;&#13275;&#8481;&#13275;&
 ```
 
-![31 characters](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-42-23.png)
+![31 characters](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-15-42-23.png)
 
 Which is 31 characters, meaning even the prefix `&#` and suffex `;` to represent each unicode character counts towards the total length. 
 
@@ -92,13 +92,13 @@ Below is a test.html page representing the XSS Injection point.
 
 **With Trailing </script> Tag in payload**
 
-![with trailing tag](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-19-05.png)
+![with trailing tag](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-19-05.png)
 
 Number in image above:
 1. Injected XSS - with trailing `</script>` tag
 2. Page content is still displayed in affected XSS page after rendering.
 
-    ![with trailing tag - after](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-23-21.png)
+    ![with trailing tag - after](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-23-21.png)
 
 3. Last script tag is **NOT** required for this payload. 
 
@@ -106,7 +106,7 @@ Number in image above:
 **Without Trailing </script> Tag in payload**
 
 
-![without trailing tag](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-28-57.png)
+![without trailing tag](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-28-57.png)
 
 I have highlighted the portion of the HTML that gets consumed by the non-closed `<script>` tag.
 
@@ -114,11 +114,11 @@ Number in image above:
 1. Injected XSS - without trailing `</script>` tag
 2. Page content below XSS injection point is no longer displayed in affected XSS page after rendering.
 
-    ![without trailing tag - after](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-26-48.png)
+    ![without trailing tag - after](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-26-48.png)
 
     As seen in the browser developer tools, the page content has been cannabalized by our payload with a non-closed `<script>` tag.
 
-    ![without trailing tag - browser html](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-30-03.png)
+    ![without trailing tag - browser html](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-16-30-03.png)
 
 3. Last script tag is **IS** required for this payload
 
@@ -148,7 +148,7 @@ At first, I tried to just buy something for $.01 and see how much the game would
 
 When checking out with paypal on the site, a `POST` request is made to paypal with the folling parameters (other parameters/headers have been removed for clarity):
 
-![paypal parameters](/assets/posts/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-17-54-44.png)
+![paypal parameters](/assets/posts/2021/2021-11-12-Finding-Vulnerabilities-in-an-18-Year-Old-MMO/2021-11-12-17-54-44.png)
 
 Of note:
 1. `os0` = my account's user_id (which account will be credited with the purchase)

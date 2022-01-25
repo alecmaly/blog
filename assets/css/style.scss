@@ -412,7 +412,11 @@ main {
 
 
 
-
+#particles-js canvas {
+  max-height: 200px !important;
+  background-color: #111;
+  border-radius: 15px;
+}
 
 // // light theme
 // .site-header {

@@ -78,7 +78,7 @@ Some nice sites to play around with color:
 
 [This was a great site](https://www.qrcode-monkey.com/) to create a custom QR code as it provides a lot of options for customization. We placed these business cards and it adds a unique touch.
 
-<img alt='olgas therapy qr code' width='250px' src='/assets/posts/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-09-16-00.png'>
+<img alt='olgas therapy qr code' width='250px' src='/assets/posts/2022/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-09-16-00.png'>
 
 ## Themes + Plugins
 
@@ -214,7 +214,7 @@ This plugin can deter brute force attempts to log into your site by IP blocking.
 
 **Cloudflare**
 
-While this is not a plugin, per se, it is connected to the WP Rocket plugin. That said, hosting on Cloudflare offers some advantages such as DDOS protection and other Web Application Firewall (WAF) protection. While I am on the free plan and usually do not have WAF protection, Cloudflare is a great company that cares about security. In the event of a major vulnerability, they have [a history of implementing protections to even free customers](/assets/posts/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-11-11-28.png). Kudos to them on that!
+While this is not a plugin, per se, it is connected to the WP Rocket plugin. That said, hosting on Cloudflare offers some advantages such as DDOS protection and other Web Application Firewall (WAF) protection. While I am on the free plan and usually do not have WAF protection, Cloudflare is a great company that cares about security. In the event of a major vulnerability, they have [a history of implementing protections to even free customers](/assets/posts/2022/2022-01-04-My-First-Wordpress-Site-Olgas-Therapy/2021-12-15-11-11-28.png). Kudos to them on that!
 
 This setup can be pretty technical since you will have to mess with SSL, DNS, DNSSEC, paging and other settings, etc. Just don't forget to disable caching when you are testing. Sometimes updates seem to not be working when they are.
 

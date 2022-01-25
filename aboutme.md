@@ -11,8 +11,6 @@
     <br>
 </div>
 
-
-
 <h3>Primary Interests</h3>
 - Application Security
 - Reverse Engineering
@@ -105,4 +103,20 @@
 
 ![](https://img.shields.io/badge/framework-React-informational?style=flat&logo=React&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/Node.js-informational?style=flat&logo=node.js&logoColor=white&color=217695)
+
+
+
+
+
+<div id="particles-js"></div>
+
+
+<!-- load partclejs -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    particlesJS.load('particles-js', '/assets/other/particlesjs-config.json', function() {
+    console.log('callback - particles.js config loaded');
+    });
+</script>
 

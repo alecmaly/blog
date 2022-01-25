@@ -12,7 +12,7 @@ published: true
 
 [HackerOne Hacktivity Reports](https://hackerone.com/hacktivity) can be a great resource to view publically disclosed hacks that worked in the real world against real companies and government entities. Unfortunately, sorting and filtering this data through the UI is rather impossible. HackerOne gives the ability to sort only on "Popular" vs. "New" or search in a searchbox. 
 
-![hackerone hacktivity](/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-14-54-18.png)
+![hackerone hacktivity](/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-14-54-18.png)
 
 However, it would be nice to sort on the severity or bounty amount as you would imagine some of the most impactful hacks will result in large bounties, and these may be more interesting to read. 
 
@@ -31,7 +31,7 @@ HackerOne Hacktivity data is collected through the `/graphql` endpoint. Informat
 The first step against a `/graphql` endpoint is to run some introspection queries to get an idea of the data schema. Several tools can be used for this such as [clairvoyance](https://github.com/nikitastupin/clairvoyance) and [GraphQLMap](https://github.com/swisskyrepo/GraphQLmap), however, I found these failed for me. The BurpSuite extension [inql](https://github.com/doyensec/inql) seemed to work best in this case. 
 
 Using the inql extension I was able to dump the schema: 
-<a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/doc-2022-01-11-1641959947.html' target="_blank">HackerOne GraphQL Schema</a>
+<a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/doc-2022-01-11-1641959947.html' target="_blank">HackerOne GraphQL Schema</a>
 
 Even with the schema in hand, I found building queries through the inql extension's interface to be the easiest for exploring the api.
 
@@ -40,7 +40,7 @@ Even with the schema in hand, I found building queries through the inql extensio
 Now that I have the schema and can work through building a query for the endpoint. 
 This is the query I have built. The following query will pull the top 5 Disclosed reports on HackerOne and display fields that I found relevant. This can be used by sending a POST request to hackerone. 
 
-![burp suite hackerone graphql query](/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-14-51-53.png)
+![burp suite hackerone graphql query](/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-14-51-53.png)
 
 ```
 query {
@@ -137,15 +137,15 @@ Remove a `#` to uncomment. In this case, I left some examples to show all Publis
 ### Dumping data to .csv.
 
 I've written a quick and dirty PowerShell script to dump this data to a .csv so I can sort/filter in Excel:<br>
-<a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a> (HTML version: <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
+<a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a> (HTML version: <a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
 
 It downloads HackerOne reports and drops a .csv file to the Downloads directory.
 
 Output: 
-<a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>hacktivity_data_disclosed_20220112.csv</a>
+<a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>hacktivity_data_disclosed_20220112.csv</a>
 
 <p class='codeblock'>Fields in the output</p>
-![hackerone hacktivity reports](/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-15-42-20.png)
+![hackerone hacktivity reports](/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/2022-01-12-15-42-20.png)
 
 Note that I did not include a summary in the output. This can be done by modifying the query to return:
 ```text
@@ -167,7 +167,7 @@ The same data that was linked above, just consolidated here for easy access.
 **Raw Data**
 
 Here is the useful output for finding reports:
-- <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>Disclosed HackerOne Reports.csv</a>  (HTML version: <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
+- <a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/hacktivity_data_disclosed_20220112.csv'>Disclosed HackerOne Reports.csv</a>  (HTML version: <a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/Hacktivity-Reports.html' target="_blank">Hacktivity-Reports.html</a>)
     - Use this file to find interesting HackerOne reports!
 - <a href='https://hackerone.com/hacktivity?querystring=&filter=type:hacker-published&order_direction=DESC&order_field=popular' target="_blank">Published HackerOne Reports</a>
     - There are only 33 Published reports (reports published off the HackerOne platform), so it is easy enough to look at them through the GUI.
@@ -175,7 +175,7 @@ Here is the useful output for finding reports:
 **Developer/Experimentation Resources**
 
 Useful if you want to test querying the endpoint and dumping the data.
-- <a href='/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/doc-2022-01-11-1641959947.html' target="_blank">HackerOne GraphQL Schema</a>
+- <a href='/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/doc-2022-01-11-1641959947.html' target="_blank">HackerOne GraphQL Schema</a>
     - A schema to undestand the GraphQL endpoint. In the event you play with pulling your own data and want to find other fields that are relavent to you.
-- <a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a>
+- <a href='https://github.com/alecmaly/blog/blob/gh-pages/assets/posts/2022/2022-01-12-Download-and-Sort-HackerOne-Hacktivity-Reports-Using-GraphQL-Introspection/dump_hackerone_reports.ps1' target="_blank">dump_hackerone_reports.ps1</a>
     - The script I used to dump data to .csv

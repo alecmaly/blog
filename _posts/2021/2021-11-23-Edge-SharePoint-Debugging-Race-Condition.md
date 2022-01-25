@@ -66,13 +66,13 @@ When researching, I came across this interesting post [xss New Tab Page](https:/
 
 Ultimately, when you open a new tab in Edge you'll be presented with a dynamic page with content that is relavent to you:
 
-![edge new tab page](/assets/posts/2021-11-22-Edge-SharePoint-Debugging-Race-Condition/2021-11-22-14-46-16.png)
+![edge new tab page](/assets/posts/2021/2021-11-22-Edge-SharePoint-Debugging-Race-Condition/2021-11-22-14-46-16.png)
 
 The important note is that this content is dynamic and pulls from Microsoft's servers. There are quick links at the top and if logged into Edge with your work profile, more sections will show up such as recent/frequent SharePoint sites. 
 
 The last critical piece of the puzzle is that Edge has a setting to pre-load the new tab page for performance reasons, and this is enabled by default.
 
-![edge settings: preload new tab page](/assets/posts/2021-11-22-Edge-SharePoint-Debugging-Race-Condition/2021-11-22-14-50-46.png)
+![edge settings: preload new tab page](/assets/posts/2021/2021-11-22-Edge-SharePoint-Debugging-Race-Condition/2021-11-22-14-50-46.png)
 
 ### Root Cause
 

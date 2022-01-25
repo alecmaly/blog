@@ -28,19 +28,19 @@ As an example, I have created a [Microsoft PowerApp](https://docs.microsoft.com/
 
 This app is very simple. There is a button that sets a variable called `role` to the value of `user`
 
-![powerapp example](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-50-50.png)
+![powerapp example](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-50-50.png)
 
 And an output box to show the value of the `role` variable
 
-![powerapp text text box](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-54-00.png)
+![powerapp text text box](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-54-00.png)
 
 Additionally, if the `role` value becomes `admin`, the text box will fill <span style='color: green'>green</span>.
 
-![](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-58-13.png)
+![](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-12-58-13.png)
 
 ## Scanning
 
-As for a basic scanner, the code can be found [here: scanner.js](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/scanner.js).
+As for a basic scanner, the code can be found [here: scanner.js](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/scanner.js).
 
 To use it, just copy/paste it into the browser console and run one of the following commands to scan either object keys or values:
 ```javascript
@@ -64,17 +64,17 @@ Note that each command has a `.new()` scan. By default, each subsequent scan wil
 
 Now, looking at this app, I can see I am a `user`.
 
-![powerapps user example](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-09-15.png)
+![powerapps user example](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-09-15.png)
 
 Running a scan using `s.new().scanValues_loose_equals('user')`, I see the results:
 
-![user scan results](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-10-40.png)
+![user scan results](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-10-40.png)
 
 The output shows all the DOM objects off of the `window` object that have these values. `window['_r10']['_scopeVaribles']['1.role']['1']` seems interesting as it includes some key terms in the key/value names such as `scopeVariables` and `1.role`. However, it's buried in a strange object called `_r10` which would have been difficult to find manually.
 
 I mean, seriously... this is the output of the `window` object.
 
-![window output](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-47-47.png)
+![window output](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-47-47.png)
 
 1. This is the scroll wheel on the output, there are a MASSIVE amount of top-level properties. 
 2. Even after expanding the `_r10` property, you can't really tell the values that are embedded at a deeper level.
@@ -84,7 +84,7 @@ Good luck finding this manually. I'll see you in a few years...
 
 Running `window['_r10']['_scopeVaribles']['1.role']['1']` shows me the same `user` value:
 
-![viewing DOM object](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-12-08.png)
+![viewing DOM object](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-12-08.png)
 
 At this point, I try to change the value by running `window['_r10']['_scopeVariables']['1.role']['1'] = 'meow'`, however, the app remains unaffected. It's time to try something else.
 
@@ -92,7 +92,7 @@ At this point, I try to change the value by running `window['_r10']['_scopeVaria
 
 I have slapped together a quick hooking function based off the information in this [github project: break-on-access](https://github.com/paulirish/break-on-access). 
 
-The function I will use in this example can be found [here: hook.js](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/hook.js)
+The function I will use in this example can be found [here: hook.js](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/hook.js)
 
 In essence, this will allow me to hook the getter/setter of the property such that I will trigger the debugger when this value is read or written to.
 
@@ -107,12 +107,12 @@ bp.enable()
 ```
 
 Now, clicking the button to set the variable has resulted in a breakpoint being triggered:
-![triggered breakpoint](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-21-39.png)
+![triggered breakpoint](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-21-39.png)
 
 I can now step out of my code to see where it was triggered.
 Conveniently, this function is nicely named, and the parameters make sense based on what I know as the developer.
 
-![breakpoint info](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-23-02.png)
+![breakpoint info](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-23-02.png)
 
 1. Function name = `setScopeVariableValue`
 2. Variable name = `role`
@@ -120,7 +120,7 @@ Conveniently, this function is nicely named, and the parameters make sense based
 
 I can now set another breakpoint here on line 12935 of this file `pa.core.bundle1.js`
 
-![set new breakpoint](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-24-32.png)
+![set new breakpoint](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-24-32.png)
 
 And also I will run this command to clear my custom breakpont:
 ```javascript
@@ -133,7 +133,7 @@ After resuming normal app execution, I press the button again to set the variabl
 
 Now that I have a breakpoint triggered and I see variable names:
 
-![breakpoint triggered: setScopeVariableValue](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-26-12.png)
+![breakpoint triggered: setScopeVariableValue](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-26-12.png)
 
 I can now run a simple console command to change the `r` value to `admin`
 ```javascript
@@ -144,7 +144,7 @@ And resume execution.
 
 Now the variable has been set to `admin` and the app state has changed accordingly.
 
-![result](/assets/posts/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-27-23.png)
+![result](/assets/posts/2021/2021-11-22-Scanning-and-Hooking-Dynamic-Client-Side-Data-in-Modern-Web-Applications/2021-11-22-13-27-23.png)
 
 At this point I have now hooked a shared function; this function that controls all scope variable assignments in the app. From here it's quite easy to set conditional breakpoints and/or just watch the data that passes through this function - and, potentially, modify it at will to affect app behavior.
 

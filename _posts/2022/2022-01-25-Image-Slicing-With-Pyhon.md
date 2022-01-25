@@ -2,7 +2,7 @@
 layout: post
 title: Image Slicing with Python
 description: >-
-    Slicing and manipulating images with a Python GUI program.
+    Slicing and manipulating images with a Python GUI program - Pillow and tkinter GUI packages.
 tags: Python CTF Image-Manipulation POC
 toc: true
 published: true

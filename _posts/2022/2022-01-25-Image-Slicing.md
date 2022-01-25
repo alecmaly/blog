@@ -12,7 +12,7 @@ published: true
 
 I recently worked on a CTF challenge with an image that was sliced into chunks and rearranged. The initial image looked like this:
 
-<p class='codeblock-label'>bleepbloop_sliced.jpg</p>
+<p class='codeblock-label'><a href='/assets/posts/2022/2022-01-25-Image-Slicing/bleepbloop_sliced.jpg' target='_blank'>bleepbloop_sliced.jpg</a></p>
 <img src='/assets/posts/2022/2022-01-25-Image-Slicing/bleepbloop_sliced.jpg'>
 
 I spent some time overengineering a python script to help me solve other CTF challenges like this in the future. I mostly wasted my time as challenges get very specific and highly customized. That said, the tool is still fun to use and can be found [here](https://github.com/alecmaly/hacking-myTools/blob/master/tools/images/img_slice_rearranger.py).
@@ -28,6 +28,6 @@ You can also dump the slices and run a custom script against them.
 > Note that a simple command can be run to convert the image back, instead of using this tool:
 > `convert -set colorspace Gray +append +repage -crop 266x100 bleepbloop_sliced.jpg original_image.jpg`
 
-The code is sloppy and the functionality can also be slightly goofy buggy as this was just a quick POC. That said, it was a fun side project for a few hours that someone else may want to clean up and expand on or just open an image and play with it. Maybe one day it will actually be useful for something, who knows...
+The code is sloppy and the functionality can also be slightly buggy as this was just a quick POC; I had no experience with the Pillow or tkinter GUI packages - it was just a fun side project for a few hours. That said, someone else may want to clean up and expand on or just open an image and play with it. Maybe one day it will actually be useful for something, who knows...
 
 Cheers!

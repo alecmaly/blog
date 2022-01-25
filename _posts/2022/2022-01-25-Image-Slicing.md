@@ -17,13 +17,11 @@ I recently worked on a CTF challenge with an image that was sliced into chunks a
 
 I spent some time overengineering a python script to help me solve other CTF challenges like this in the future. I mostly wasted my time as challenges get very specific and highly customized. That said, the tool is still fun to use and can be found [here](https://github.com/alecmaly/hacking-myTools/blob/master/tools/images/img_slice_rearranger.py).
 
-It should operate cross-platform and gives options to slice the image into desired chunks of size WIDTHxHEIGHT, you can then crop each slice, scale them, rotate them, and output into a grid of X columns. 
+It should operate cross-platform and gives options to slice the image into desired chunks of size WIDTHxHEIGHT, you can then crop each slice, scale them, rotate them, and output into a grid of X columns. You can also dump the slices and run a custom script against them.
 
 ![script output](/assets/posts/2022/2022-01-25-Image-Slicing/2022-01-25-11-40-58.png)
 
 Above you see the image has been reconstructed by taking slices of the skewed image, using slices of size 7x100, and rearranging the slices into a single row.
-
-You can also dump the slices and run a custom script against them.
 
 > Note that a simple command can be run to convert the image back, instead of using this tool:
 > `convert -set colorspace Gray +append +repage -crop 266x100 bleepbloop_sliced.jpg original_image.jpg`

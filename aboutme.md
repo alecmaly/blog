@@ -31,6 +31,7 @@
 <h3>Certifications:</h3>
 <a alt='certification: OSCP' href='https://www.credly.com/badges/99fdb27b-2f63-4965-911c-4681d2ac54c5/public_url' target="blank"><img class='public-profile certification-profile' style='background: rgba(0,0,0,0)' src="{{ '/assets/images/certifications/offensive-security-certified-professional-oscp.png' | relative_url }}"></a>
 <a alt='certification: burp suite certified practitioner' href='https://portswigger.net/web-security/E/C/3BF9F2BDAAC74879' target="blank"><img class='public-profile certification-profile' src="{{ '/assets/images/certifications/burp-suite-certified-practitioner.svg' | relative_url }}"></a>
+<a alt='certification: SLAE32' href='/assets/images/certifications/SLAE32/SLAE32.html' target="blank"><img class='public-profile certification-profile' src="{{ '/assets/images/certifications/SLAE32/SLAE32.png' | relative_url }}"></a>
 
 
 <h3 align="left">My other public profiles:<br>

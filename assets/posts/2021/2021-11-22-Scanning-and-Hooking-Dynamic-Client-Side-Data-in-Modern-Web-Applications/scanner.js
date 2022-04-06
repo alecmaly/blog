@@ -44,7 +44,7 @@ function scanner() {
                             traverse(value, parentIsArray ? `${path}[${key}]` : `${path}['${key}']`);
                         } else if (typeof value === 'object' && Array.isArray(value)) {
                             for (let i = 0; i < value.length; i += 1) {
-                                traverse(value[i], `${path}.${key}[${i}]`);
+                                traverse(value[i], `${path}['${key}'][${i}]`);
                             }
                         }
 

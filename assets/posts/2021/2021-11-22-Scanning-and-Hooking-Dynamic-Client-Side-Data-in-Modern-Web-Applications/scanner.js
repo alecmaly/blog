@@ -61,7 +61,7 @@ function scanner() {
 
         root_nodes = matches
         console.log('DONE!')
-        return matches
+        return matches  // matches to global variable
     };
 
     // key comparisons
@@ -126,19 +126,19 @@ function scanner() {
             return this
         },
         scanKeys_includes: (find_str) => {
-            console.log(search(comparison_key, 'includes', [find_str]));
+            return search(comparison_key, 'includes', [find_str])
         },
         scanKeys_loose_equals: (find_str) => {
-            console.log(search(comparison_key, 'loose_equals', [find_str]));
+            return search(comparison_key, 'loose_equals', [find_str])
         },
         scanValues_includes: (find_str) => {
-            console.log(search(comparison_values, 'includes', [find_str]));
+            return search(comparison_values, 'includes', [find_str])
         },
         scanValues_loose_equals: (find_str) => {
-            console.log(search(comparison_values, 'loose_equals', [find_str]));
+            return search(comparison_values, 'loose_equals', [find_str])
         },
         scanValues_between: (min, max) => {
-            console.log(search(comparison_values, 'between', [min, max]));
+            return search(comparison_values, 'between', [min, max])
         }
     }
 }

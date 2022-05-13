@@ -3,7 +3,7 @@ layout: post
 title: M365 Internal Phish | Abusing SharePoint and OneDrive API with Power Apps and Power Automate
 description: >-
     An internal phishing POC leveraging Microsoft 365 citizen development tools (Power Platform). Subtly gain access to a target user's OneDrive / SharePoint sites they own. A YouTube video of the POC can be found here: https://youtu.be/xXqFhN4wyGY
-tags: Microsoft PowerApps Power-Automate SharePoint OneDrive Phishing M365 POC Privilege-Escalation
+tags: Microsoft PowerApps Power-Automate SharePoint OneDrive Phishing M365 POC Cloud Hacking Privilege-Escalation
 toc: true
 published: true
 ---

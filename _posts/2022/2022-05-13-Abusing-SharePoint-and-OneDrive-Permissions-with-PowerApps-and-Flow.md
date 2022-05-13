@@ -8,7 +8,7 @@ toc: true
 published: true
 ---
 
-## Public Service Announcement to All Power Platform Users
+## Introduction
 
 This vulnerability was submitted to Microsoft via their [vulnerability disclosure program (VDP)](https://www.microsoft.com/en-us/msrc/bounty-dynamics?rtc=1) and was designated: <span style='color: red; font-weight: bold'>Critical - Elevation of Privilege</span>. This was my first submission to a public VDP and I'm so excited it was accepted!
 
@@ -16,7 +16,7 @@ One note of warning. While Microsoft resolved the report, the technique still wo
 
 If you attempt to re-create the Proof of Concept in this post, I last worked on this side project months ago and functionality may have changed. You may need to do some work to get it to work (if it even still works).
 
-## Introduction
+## Details
 
 The Office/Microsoft 365 suite has become incredibly powerful and gives power users in an organization the ability to quickly develop useful tools to help their business operate at peak performance. These tools are becoming more mainstream as businesses continue to adopt the suite, putting these tools in the hands of their employees. However, much like the Office suite (Word, Excel, PowerPoint, etc.) has been abused with embedded macros, the Power Platform offers some interesting ways to abuse it's extensive feature set leading to some unexpected results. While endpoint antivirus has become increasingly decent at catching embedded visual basic scripts detection on strange cloud activity is far less robust. 
 

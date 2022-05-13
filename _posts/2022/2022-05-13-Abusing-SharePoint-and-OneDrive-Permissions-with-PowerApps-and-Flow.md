@@ -16,7 +16,7 @@ One note of warning. While Microsoft resolved the report, the technique still wo
 
 If you attempt to re-create the Proof of Concept in this post, I last worked on this side project months ago and functionality may have changed. You may need to do some work to get it to work (if it even still works).
 
-## Details
+## Background & Details
 
 The Office/Microsoft 365 suite has become incredibly powerful and gives power users in an organization the ability to quickly develop useful tools to help their business operate at peak performance. These tools are becoming more mainstream as businesses continue to adopt the suite, putting these tools in the hands of their employees. However, much like the Office suite (Word, Excel, PowerPoint, etc.) has been abused with embedded macros, the Power Platform offers some interesting ways to abuse it's extensive feature set leading to some unexpected results. While endpoint antivirus has become increasingly decent at catching embedded visual basic scripts detection on strange cloud activity is far less robust. 
 

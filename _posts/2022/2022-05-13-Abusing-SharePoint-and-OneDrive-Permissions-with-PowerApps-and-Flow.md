@@ -71,7 +71,7 @@ As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY).
 
 ### Steps
 
-1. Create/Import a malicious Power Automate workflow using the template .zip: [POC-POC-M365Phish_20220513062553](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/POC-POC-M365Phish_20220513062553) provided
+1. Create/Import a malicious Power Automate workflow using the template .zip: [POC-POC-M365Phish_20220513062553.zip](/assets/posts/2022/2022-05-13-Abusing-SharePoint-and-OneDrive-Permissions-with-PowerApps-and-Flow/POC-POC-M365Phish_20220513062553.zip)
 
     Importing may be troublesome and have some errors. The following details may help resolve the issues. If not, then just create a new workflow and manually create each step.
 

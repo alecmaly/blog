@@ -62,12 +62,11 @@ which expands to the following
 
 ## Proof of Concept
 
-> Notes: 
->
-> - The site enumeration part of this POC leverages the SharePoint search API and does NOT paginate results. To find all sites, this section should be modified.
-> - An action can be appended to the end of the workflow to output all sites that you have been granted permissions to, perhaps by `SharePoint | Create Action` in a public SharePoint list (don't forget to disable indexing so it won't be found through SharePoint search), Email `Outlook | Send an Email`, or other similar methods. 
-
 As mentioned above, I have posted a [YouTube POC](https://youtu.be/xXqFhN4wyGY). The POC in the video is a bit different than the one shown below, so keep that in mind if you try this yourself. 
+
+**Notes**: 
+- The site enumeration part of this POC leverages the SharePoint search API and does NOT paginate results. To find all sites, this section should be modified.
+- An action can be appended to the end of the workflow to output all sites that you have been granted permissions to, perhaps by `SharePoint | Create Action` in a public SharePoint list (don't forget to disable indexing so it won't be found through SharePoint search), Email `Outlook | Send an Email`, or other similar methods. 
 
 ### Steps
 

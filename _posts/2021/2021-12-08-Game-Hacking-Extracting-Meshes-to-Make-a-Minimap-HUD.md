@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Game Hacking | Extracting Meshes to Make a Minimap HUD
+title: Game Hacking&#x3a; Extracting Meshes to Make a Minimap HUD
 description: >-
     Extracting/ripping game meshes to create a minimap Heads Up Display (HUD) showing player position.
 tags: Game-Hacking reverse-engineering Tutorial Unity Blender Hacking

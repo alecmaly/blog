@@ -49,6 +49,8 @@
 <hr>
 <h3 align="left">Languages, Tools, and Technologies I play with:</h3>
 
+<!-- Find logo icons: https://simpleicons.org/ -->
+
 <h4 align="left">Primary Languages:</h4>
 
 ![](https://img.shields.io/badge/JavaScript-informational?style=flat&logo=javascript&logoColor=white&color=217695)
@@ -66,6 +68,8 @@
 ![](https://img.shields.io/badge/Java-informational?style=flat&logo=Java&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/C/C++/C%23-informational?style=flat&logo=c&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/Visual%20Basic-informational?style=flat&color=217695)
+![](https://img.shields.io/badge/php-informational?style=flat&logo=php&logoColor=white&color=217695)
+![](https://img.shields.io/badge/Ruby-informational?style=flat&logo=ruby&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/HTML-informational?style=flat&logo=html5&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/CSS-informational?style=flat&logo=css3&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/Assembly-informational?style=flat&color=217695)

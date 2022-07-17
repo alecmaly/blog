@@ -91,10 +91,16 @@
 
 ![](https://img.shields.io/badge/API-Postman-informational?style=flat&logo=postman&logoColor=white&color=217695)
 ![](https://img.shields.io/badge/API-BurpSuite-informational?style=flat&color=217695)
+<br>
+
 ![](https://img.shields.io/badge/disassembler-Ghidra-informational?style=flat&color=217695)
 ![](https://img.shields.io/badge/debugger-x64dbg-informational?style=flat&color=217695)
 ![](https://img.shields.io/badge/debugger-gdb-informational?style=flat&color=217695)
+<br>
+
 ![](https://img.shields.io/badge/memory%20scanner-cheat%20engine-informational?style=flat&color=217695)
+<br>
+
 ![](https://img.shields.io/badge/.NET%20Reverse%20Engineering-dnSpy-informational?style=flat&color=217695)
 ![](https://img.shields.io/badge/Android%20Reverse%20Engineering-Frida-informational?style=flat&color=217695)
 <br>

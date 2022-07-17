@@ -3,47 +3,7 @@ layout: default
 title: Posts
 tags: blog test-tag
 ---
-<h1 class='page-title'>{{ page.title }}</h1>
 
-<!-- This loops through the paginated posts -->
-{% for post in paginator.posts %}
-  <time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time>
-  <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-
-  <!-- tags -->
-  {%  if post.tags.size > 0 %}
-    <span class="post-tags">
-      Tags: [&nbsp;
-      {% for tag in post.tags %}
-        {% capture tag_name %}{{ tag }}{% endcapture %}
-        <a class="tag" href="/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>    
-      {% endfor %}
-      ]
-    </span>
-  {%  endif %}
- 
-
-  <p class="description">
-    <div class="content">{{ post.description }}</span>
-  </p>
-  <hr>
-{% endfor %}
-
-<!-- Pagination links -->
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}" class="previous" style="text-decoration:none">
-      Previous
-    </a>
-  {% else %}
-    <span class="previous">Previous</span>
-  {% endif %}
-  <span class="page_number ">
-    Page: {{ paginator.page }} of {{ paginator.total_pages }}
-  </span>
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}" class="next" style="text-decoration:none">Next</a>
-  {% else %}
-    <span class="next ">Next</span>
-  {% endif %}
-</div>
+<script>
+  window.location.href = window.location.origin + '/aboutme'
+</script>

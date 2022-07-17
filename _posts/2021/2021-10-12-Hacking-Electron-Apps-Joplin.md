@@ -8,7 +8,7 @@ toc: true
 
 ## Introduction
 
-In my previous post, [Adventures in Open Source Contributing&#x3a; Joplin]({{ '/2021/10/11/Adventures-in-open-source-contributing-Joplin.html' | relative_url }}), I went over how I have contributed a useful feature to the Joplin open source project. 
+In my previous post, [Adventures in Open Source Contributing&#x3a; Joplin]({{ '/blog/2021/10/11/Adventures-in-open-source-contributing-Joplin.html' | relative_url }}), I went over how I have contributed a useful feature to the Joplin open source project. 
 
 But what do you do if you want to change functionality to fit your extremely specific use case? A use case that nobody else needs or even wants at all)?
 

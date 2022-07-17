@@ -32,6 +32,11 @@ github_username:  alecmaly
 youtube_username: alecmaly
 linkedin_username: alecmaly
 
+# blog posts url format
+collections:
+  posts:
+    output: true
+    permalink: /blog/:categories/:year/:month/:day/:title:output_ext
 
 # Build settings
 # theme: minima
@@ -46,6 +51,7 @@ plugins:
 
 # post page - pagination
 paginate: 10
+paginate_path: /blog/:num/
 
 #Publishing defaults
 show_drafts: false

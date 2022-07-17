@@ -38,7 +38,7 @@ What am I looking for in my note-taking app?
 - [evernote](https://evernote.com/) - Too simple for my purposes.
 - [obsidian.md](https://obsidian.md/) - This solution seems VERY interesting, however, it lacked a mobile app when I originally looked at it. A mobile app has been released in the past few months, so I may have to circle back and reevaluate this product.
 
-Now I must say, Joplin is far from perfect. It's mobile experience is definitely not as clean as Notion's and searching only works for the content of notes, not the names of notebooks (resolved by some of my injected code for the desktop client; see my related post [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }})). Overall, it fits my requirements the most and I can work around most of it's limitations. 
+Now I must say, Joplin is far from perfect. It's mobile experience is definitely not as clean as Notion's and searching only works for the content of notes, not the names of notebooks (resolved by some of my injected code for the desktop client; see my related post [Hacking Electron Apps: Joplin]({{ '/blog/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }})). Overall, it fits my requirements the most and I can work around most of it's limitations. 
 
 ## The Problem: OneDrive Throttling Kills Sync Process
 
@@ -97,4 +97,4 @@ What happens when you want to add functionality to an open source electron.js ap
 
 Just inject custom code into your client app, it's super easy!
 
-Read about my journey in hacking Joplin in my next post: [Hacking Electron Apps: Joplin]({{ '/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }}).
+Read about my journey in hacking Joplin in my next post: [Hacking Electron Apps: Joplin]({{ '/blog/2021/10/12/Hacking-Electron-Apps-Joplin.html' | relative_url }}).
